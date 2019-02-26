@@ -47,11 +47,23 @@ gulp.task('res', () => {
                .pipe(gulp.dest(paths.build));
 })
 
+gulp.task('server', () => {
+    return gulp.src(`${paths.back_src}/**`)
+               //.pipe(eslint())
+               //.pipe(eslint.format())
+               //.pipe(eslint.failAfterError())
+               //.pipe(babel({
+               //     presets: ['@babel/env']
+               //}))
+               .pipe(gulp.dest(paths.back_build));
+})
+
+
 gulp.task('clean', () => {
     return del([`${paths.build}/**/*`, `!${paths.build}`])
 });
 
-gulp.task('all', gulp.series('clean', 'res', 'sass', 'html', 'js'));
+gulp.task('all', gulp.series('clean', 'res', 'sass', 'html', 'js', 'server'));
 
 gulp.task('default', () => {
     gulp.task('all')();
@@ -60,7 +72,9 @@ gulp.task('default', () => {
             baseDir: paths.build
         }
     });
+    
     gulp.watch(paths.sass_src, gulp.series('sass'));
     gulp.watch(paths.html_src, gulp.series('html'));
-    gulp.watch(paths.js_src, gulp.series('js'));
+    //gulp.watch(paths.js_src, gulp.series('js'));
+    gulp.watch(paths.back_src, gulp.series('server'));
 });
