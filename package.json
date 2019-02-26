@@ -1,0 +1,40 @@
+{
+  "name": "geekbrains",
+  "version": "1.0.0",
+  "description": "online shop",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/eonae/geekbrains.git"
+  },
+  "keywords": [
+    "online",
+    "shop",
+    "geekbrains"
+  ],
+  "author": "Sergey S. Aslanov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eonae/geekbrains/issues"
+  },
+  "homepage": "https://github.com/eonae/geekbrains#readme",
+  "devDependencies": {
+    "@babel/core": "^7.3.3",
+    "@babel/preset-env": "^7.3.1",
+    "babel-eslint": "^10.0.1",
+    "browser-sync": "^2.26.3",
+    "del": "^3.0.0",
+    "express": "^4.16.4",
+    "gulp": "^4.0.0",
+    "gulp-babel": "^8.0.0",
+    "gulp-eslint": "^5.0.0",
+    "gulp-htmlhint": "^2.2.1",
+    "gulp-merge-media-queries": "^0.2.1",
+    "gulp-rigger": "^0.5.8",
+    "gulp-sass": "^4.0.2",
+    "install": "^0.12.2"
+  }
+}

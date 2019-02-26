@@ -1,0 +1,92 @@
+body {
+	margin: 0;
+	padding: 0;
+	background: url("img/back.png") no-repeat;
+	background-size: 100%;
+}
+
+body .hidden {
+	display: none;
+}
+
+.mainScreen,
+.gameScreen {
+	max-width: 1140px;
+	margin: 0 auto;
+}
+
+.mainScreen {
+	display: flex;
+}
+
+.mainScreen #newGame {
+	display: block;
+	font-size: 50px;
+	padding: 20px 50px;
+	background: none;
+	border: 2px solid white;
+	color: white;
+	margin: 23% auto 0 auto;
+	outline: none;
+}
+
+.mainScreen #newGame:hover {
+	color: #114EAD;
+	border-color: #114EAD;
+}
+
+.gameScreen {
+	height: 500px;
+}
+
+.gameScreen .menu {
+	display: flex;
+	justify-content: space-between;
+}
+
+.gameScreen .menu button {
+	background: lightblue;
+	padding: 5px 15px;
+	color: darkblue;
+}
+
+.gameScreen .wrapper {
+	margin-top: 30px;
+	height: 500px;
+	border: 1px solid red;
+	display: flex;
+}
+
+.gameScreen .wrapper .main {
+	width: 69%;
+	height: 500px;
+	margin-right: 1%;
+}
+
+.gameScreen .wrapper .main .question {
+	box-sizing: border-box;
+	border: 2px solid white;
+	height: 200px;
+	background: pink;
+	margin-bottom: 10px;
+	padding: 10px;
+	font-size: 40px;
+}
+
+.gameScreen .wrapper .main .options {
+	box-sizing: border-box;
+	border: 2px solid white;
+	height: 150px;
+	background: yellow;
+	display: grid;
+	grid-template-rows: 1fr, 1fr;
+	grid-template-columns: 1fr 1fr;
+	grid-gap: 1em;
+}
+
+.gameScreen .wrapper .ladder {
+	width: 30%;
+	height: 360px;
+	background: green;
+}
+

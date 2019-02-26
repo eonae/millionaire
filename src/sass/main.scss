@@ -1,0 +1,92 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: url('img/back.png') no-repeat;
+    background-size: 100%;
+
+    .hidden {
+        display: none;
+    }
+}
+
+
+
+%container {
+    max-width: 1140px;
+    margin: 0 auto;
+}
+
+.mainScreen {
+    @extend %container;
+    display: flex;
+    #newGame {
+        display: block;
+        font-size: 50px;
+        padding: 20px 50px;
+        background: none;
+        border: 2px solid white;
+        color: white;
+        margin: 23% auto 0 auto;
+        outline: none;
+
+
+        &:hover {
+            color: #114EAD;
+            border-color:#114EAD;
+        }
+    }
+}
+.gameScreen {
+    @extend %container;
+    height: 500px;
+
+    .menu {
+        display: flex;
+        justify-content: space-between;
+
+        button {
+            background: lightblue;
+            padding: 5px 15px;
+            color: darkblue;
+        }
+    }
+    .wrapper {
+        margin-top: 30px;
+        height: 500px;
+        border: 1px solid red;
+        display: flex;
+
+        .main {
+            width: 69%;
+            height: 500px;
+            margin-right: 1%;
+            
+            .question {
+                box-sizing: border-box;
+                border: 2px solid white;
+                height: 200px;
+                background: pink;
+                margin-bottom: 10px;
+                padding: 10px;
+                font-size: 40px;
+            }
+            .options {
+                box-sizing: border-box;
+                border: 2px solid white;
+                height: 150px;
+                background: yellow;
+                display: grid;
+                grid-template-rows: 1fr, 1fr;
+                grid-template-columns: 1fr 1fr;
+                grid-gap: 1em;
+
+            }
+        }
+        .ladder {
+
+            width: 30%;
+            height: 360px;
+            background: green;
+        }
+    }
+}
