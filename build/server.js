@@ -1,7 +1,9 @@
 const http = require('http');
+const url = require('url');
+
 const lib = require('./lib.js');
 const static = require('./static.js');
-const api = require('./api.js');
+const gameController = require('./game/gameController.js');
 
 const routes = {
     static: [
@@ -12,25 +14,32 @@ const routes = {
         /^\/img\/.*/i,
         /^\/fonts\/.*/i
     ],
-    api: [
-        '/new', '/try', '/flee', '/percents', '/half'
-    ]
+    api: /\/api\/.*/i
 }
 
-const server = http.createServer((request, response) => {
+const server = http.createServer( (request, response) => {
 
-    if (lib.regexMatchOneOf(request.url, routes.static)) {
-        console.log('serving ' + request.url);
+    if (lib.regexMatchOneOf(request.url, routes.static) ) {
         static.serve(request, response);
 
-    } else if (routes.api.indexOf(request.url) != -1) {
+    } else if (routes.api.test(request.url) ) {
 
-        api[request.url.substring(1)](request, response);
+        let  { pathname, query } = url.parse(request.url, true);
+        
+        gameController.callApi(pathname.substring(5), query, (error, result) => {
+            response.setHeader('Content-type', 'application/json');
+            if (error) {
+                response.statusCode = 500;
+                response.end(JSON.stringify(error));
+            } else {
+                response.statusCode = 200;
+                response.end(JSON.stringify(result));
+            }
+        });
 
     } else {
-        //console.log('wrong route! ' + request.url);
-        //reportError(request, response);
-
+        response.statusCode = 403;
+        response.end();
     }
 });
 
