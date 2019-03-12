@@ -1,23 +1,23 @@
-function _setInnerText(element, value) {
-    element.innerText = value;
-}
+import util from '../util.js';
 
 let _$gameView = document.querySelector('.gameScreen');
 
 export default class GameView {
 
     constructor() {
-        // this.btnQuit = document.querySelector('#quit');
+        this.btnQuit = document.querySelector('#quit');
         this.btnFlee = document.querySelector('#flee');
         // this.btnHintPercent = document.querySelector('#percent');
         // this.btnHintHalf = document.querySelector('#half');
         this.questionField = document.querySelector('.question');
-        this.optionButtons = Array.from(document.querySelectorAll('.option'));
+        this.optionButtonsPanel = document.querySelector('.options');
+        this.optionButtons = Array.from(this.optionButtonsPanel.children);
     }
 
     toggle() {
         _$gameView.classList.toggle('hidden');
     }
+
     update() {
         var nextPrize = this._currentGame.rounds[this._currentGame.current].prize;
         var prize = this._currentGame.prize;
@@ -50,11 +50,13 @@ export default class GameView {
                 break;
         }
     }
-    showQuestion() {
-        var question = this._currentGame.getCurrentQuestion();
-        _setInnerText(this.questionField, question.text);
+    showQuestion(question) {
+        util.setInnerText(this.questionField, question.text);
         for (var i = 0; i < this.optionButtons.length; i++) {
-            _setInnerText(this.optionButtons[i], question.options[i]);
+            util.setInnerText(this.optionButtons[i], question.options[i]);
         }
     }
+
+    // showQuestion() {
+    // }
 }

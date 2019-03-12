@@ -162,7 +162,7 @@ module.exports = class Game {
 
     question(params, callback) {
         console.log('Command - "question"');
-        callback(null, createResponse(this.currentQuestion));
+        callback(null, createResponse(this.status, this.currentQuestion));
     }
 
     flee(params, callback) {
