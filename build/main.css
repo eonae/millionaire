@@ -9,17 +9,17 @@ body .hidden {
 	display: none;
 }
 
-.mainScreen,
+.introScreen,
 .gameScreen {
 	max-width: 1140px;
 	margin: 0 auto;
 }
 
-.mainScreen {
+.introScreen {
 	display: flex;
 }
 
-.mainScreen #newGame {
+.introScreen #newGame {
 	display: block;
 	font-size: 50px;
 	padding: 20px 50px;
@@ -30,7 +30,7 @@ body .hidden {
 	outline: none;
 }
 
-.mainScreen #newGame:hover {
+.introScreen #newGame:hover {
 	color: #114EAD;
 	border-color: #114EAD;
 }

@@ -9,16 +9,15 @@ body {
     }
 }
 
-
-
 %container {
     max-width: 1140px;
     margin: 0 auto;
 }
 
-.mainScreen {
+.introScreen {
     @extend %container;
     display: flex;
+
     #newGame {
         display: block;
         font-size: 50px;
@@ -28,7 +27,6 @@ body {
         color: white;
         margin: 23% auto 0 auto;
         outline: none;
-
 
         &:hover {
             color: #114EAD;

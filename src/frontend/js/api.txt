@@ -1,0 +1,13 @@
+// API commands
+
+    - new               impact: initializes new game
+                        return: ladder
+
+    - question          impact: none
+                        return: question and options
+    
+    - try?option=...    impact: tries an option, promotes or looses
+                        return: correctness of answer
+
+    -flee               impact: flees
+                        return: ...

@@ -1,6 +1,7 @@
 'use strict';
 
 const paths = require('./paths');
+
 const gulp = require('gulp');
 const sass = require('gulp-sass');
 const mmq = require('gulp-merge-media-queries')
@@ -9,6 +10,8 @@ const rigger = require('gulp-rigger');
 const htmlval = require('gulp-htmlhint');
 const eslint = require('gulp-eslint');
 const babel = require('gulp-babel');
+const webpack = require('webpack-stream');
+const path = require('path');
 const browserSync = require('browser-sync').create();
 
 gulp.task('sass', () => {
@@ -31,12 +34,23 @@ gulp.task('html', () => {
 });
 
 gulp.task('js', () => {
-    return gulp.src(`${paths.js_src}/**`)
+    return gulp.src(`${paths.js_src}/app.js`)
                .pipe(eslint())
                .pipe(eslint.format())
                //.pipe(eslint.failAfterError())
-               .pipe(babel({
-                   presets: ['@babel/env']
+            //    .pipe(babel({
+            //        presets: ['@babel/env']
+            //    }))
+               .pipe(webpack({
+                    //entry: './app.js',
+                    output: {
+                        filename: 'app.js',
+                        path: path.resolve(__dirname, 'build')
+                    },
+                    mode: 'production',
+                    optimization: {
+                        minimize: false
+                    }
                }))
                .pipe(gulp.dest(paths.js_build))
                .pipe(browserSync.stream());
@@ -75,6 +89,6 @@ gulp.task('default', () => {
     
     gulp.watch(paths.sass_src, gulp.series('sass'));
     gulp.watch(paths.html_src, gulp.series('html'));
-    //gulp.watch(paths.js_src, gulp.series('js'));
+    gulp.watch(paths.js_src, gulp.series('js'));
     gulp.watch(paths.back_src, gulp.series('server'));
 });

@@ -9,8 +9,9 @@ const routes = {
     static: [
         /^\/$/i,
         /\.html$/i,
+        /\.ico$/i,
         /\.css$/i,
-        /^\/js\/[\S\s]+\.jd$/i,
+        /^\/js\/[\S\s]+\.js$/i,
         /^\/img\/.*/i,
         /^\/fonts\/.*/i
     ],

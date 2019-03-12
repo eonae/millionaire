@@ -32,10 +32,12 @@
     "gulp-babel": "^8.0.0",
     "gulp-eslint": "^5.0.0",
     "gulp-htmlhint": "^2.2.1",
+    "gulp-if": "^2.0.2",
     "gulp-merge-media-queries": "^0.2.1",
     "gulp-rigger": "^0.5.8",
     "gulp-sass": "^4.0.2",
     "install": "^0.12.2",
-    "mime": "^2.4.0"
+    "mime": "^2.4.0",
+    "webpack-stream": "^5.2.1"
   }
 }

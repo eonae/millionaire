@@ -7,17 +7,18 @@ module.exports = {
     callApi: function(command, params, callback) {
 
         switch (command) {
+
             case 'new':
                 this.currentGame = new Game();
-                console.dir(this.currentGame);
-                callback(null, JSON.stringify(this.currentGame) );
+                callback(null, JSON.stringify(this.currentGame.ladder) );
                 break;
+
             case 'quit':
                 this.currentGame = null;
                 callback(null, { status: 'success' } );
                 break;
-            default:
 
+            default:
                 if (this.currentGame && (command in this.currentGame)) {
                     this.currentGame[command](params, callback);
                 } else {
