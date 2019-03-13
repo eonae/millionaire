@@ -228,7 +228,7 @@ introView.setStartHandler(() => {
         } else {
             introView.toggle();
             gameView.toggle();
-            // create LadderView(result)
+            // create LadderView(result);
             requireQuestion();
         }
     });
@@ -236,39 +236,41 @@ introView.setStartHandler(() => {
 
 //////////////////// GameView
 
-for (var app_i = 0; app_i < gameView.optionButtons.length; app_i++) {
-    gameView.optionButtons[app_i].value = app_i;
-}
-
 gameView.btnQuit.addEventListener('click', () => {
     gameView.toggle();
     introView.toggle();
 });
 
-// gameView.btnFlee.addEventListener('click', function() {
-//     if (gameView._currentGame.current != 0) {
-//         gameView._currentGame.flee();
-//         gameView.update();
-//     } else {
-//         alert('Вам пока нечего забирать!');
-//     }
-// });
-
 gameView.optionButtonsPanel.addEventListener('click', (event) => {
-    console.log(event.target.id);
-    if ( [ 0, 1, 2, 3 ].includes(+event.target.id) ) {
-        console.log('includes!');
+
+    if ( [ '0', '1', '2', '3' ].includes(event.target.id) ) {
         util.ajax('api/try', { option: +event.target.id }, (error, result) => {
             if (error) {
                 console.dir(error);
-            } else if (result.status = "promoting") {
-                console.log('requiring');
+            } else if (result.status == 'promoting') {
                 requireQuestion();
+            } else if (result.params.type == 'win') {
+                alert('you win!');
             } else {
                 alert('You loose!');
             }
         });
     }
+});
+
+gameView.btnFlee.addEventListener('click', function() {
+    alert('btn-flee');
+    util.ajax('api/flee', null, (error, result) => {
+        if (error) {
+            console.dir(error);
+        } else {
+            if (result.status == 'finished') {
+                alert('You flee!');
+            } else {
+                alert('It\'s not a good time to flee - you hadn\'t answered any questions yet!');
+            }
+        }
+    });
 });
 
 ////////////////
@@ -279,7 +281,7 @@ function requireQuestion() {
             console.dir(error);
         } else {
             console.dir(result);
-            gameView.showQuestion(result.obj);
+            gameView.showQuestion(result.params);
         }
     });
 }

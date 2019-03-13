@@ -19,7 +19,7 @@ module.exports = {
                 break;
 
             default:
-                if (this.currentGame && (command in this.currentGame)) {
+                if (this.currentGame && this.currentGame.status != 'finished' && (command in this.currentGame)) {
                     this.currentGame[command](params, callback);
                 } else {
                     callback({ message: 'Invalid command!'});

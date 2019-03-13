@@ -5,6 +5,12 @@ class GameResult {
     }
 }
 
+class GameResponse {
+    constructor(gameStatus, params) {
+        this.status = gameStatus;
+        this.params = params;
+    }
+}
 ///////////////////////////////////
 /// Private
 ///////////////////////////////////
@@ -63,10 +69,10 @@ function getRandomQuestion(level) {
     }
 }
 
-function createResponse(status, obj) {
+function createResponse(status, paramsObj) {
     return {
         status,
-        obj
+        paramsObj
     }
 }
 
@@ -79,7 +85,6 @@ module.exports = class Game {
     constructor() {
 
         this.ladder = require('./ladder.js');           // Создаём лесенку (призы, несгораемые суммы)
-        console.dir(this.ladder);
         this.currentPosition = 0;
         this.status = 'start';
         this.result = null;
@@ -143,11 +148,12 @@ module.exports = class Game {
                     'win',
                     this.maxPrize
                 );
-                callback(null, createResponse(this.status, this.result));
+                callback(null, new GameResponse(this.status, this.result));
             } else {
                 this.currentPosition++;
+                console.log('now your postion is ' + this.currentPosition);
                 this.status = 'promoting';
-                callback(null, createResponse(this.status, {}) );
+                callback(null, new GameResponse(this.status, {}) );
             }
         }
         else {
@@ -156,25 +162,30 @@ module.exports = class Game {
                 'defeat',
                 this.lastFixedPrize
             )
-            callback(null, createResponse(this.status, this.result));
+            callback(null, new GameResponse(this.status, this.result));
         }
     }
 
     question(params, callback) {
         console.log('Command - "question"');
-        callback(null, createResponse(this.status, this.currentQuestion));
+        callback(null, new GameResponse(this.status, this.currentQuestion));
     }
 
     flee(params, callback) {
 
         console.log('Command - "flee"');
 
-        this.status = 'finished';
-        this.result = new GameResult(
-            'flee',
-            this.currentPrize
-        );
+        if (this.CurrentPostion != 0) {
+            this.status = 'finished';
+            this.result = new GameResult(
+                'flee',
+                this.currentPrize
+            );
+        } else {
+
+            this.status = 'same';
+        }
     
-        callback(null, createResponse(this.status, this.result));
+        callback(null, new GameResponse(this.status, this.result));
     }
 }
