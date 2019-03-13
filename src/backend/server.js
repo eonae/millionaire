@@ -44,4 +44,4 @@ const server = http.createServer( (request, response) => {
     }
 });
 
-server.listen(4444);
+server.listen(process.env.PORT || 4444);

@@ -69,13 +69,6 @@ function getRandomQuestion(level) {
     }
 }
 
-function createResponse(status, paramsObj) {
-    return {
-        status,
-        paramsObj
-    }
-}
-
 ////////////////////////////////////
 /// Internal
 ////////////////////////////////////
