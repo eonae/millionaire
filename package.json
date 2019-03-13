@@ -22,6 +22,9 @@
     "url": "https://github.com/eonae/geekbrains/issues"
   },
   "homepage": "https://github.com/eonae/geekbrains#readme",
+  "dependencies": {
+    "mime": "^2.4.0"
+  },
   "devDependencies": {
     "@babel/core": "^7.3.3",
     "@babel/preset-env": "^7.3.1",
@@ -38,7 +41,6 @@
     "gulp-rigger": "^0.5.8",
     "gulp-sass": "^4.0.2",
     "install": "^0.12.2",
-    "mime": "^2.4.0",
     "webpack-stream": "^5.2.1"
   }
 }
