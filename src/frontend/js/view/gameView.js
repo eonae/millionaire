@@ -8,7 +8,7 @@ export default class GameView {
         this.btnQuit = document.querySelector('#quit');
         this.btnFlee = document.querySelector('#flee');
         // this.btnHintPercent = document.querySelector('#percent');
-        // this.btnHintHalf = document.querySelector('#half');
+        this.btnHintHalf = document.querySelector('#half');
         this.questionField = document.querySelector('.question');
         this.optionButtonsPanel = document.querySelector('.options');
         this.optionButtons = Array.from(this.optionButtonsPanel.children);

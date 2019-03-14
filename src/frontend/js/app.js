@@ -1,9 +1,15 @@
 import IntroView from './view/introView';
 import GameView from './view/gameView';
+import ModalWindow from './view/modal';
 import util from './util.js';
 
 const introView = new IntroView();
 const gameView = new GameView();
+
+gameView.btnHintHalf.addEventListener('click', (event) => {
+    var test = new ModalWindow('hbs');
+    test.open({ message: 'My Message!'});
+});
 
 introView.setStartHandler(() => {
     

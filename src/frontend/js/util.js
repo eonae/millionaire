@@ -29,6 +29,19 @@ export default {
 
     setInnerText(element, value) {
         element.textContent = value;
+    },
+
+    create(tagName, classList, text) {
+        var $elem = document.createElement(tagName);
+        if (classList) {
+            for (var cls of classList)
+                $elem.classList.add(cls);
+        }
+        if (text)
+            $elem.textContent = text;
+    
+        return $elem;
     }
+    
 
 }

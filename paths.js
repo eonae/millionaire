@@ -13,7 +13,11 @@ const paths = {
     js_build: build + '/js',
     res_build: build,
     back_src: src + '/backend',
-    back_build: build
+    back_build: build,
+    libs_src: src + '/frontend/libs',
+    libs_build: build + '/js',
+    templates_src: src + '/frontend/templates',
+    templates_build: src + '/frontend/js' // не ошибка
 }
 
 module.exports = paths;

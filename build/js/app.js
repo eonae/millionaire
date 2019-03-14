@@ -92,8 +92,6 @@
 __webpack_require__.r(__webpack_exports__);
 
 // CONCATENATED MODULE: ./src/frontend/js/view/introView.js
-// let _currentGame = null;
-
 let _$introView = document.querySelector('.introScreen');
 let _startHandler = null;
 
@@ -146,7 +144,20 @@ function constructGetUrl(url, paramsObj) {
 
     setInnerText(element, value) {
         element.textContent = value;
+    },
+
+    create(tagName, classList, text) {
+        var $elem = document.createElement(tagName);
+        if (classList) {
+            for (var cls of classList)
+                $elem.classList.add(cls);
+        }
+        if (text)
+            $elem.textContent = text;
+    
+        return $elem;
     }
+    
 
 });
 // CONCATENATED MODULE: ./src/frontend/js/view/gameView.js
@@ -160,7 +171,7 @@ class gameView_GameView {
         this.btnQuit = document.querySelector('#quit');
         this.btnFlee = document.querySelector('#flee');
         // this.btnHintPercent = document.querySelector('#percent');
-        // this.btnHintHalf = document.querySelector('#half');
+        this.btnHintHalf = document.querySelector('#half');
         this.questionField = document.querySelector('.question');
         this.optionButtonsPanel = document.querySelector('.options');
         this.optionButtons = Array.from(this.optionButtonsPanel.children);
@@ -212,13 +223,43 @@ class gameView_GameView {
     // showQuestion() {
     // }
 }
+// CONCATENATED MODULE: ./src/frontend/js/view/modal.js
+let _this;
+
+class ModalWindow {
+
+  constructor(templateId) {
+    var source = document.getElementById(templateId).innerHTML;
+    this.__template = Handlebars.compile(source);
+    this.__mw = document.createElement('div');
+    _this = this;
+  }
+  
+  open(data) {
+    debugger;
+    this.__mw.innerHTML = this.__template(data);
+    document.body.appendChild(this.__mw);
+    setTimeout(this.close, 2000);
+  }
+
+  close() {
+    document.body.removeChild(_this.__mw);
+  }
+
+}
 // CONCATENATED MODULE: ./src/frontend/js/app.js
+
 
 
 
 
 const introView = new IntroView();
 const gameView = new gameView_GameView();
+
+gameView.btnHintHalf.addEventListener('click', (event) => {
+    var test = new ModalWindow('hbs');
+    test.open({ message: 'My Message!'});
+});
 
 introView.setStartHandler(() => {
     

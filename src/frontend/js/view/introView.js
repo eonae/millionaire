@@ -1,5 +1,3 @@
-// let _currentGame = null;
-
 let _$introView = document.querySelector('.introScreen');
 let _startHandler = null;
 

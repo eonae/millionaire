@@ -13,6 +13,10 @@ const babel = require('gulp-babel');
 const webpack = require('webpack-stream');
 const path = require('path');
 const browserSync = require('browser-sync').create();
+const hbsPrecompile = require('gulp-precompile-handlebars');
+const rename = require('gulp-rename');
+const defineModule = require('gulp-define-module');
+const concat = require('gulp-concat');
 
 gulp.task('sass', () => {
     return gulp.src(paths.sass_src + '/main.scss')
@@ -31,6 +35,23 @@ gulp.task('html', () => {
                .pipe(htmlval.failAfterError())
                .pipe(gulp.dest(paths.html_build))
                .pipe(browserSync.stream());
+});
+
+gulp.task('templates', () => {
+    // `${paths.templates_src}*.hbs`
+    return gulp.src('./src/frontend/templates/*.hbs')
+               .pipe(hbsPrecompile())
+            //    .pipe(rename({ extname: '.js' }))
+               .pipe(concat('templates.js'))
+               .pipe(gulp.dest(paths.templates_build));
+
+    // return gulp.src(`${paths.templates_src}/**/*.hbs`)
+    //            .pipe(gulp.dest(paths.templates_build));
+})
+
+gulp.task('libs', () => {
+    return gulp.src(paths.libs_src + '/*.js')
+               .pipe(gulp.dest(paths.libs_build));
 });
 
 gulp.task('js', () => {
@@ -77,7 +98,7 @@ gulp.task('clean', () => {
     return del([`${paths.build}/**/*`, `!${paths.build}`])
 });
 
-gulp.task('all', gulp.series('clean', 'res', 'sass', 'html', 'js', 'server'));
+gulp.task('all', gulp.series('clean', 'res', 'sass', 'html', 'js', 'libs', 'server'));
 
 gulp.task('default', () => {
     gulp.task('all')();
@@ -89,6 +110,7 @@ gulp.task('default', () => {
     
     gulp.watch(paths.sass_src, gulp.series('sass'));
     gulp.watch(paths.html_src, gulp.series('html'));
+    gulp.watch(paths.templates_src, gulp.series('templates'));
     gulp.watch(paths.js_src, gulp.series('js'));
     gulp.watch(paths.back_src, gulp.series('server'));
 });
