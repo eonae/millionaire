@@ -1,3 +1,5 @@
+import { assignmentExpression } from "babel-types";
+
 function constructGetUrl(url, paramsObj) {
     let query = url;
     if (paramsObj && Object.keys(paramsObj).length != 0) {
@@ -41,7 +43,29 @@ export default {
             $elem.textContent = text;
     
         return $elem;
-    }
-    
+    },
 
+    getElements() {
+        const elements = [];
+
+        function push(selector) {
+            const element = document.querySelector(selector);
+            if (element) elements.push(element);
+        }
+
+        for (let argument of arguments) {
+            if (argument instanceof Array) {
+                for (let value of argument)
+                    push(value);
+            } else {
+                push(argument);
+            }
+        }
+        return elements;
+    }
+    // getElementsObj(values, keys) {
+        
+
+
+    // }
 }

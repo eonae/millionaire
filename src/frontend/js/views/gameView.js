@@ -1,13 +1,19 @@
-import util from '../util.js';
+import util from 'util.js';
+import Component from 'base/component.js';
 
-let _$gameView = document.querySelector('.gameScreen');
+let _gw = document.querySelector('.gameScreen');
 
-export default class GameView {
+export default class GameView extends Component {
 
     constructor() {
+        super();
+        var elems = util.getElements('#quit', '#flee', '#percent', '#half', '.question', '.options');
+        //debugger;
+        //Object.assign(this, util);
+
         this.btnQuit = document.querySelector('#quit');
         this.btnFlee = document.querySelector('#flee');
-        // this.btnHintPercent = document.querySelector('#percent');
+        this.btnHintPercent = document.querySelector('#percent');
         this.btnHintHalf = document.querySelector('#half');
         this.questionField = document.querySelector('.question');
         this.optionButtonsPanel = document.querySelector('.options');
@@ -15,7 +21,7 @@ export default class GameView {
     }
 
     toggle() {
-        _$gameView.classList.toggle('hidden');
+        _gw.classList.toggle('hidden');
     }
 
     update() {
@@ -51,12 +57,10 @@ export default class GameView {
         }
     }
     showQuestion(question) {
+        const buttons = this.optionButtonsPanel.children;
         util.setInnerText(this.questionField, question.text);
         for (var i = 0; i < this.optionButtons.length; i++) {
             util.setInnerText(this.optionButtons[i], question.options[i]);
         }
     }
-
-    // showQuestion() {
-    // }
 }

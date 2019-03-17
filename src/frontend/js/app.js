@@ -1,13 +1,20 @@
-import IntroView from './view/introView';
-import GameView from './view/gameView';
-import ModalWindow from './view/modal';
-import util from './util.js';
+import IntroView from 'views/introView';
+import GameView from 'views/gameView';
+import ModalWindow from 'views/modal';
+import util from 'util.js';
 
 const introView = new IntroView();
 const gameView = new GameView();
 
 gameView.btnHintHalf.addEventListener('click', (event) => {
-    var test = new ModalWindow('hbs');
+    debugger;
+    var test = new ModalWindow();
+    test.open({ message: 'My Message!'});
+});
+
+gameView.btnHintPercent.addEventListener('click', (event) => {
+    debugger;
+    var test = new ModalWindow();
     test.open({ message: 'My Message!'});
 });
 

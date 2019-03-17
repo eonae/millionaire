@@ -1,0 +1,27 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport', content='width=device-width, initial-scale=1.0')
+  meta(http-equiv='X-UA-Compatible', content='ie=edge')
+  link(rel='stylesheet', href='main.css')
+  title Millionaire
+.introScreen
+  button#newGame(type='button') Start new!
+.gameScreen.hidden
+  .menu
+    .mainMenu
+      button#flee(type='button') Flee
+      button#quit(type='button') Quit
+    .hints
+      button#percent(type='button') Hall
+      button#half(type='button') 50/50
+  .wrapper
+    .main
+      .question Place for a question
+      .options
+        button#0.option(type='button')
+        button#1.option(type='button')
+        button#2.option(type='button')
+        button#3.option(type='button')
+    .ladder Place for a ladder
+script(src='js/app.js')

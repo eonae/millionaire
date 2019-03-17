@@ -7,17 +7,17 @@ const paths = {
     html_src: src + '/frontend/html',
     sass_src: src + '/frontend/sass',
     js_src: src + '/frontend/js',
-    res_src: './resources',
+    assets_src: './assets',
     html_build: build,
     css_build: build,
     js_build: build + '/js',
-    res_build: build,
+    assets_build: build,
     back_src: src + '/backend',
     back_build: build,
     libs_src: src + '/frontend/libs',
     libs_build: build + '/js',
-    templates_src: src + '/frontend/templates',
-    templates_build: src + '/frontend/js' // не ошибка
+    templates_src: src + '/frontend/pug-client',
+    templates_build: src + '/frontend/js/view/templates' // не ошибка
 }
 
 module.exports = paths;
