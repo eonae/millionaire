@@ -1,22 +1,22 @@
 import templates from 'views/templates/templates.js'
-import EventEmitter from 'base/EventEmitter.js';
 
-export default class ModalWindow extends EventEmitter {
+export default class ModalWindow {
 
-  constructor(template) {
-    super();
-    this.template = template;
+  constructor(template, data, callback) {
     this.wrapper = document.createElement('div');
-    this.output = {};
+    this.template = template;
+
+    this.data = data;
+    this.callback = callback;
+    this.output = null;
   }
   
-  open(data) {
+  open() {
 
     const render = templates[`render_${this.template}`];
     if (render) {
-      this.wrapper.innerHTML = render(data);
+      this.wrapper.innerHTML = render(this.data);
       document.body.appendChild(this.wrapper);
-      this.emit('open', {}); // ....
     }
     else {
       throw new Error(`Template ${this.template} not found!`);
@@ -25,7 +25,6 @@ export default class ModalWindow extends EventEmitter {
 
   close() {
     document.body.removeChild(this.wrapper);
-    this.emit('close', this.output);
+    this.callback(this.output);
   }
-
 }

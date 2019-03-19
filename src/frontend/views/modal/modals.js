@@ -1,24 +1,35 @@
 import MessageBox from 'views/modal/MessageBox';
-
-// void messageBox(message, [{ options }])
-// void messageBoxAsync(message, callback, [{ options }])
-// string inputBox(message, [{options}])
-// string inputBoxAsync(message, callback, [options]);
-// bool confirmBox()
-// bool confirmBoxAsync()
-
-
+import ConfirmBox from 'views/modal/ConfirmBox';
+import InputBox from 'views/modal/InputBox';
 
 export default {
-  messageBox(message, options) {
-    new MessageBox()
-      .show(message, options);
+
+  messageBox(options, callback) {
+    new MessageBox(options, callback).show();
   },
 
-  messageBoxAsync(message, callback, options) {
-    new MessageBox()
-      .showAsync(message, callback, options)
+  confirmBox(options, callback) {
+    new ConfirmBox(options, callback).show();
+  },
+
+  inputBox(options, callback) {
+    new InputBox(options, callback).show();
+
+    /*
+      На будущее:
+      new InputBox({
+        validation: {
+          constraint: 'email',
+          type: 'submit || 'input'
+        },
+        placeholder: '...'
+      }, (value) => {
+        // do something;
+      }
+      )
+    */
   }
 
-  
+
+
 }

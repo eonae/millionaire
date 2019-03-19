@@ -14,33 +14,21 @@
   left: 50%;
   transform: translate(-50%, -50%);
   background: white;
-
-  .message {
-    padding: 5%;
-    text-align: center;
-    
-  }
-  .buttons {
-    @include flex(center, center);
-
-    button {
-      @extend .game-btn;
-      padding: 10px 30px;
-      margin: 5%;
-      margin-top: 1%;
-    }
-  }
 }
 
-.modal-window-lg {
+%modal-window-lg {
   width: 80%;
   height: 80%;
 }
 
-.modal-window-md {
+%modal-window-md {
   width: 60%;
   height: 60%;
 }
-.modal-window-sm {
+%modal-window-sm {
   min-width: 40%;
 }
+
+@import 'messageBox';
+@import 'confirmBox';
+@import 'inputBox';

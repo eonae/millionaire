@@ -476,54 +476,27 @@ class Pug {
 
 /* harmony default export */ var pug_runtime_es6 = (new Pug());
 // CONCATENATED MODULE: ./src/frontend/views/templates/templates.js
-/* harmony default export */ var templates = ({  render_message: function(locals) {    var pug_html = "",      pug_mixins = {},      pug_interp;    var locals_for_with = locals || {};    (function(message) {      var pug_indent = [];      pug_html =        pug_html +        '\n\u003Cdiv id="modal-wrapper"\u003E\n  \u003Cdiv class="modal-overlay"\u003E\u003C\u002Fdiv\u003E\n  \u003Cdiv class="modal-window modal-window-lg" style="background: white"\u003E' +        pug_runtime_es6.escape(null == (pug_interp = message) ? "" : pug_interp) +        "\u003C\u002Fdiv\u003E\n\u003C\u002Fdiv\u003E";    }.call(      this,      "message" in locals_for_with        ? locals_for_with.message        : typeof message !== "undefined"        ? message        : undefined    ));    return pug_html;  },  render_preloader: function(locals) {    var pug_html = "",      pug_mixins = {},      pug_interp;    var pug_indent = [];    return pug_html;  },  render_test: function(locals) {    var pug_html = "",      pug_mixins = {},      pug_interp;    var locals_for_with = locals || {};    (function(message) {      var pug_indent = [];      pug_html =        pug_html +        '\n\u003Cdiv id="modal-wrapper"\u003E\n  \u003Cdiv class="modal-overlay"\u003E\u003C\u002Fdiv\u003E\n  \u003Cdiv class="modal-window modal-window-lg" style="background: white"\u003E' +        pug_runtime_es6.escape(null == (pug_interp = message) ? "" : pug_interp) +        " test!\u003C\u002Fdiv\u003E\n\u003C\u002Fdiv\u003E";    }.call(      this,      "message" in locals_for_with        ? locals_for_with.message        : typeof message !== "undefined"        ? message        : undefined    ));    return pug_html;  },  render_messageBox: function(locals) {    var pug_html = "",      pug_mixins = {},      pug_interp;    var locals_for_with = locals || {};    (function(btnOkText, message) {      var pug_indent = [];      pug_html =        pug_html +        '\n\u003Cdiv id="modal-wrapper"\u003E\n  \u003Cdiv class="modal-overlay"\u003E\u003C\u002Fdiv\u003E\n  \u003Cdiv class="modal-window modal-window-sm alert"\u003E\n    \u003Cdiv class="message"\u003E' +        pug_runtime_es6.escape(null == (pug_interp = message) ? "" : pug_interp) +        '\u003C\u002Fdiv\u003E\n    \u003Cdiv class="buttons"\u003E\n      \u003Cbutton type="button" id="msgBox-ok"\u003E' +        pug_runtime_es6.escape(null == (pug_interp = btnOkText) ? "" : pug_interp) +        "\u003C\u002Fbutton\u003E\n    \u003C\u002Fdiv\u003E\n  \u003C\u002Fdiv\u003E\n\u003C\u002Fdiv\u003E";    }.call(      this,      "btnOkText" in locals_for_with        ? locals_for_with.btnOkText        : typeof btnOkText !== "undefined"        ? btnOkText        : undefined,      "message" in locals_for_with        ? locals_for_with.message        : typeof message !== "undefined"        ? message        : undefined    ));    return pug_html;  },  render_modalLayout: function(locals) {    var pug_html = "",      pug_mixins = {},      pug_interp;    var locals_for_with = locals || {};    (function(message) {      var pug_indent = [];      pug_html =        pug_html +        '\n\u003Cdiv id="modal-wrapper"\u003E\n  \u003Cdiv class="modal-overlay"\u003E\u003C\u002Fdiv\u003E\n  \u003Cdiv class="modal-window modal-window-lg" style="background: white"\u003E' +        pug_runtime_es6.escape(null == (pug_interp = message) ? "" : pug_interp) +        "\u003C\u002Fdiv\u003E\n\u003C\u002Fdiv\u003E";    }.call(      this,      "message" in locals_for_with        ? locals_for_with.message        : typeof message !== "undefined"        ? message        : undefined    ));    return pug_html;  }});
-// CONCATENATED MODULE: ./src/frontend/base/EventEmitter.js
-class EventEmitter_EventEmitter {
-
-  constructor() {
-    this.handlers = {};
-  }
-  
-  on(eventName, handler) {
-      if (eventName in this.handlers) {
-          this.handlers[eventName].push(handler);
-      } else {
-          this.handlers[eventName] = [ handler ];
-      }
-  };
-
-  off(eventName, handler) {
-      //..
-  };
-
-  emit(eventName, args) {
-      if (eventName in this.handlers) {
-          for (var handler of this.handlers[eventName]) {
-              setTimeout(() => { handler(args); }, 0);
-          }
-      }
-  }
-}
+/* harmony default export */ var templates = ({  render_message: function(locals) {    var pug_html = "",      pug_mixins = {},      pug_interp;    var locals_for_with = locals || {};    (function(message) {      var pug_indent = [];      pug_html =        pug_html +        '\n\u003Cdiv id="modal-wrapper"\u003E\n  \u003Cdiv class="modal-overlay"\u003E\u003C\u002Fdiv\u003E\n  \u003Cdiv class="modal-window modal-window-lg" style="background: white"\u003E' +        pug_runtime_es6.escape(null == (pug_interp = message) ? "" : pug_interp) +        "\u003C\u002Fdiv\u003E\n\u003C\u002Fdiv\u003E";    }.call(      this,      "message" in locals_for_with        ? locals_for_with.message        : typeof message !== "undefined"        ? message        : undefined    ));    return pug_html;  },  render_preloader: function(locals) {    var pug_html = "",      pug_mixins = {},      pug_interp;    var pug_indent = [];    return pug_html;  },  render_test: function(locals) {    var pug_html = "",      pug_mixins = {},      pug_interp;    var locals_for_with = locals || {};    (function(message) {      var pug_indent = [];      pug_html =        pug_html +        '\n\u003Cdiv id="modal-wrapper"\u003E\n  \u003Cdiv class="modal-overlay"\u003E\u003C\u002Fdiv\u003E\n  \u003Cdiv class="modal-window modal-window-lg" style="background: white"\u003E' +        pug_runtime_es6.escape(null == (pug_interp = message) ? "" : pug_interp) +        " test!\u003C\u002Fdiv\u003E\n\u003C\u002Fdiv\u003E";    }.call(      this,      "message" in locals_for_with        ? locals_for_with.message        : typeof message !== "undefined"        ? message        : undefined    ));    return pug_html;  },  render_confirmBox: function(locals) {    var pug_html = "",      pug_mixins = {},      pug_interp;    var locals_for_with = locals || {};    (function(buttons, message) {      var pug_indent = [];      pug_html =        pug_html +        '\n\u003Cdiv id="modal-wrapper"\u003E\n  \u003Cdiv class="modal-overlay"\u003E\u003C\u002Fdiv\u003E\n  \u003Cdiv class="modal-window confirm-box"\u003E\n    \u003Cdiv class="message"\u003E' +        pug_runtime_es6.escape(null == (pug_interp = message) ? "" : pug_interp) +        '\u003C\u002Fdiv\u003E\n    \u003Cdiv class="buttons"\u003E\n      \u003Cbutton type="button" id="positive"\u003E' +        pug_runtime_es6.escape(null == (pug_interp = buttons.positive) ? "" : pug_interp) +        '\u003C\u002Fbutton\u003E\n      \u003Cbutton type="button" id="negative"\u003E' +        pug_runtime_es6.escape(null == (pug_interp = buttons.negative) ? "" : pug_interp) +        "\u003C\u002Fbutton\u003E\n    \u003C\u002Fdiv\u003E\n  \u003C\u002Fdiv\u003E\n\u003C\u002Fdiv\u003E";    }.call(      this,      "buttons" in locals_for_with        ? locals_for_with.buttons        : typeof buttons !== "undefined"        ? buttons        : undefined,      "message" in locals_for_with        ? locals_for_with.message        : typeof message !== "undefined"        ? message        : undefined    ));    return pug_html;  },  render_inputBox: function(locals) {    var pug_html = "",      pug_mixins = {},      pug_interp;    var locals_for_with = locals || {};    (function(buttons, message, placeholder) {      var pug_indent = [];      pug_html =        pug_html +        '\n\u003Cdiv id="modal-wrapper"\u003E\n  \u003Cdiv class="modal-overlay"\u003E\u003C\u002Fdiv\u003E\n  \u003Cdiv class="modal-window modal-window-sm input-box"\u003E\n    \u003Cdiv class="message"\u003E' +        pug_runtime_es6.escape(null == (pug_interp = message) ? "" : pug_interp) +        "\u003C\u002Fdiv\u003E\n    \u003Cinput" +        (' type="text"' +          pug_runtime_es6.attr("placeholder", `${placeholder}`, true, false) +          ' id="modal-input"') +        '\u002F\u003E\n    \u003Cdiv class="buttons"\u003E\n      \u003Cbutton type="button" id="positive"\u003E' +        pug_runtime_es6.escape(null == (pug_interp = buttons.positive) ? "" : pug_interp) +        '\u003C\u002Fbutton\u003E\n      \u003Cbutton type="button" id="negative"\u003E' +        pug_runtime_es6.escape(null == (pug_interp = buttons.negative) ? "" : pug_interp) +        "\u003C\u002Fbutton\u003E\n    \u003C\u002Fdiv\u003E\n  \u003C\u002Fdiv\u003E\n\u003C\u002Fdiv\u003E";    }.call(      this,      "buttons" in locals_for_with        ? locals_for_with.buttons        : typeof buttons !== "undefined"        ? buttons        : undefined,      "message" in locals_for_with        ? locals_for_with.message        : typeof message !== "undefined"        ? message        : undefined,      "placeholder" in locals_for_with        ? locals_for_with.placeholder        : typeof placeholder !== "undefined"        ? placeholder        : undefined    ));    return pug_html;  },  render_messageBox: function(locals) {    var pug_html = "",      pug_mixins = {},      pug_interp;    var locals_for_with = locals || {};    (function(buttons, message) {      var pug_indent = [];      pug_html =        pug_html +        '\n\u003Cdiv id="modal-wrapper"\u003E\n  \u003Cdiv class="modal-overlay"\u003E\u003C\u002Fdiv\u003E\n  \u003Cdiv class="modal-window message-box"\u003E\n    \u003Cdiv class="message"\u003E' +        pug_runtime_es6.escape(null == (pug_interp = message) ? "" : pug_interp) +        '\u003C\u002Fdiv\u003E\n    \u003Cdiv class="buttons"\u003E\n      \u003Cbutton type="button" id="positive"\u003E' +        pug_runtime_es6.escape(null == (pug_interp = buttons.positive) ? "" : pug_interp) +        "\u003C\u002Fbutton\u003E\n    \u003C\u002Fdiv\u003E\n  \u003C\u002Fdiv\u003E\n\u003C\u002Fdiv\u003E";    }.call(      this,      "buttons" in locals_for_with        ? locals_for_with.buttons        : typeof buttons !== "undefined"        ? buttons        : undefined,      "message" in locals_for_with        ? locals_for_with.message        : typeof message !== "undefined"        ? message        : undefined    ));    return pug_html;  },  render_modalLayout: function(locals) {    var pug_html = "",      pug_mixins = {},      pug_interp;    var locals_for_with = locals || {};    (function(message) {      var pug_indent = [];      pug_html =        pug_html +        '\n\u003Cdiv id="modal-wrapper"\u003E\n  \u003Cdiv class="modal-overlay"\u003E\u003C\u002Fdiv\u003E\n  \u003Cdiv class="modal-window modal-window-lg" style="background: white"\u003E' +        pug_runtime_es6.escape(null == (pug_interp = message) ? "" : pug_interp) +        "\u003C\u002Fdiv\u003E\n\u003C\u002Fdiv\u003E";    }.call(      this,      "message" in locals_for_with        ? locals_for_with.message        : typeof message !== "undefined"        ? message        : undefined    ));    return pug_html;  }});
 // CONCATENATED MODULE: ./src/frontend/views/modal/base/ModalWindow.js
 
 
+class ModalWindow_ModalWindow {
 
-class ModalWindow_ModalWindow extends EventEmitter_EventEmitter {
-
-  constructor(template) {
-    super();
-    this.template = template;
+  constructor(template, data, callback) {
     this.wrapper = document.createElement('div');
-    this.output = {};
+    this.template = template;
+
+    this.data = data;
+    this.callback = callback;
+    this.output = null;
   }
   
-  open(data) {
+  open() {
 
     const render = templates[`render_${this.template}`];
     if (render) {
-      this.wrapper.innerHTML = render(data);
+      this.wrapper.innerHTML = render(this.data);
       document.body.appendChild(this.wrapper);
-      this.emit('open', {}); // ....
     }
     else {
       throw new Error(`Template ${this.template} not found!`);
@@ -532,61 +505,123 @@ class ModalWindow_ModalWindow extends EventEmitter_EventEmitter {
 
   close() {
     document.body.removeChild(this.wrapper);
-    this.emit('close', this.output);
+    this.callback(this.output);
   }
-
 }
 // CONCATENATED MODULE: ./src/frontend/views/modal/MessageBox.js
 
 
 class MessageBox_MessageBox extends ModalWindow_ModalWindow {
 
-  constructor() {
-    super('messageBox');
+  constructor(data, callback) {
+    
+    const settings = Object.assign({
+      buttons: { positive: 'Continue' },
+      message: ''
+    }, (data instanceof Object) ? data : { message: data });
+
+    super('messageBox', settings, callback);
   }
 
-  show(message, options) {
-    const data = {
-      btnOkText: 'OK',
-      message
-    };
-    Object.assign(data, options);
-    this.open(data);
-    document.getElementById('msgBox-ok').addEventListener('click', () => {
+  show() {
+    this.open();
+    document.getElementById('positive').addEventListener('click', () => {
       this.close();
     });
   }
+}
+// CONCATENATED MODULE: ./src/frontend/views/modal/ConfirmBox.js
 
-  showAsync(message, callback, options) {
-    this.on('close', callback);
-    this.show(message, options);
+
+class ConfirmBox_ConfirmBox extends ModalWindow_ModalWindow {
+
+  constructor(data, callback) {
+    const settings = Object.assign({
+      buttons: {
+        positive: 'Yes',
+        negative: 'No'
+      },
+      message: ''
+    }, (data instanceof Object) ? data : { message: data });
+    super('confirmBox', settings, callback);
   }
 
+  show() {
+
+    this.open();
+    const buttons = document.querySelector('.modal-window .buttons');
+    buttons.addEventListener('click', (e) => {
+      this.output = e.target.id === 'positive';
+      console.log(this.output);
+      this.close();
+    });
+  }
+}
+// CONCATENATED MODULE: ./src/frontend/views/modal/InputBox.js
+
+
+class InputBox_ConfirmBox extends ModalWindow_ModalWindow {
+
+  constructor(data, callback) {
+    const settings = Object.assign({
+      buttons: {
+        positive: 'Continue',
+        negative: 'Back'
+      },
+      placeholder: 'Your input',
+      message: ''
+    }, (data instanceof Object) ? data : { message: data });
+    super('inputBox', settings, callback);
+  }
+
+  show() {
+
+    this.open();
+    const buttons = document.querySelector('.modal-window .buttons');
+    buttons.addEventListener('click', (e) => {
+      this.output = (e.target.id === 'positive')
+        ? document.getElementById('modal-input').value
+        : undefined;
+      console.log(this.output);
+      this.close();
+    });
+  }
 }
 // CONCATENATED MODULE: ./src/frontend/views/modal/modals.js
 
 
-// void messageBox(message, [{ options }])
-// void messageBoxAsync(message, callback, [{ options }])
-// string inputBox(message, [{options}])
-// string inputBoxAsync(message, callback, [options]);
-// bool confirmBox()
-// bool confirmBoxAsync()
-
 
 
 /* harmony default export */ var modals = ({
-  messageBox(message, options) {
-    new MessageBox_MessageBox()
-      .show(message, options);
+
+  messageBox(options, callback) {
+    new MessageBox_MessageBox(options, callback).show();
   },
 
-  messageBoxAsync(message, callback, options) {
-    new MessageBox_MessageBox()
-      .showAsync(message, callback, options)
+  confirmBox(options, callback) {
+    new ConfirmBox_ConfirmBox(options, callback).show();
+  },
+
+  inputBox(options, callback) {
+    new InputBox_ConfirmBox(options, callback).show();
+
+    /*
+      На будущее:
+      new InputBox({
+        validation: {
+          constraint: 'email',
+          type: 'submit || 'input'
+        },
+        placeholder: '...'
+      }, (value) => {
+        // do something;
+      }
+      )
+    */
   }
 
-  
+
+
 });
 // CONCATENATED MODULE: ./src/frontend/main.js
 
@@ -594,11 +629,17 @@ class MessageBox_MessageBox extends ModalWindow_ModalWindow {
 
 
 
+modals.inputBox('Hello, My little friend!', data => {
+  const $name = document.querySelector('.greetings span');
+  $name.textContent = data;
+});
+// modals.confirmBox('Hello, My little friend!', data => alert(data));
+// modals.inputBox('Please enter your name!', data => alert(data));
+// debugger;
 // const introView = new IntroView();
 // const gameView = new GameView();
-modals.messageBoxAsync('Большое спасибо за игру!', () => alert('callback!'));
-// const answer = modal.confirm('?');
-// const input = modal.inputBox(' ');
+// // const answer = modal.confirmBox('?');
+// // const input = modal.inputBox(' ');
 
 
 // gameView.btnHintHalf.addEventListener('click', (event) => {

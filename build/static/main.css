@@ -18,7 +18,9 @@ footer {
 .game-btn,
 .gameHeader button,
 .options button,
-.modal-window .buttons button {
+.message-box .buttons button,
+.confirm-box .buttons button,
+.input-box .buttons button {
 	text-decoration: none;
 	outline: none;
 	display: block;
@@ -292,36 +294,118 @@ footer a {
 	background: white;
 }
 
-.modal-window .message {
-	padding: 5%;
+.message-box {
+	min-width: 250px;
+}
+
+.message-box > * {
+	margin-bottom: 8%;
+}
+
+.message-box > *:first-child {
+	margin-top: 8%;
+}
+
+.message-box .message {
+	padding: 0 5%;
 	text-align: center;
 }
 
-.modal-window .buttons {
+.message-box .buttons {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	flex-direction: row;
 }
 
-.modal-window .buttons button {
+.message-box .buttons button {
 	padding: 10px 30px;
-	margin: 5%;
-	margin-top: 1%;
+	padding: 3% 7%;
+	margin-left: 5%;
 }
 
-.modal-window-lg {
+.message-box .buttons button:last-child {
+	margin-right: 5%;
+}
+
+.confirm-box {
+	min-width: 250px;
+}
+
+.confirm-box > * {
+	margin-bottom: 8%;
+}
+
+.confirm-box > *:first-child {
+	margin-top: 8%;
+}
+
+.confirm-box .message {
+	padding: 0 5%;
+	text-align: center;
+}
+
+.confirm-box .buttons {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: row;
+}
+
+.confirm-box .buttons button {
+	padding: 3% 7%;
+	margin-left: 5%;
+}
+
+.confirm-box .buttons button:last-child {
+	margin-right: 5%;
+}
+
+.input-box {
+	min-width: 300px;
+}
+
+.input-box > * {
+	margin-bottom: 4%;
+}
+
+.input-box > *:first-child {
+	margin-top: 4%;
+}
+
+.input-box .message {
+	padding: 0 3%;
+	text-align: center;
+	font-size: .8em;
+}
+
+.input-box input {
+	box-sizing: border-box;
+	font-family: inherit;
+	font-size: 1.3em;
+	padding-left: 3%;
 	width: 80%;
-	height: 80%;
+	margin-left: 10%;
+	height: 40px;
+	border: none;
+	outline: none;
+	border-bottom: 2px solid palevioletred;
 }
 
-.modal-window-md {
-	width: 60%;
-	height: 60%;
+.input-box .buttons {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	flex-direction: row;
 }
 
-.modal-window-sm {
-	min-width: 40%;
+.input-box .buttons button {
+	padding: 1% 4%;
+	margin-left: 5%;
+}
+
+.input-box .buttons button:last-child {
+	margin-right: 10%;
 }
 
 @media (max-width: 1040px) {

@@ -5,12 +5,13 @@ export default class ConfirmBox extends ModalWindow {
   constructor(data, callback) {
     const settings = Object.assign({
       buttons: {
-        positive: 'Yes',
-        negative: 'No'
+        positive: 'Continue',
+        negative: 'Back'
       },
+      placeholder: 'Your input',
       message: ''
     }, (data instanceof Object) ? data : { message: data });
-    super('confirmBox', settings, callback);
+    super('inputBox', settings, callback);
   }
 
   show() {
@@ -18,7 +19,9 @@ export default class ConfirmBox extends ModalWindow {
     this.open();
     const buttons = document.querySelector('.modal-window .buttons');
     buttons.addEventListener('click', (e) => {
-      this.output = e.target.id === 'positive';
+      this.output = (e.target.id === 'positive')
+        ? document.getElementById('modal-input').value
+        : undefined;
       console.log(this.output);
       this.close();
     });

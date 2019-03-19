@@ -3,11 +3,17 @@ import GameView from 'views/gameView';
 import util from 'util.js';
 import modals from './views/modal/modals.js';
 
+modals.inputBox('Hello, My little friend!', data => {
+  const $name = document.querySelector('.greetings span');
+  $name.textContent = data;
+});
+// modals.confirmBox('Hello, My little friend!', data => alert(data));
+// modals.inputBox('Please enter your name!', data => alert(data));
+// debugger;
 // const introView = new IntroView();
 // const gameView = new GameView();
-modals.messageBoxAsync('Большое спасибо за игру!', () => alert('callback!'));
-// const answer = modal.confirm('?');
-// const input = modal.inputBox(' ');
+// // const answer = modal.confirmBox('?');
+// // const input = modal.inputBox(' ');
 
 
 // gameView.btnHintHalf.addEventListener('click', (event) => {

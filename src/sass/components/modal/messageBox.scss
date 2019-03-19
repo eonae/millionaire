@@ -1,0 +1,22 @@
+.message-box {
+  @include verticalGap(8%);
+  min-width: 250px;
+
+  .message {
+    padding: 0 5%;
+    text-align: center;
+  }
+  .buttons {
+    @include flex(center, center);
+  
+    button {
+      @extend .game-btn;
+      padding: 10px 30px;
+      padding: 3% 7%;
+      margin-left: 5%;
+      &:last-child {
+        margin-right: 5%;
+      }
+    }
+  }
+}

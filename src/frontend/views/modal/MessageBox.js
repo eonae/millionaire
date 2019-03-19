@@ -2,25 +2,20 @@ import ModalWindow from 'views/modal/base/ModalWindow.js'
 
 export default class MessageBox extends ModalWindow {
 
-  constructor() {
-    super('messageBox');
+  constructor(data, callback) {
+    
+    const settings = Object.assign({
+      buttons: { positive: 'Continue' },
+      message: ''
+    }, (data instanceof Object) ? data : { message: data });
+
+    super('messageBox', settings, callback);
   }
 
-  show(message, options) {
-    const data = {
-      btnOkText: 'OK',
-      message
-    };
-    Object.assign(data, options);
-    this.open(data);
-    document.getElementById('msgBox-ok').addEventListener('click', () => {
+  show() {
+    this.open();
+    document.getElementById('positive').addEventListener('click', () => {
       this.close();
     });
   }
-
-  showAsync(message, callback, options) {
-    this.on('close', callback);
-    this.show(message, options);
-  }
-
 }
