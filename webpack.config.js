@@ -1,7 +1,7 @@
 var path = require('path');
 
 module.exports = {
-  entry: './src/frontend/js/app.js',
+  entry: './src/frontend/main.js',
   output: {
       filename: 'app.js',
       path: path.resolve(__dirname, 'build')
@@ -12,7 +12,7 @@ module.exports = {
   },
   resolve: {
     modules: [
-      path.resolve('./src/frontend/js'),
+      path.resolve('./src/frontend'),
       path.resolve('./node_modules')
     ]
   }

@@ -1,0 +1,27 @@
+@mixin font($_size, $_weight, $_color: default, $_transform: default) {
+  font-size: $_size;
+  font-weight: $_weight;
+  @if $_color != default {
+      color: $_color;
+  } 
+  @if $_transform != default {
+      text-transform: $_transform;
+  }
+}
+
+@mixin flex($_alignMain: default, $_alignCross: default, $_direction: row) {
+  display: flex;
+  @if ($_alignMain != default) {
+      justify-content: $_alignMain;
+  }
+  @if ($_alignCross != default) {
+      align-items: $_alignCross;
+  }
+  flex-direction: $_direction;
+}
+
+@mixin notLikeLink() {
+  text-decoration: none;
+  outline: none;
+  display: block;
+}

@@ -4,8 +4,8 @@
   "description": "online shop",
   "main": "index.js",
   "scripts": {
-    "start": "node ./build/server.js",
-    "dev": "nodemon ./build/server.js"
+    "start": "node ./build/app.js",
+    "dev": "nodemon ./build/app.js"
   },
   "repository": {
     "type": "git",
@@ -23,9 +23,14 @@
   },
   "homepage": "https://github.com/eonae/geekbrains#readme",
   "dependencies": {
+    "body-parser": "^1.18.3",
+    "express-pug": "^1.0.0",
     "gulp": "^4.0.0",
     "gulp-handlebars": "^4.0.0",
-    "mime": "^2.4.0"
+    "mime": "^2.4.0",
+    "morgan": "^1.9.1",
+    "pug": "^2.0.3",
+    "winston": "^3.2.1"
   },
   "devDependencies": {
     "@babel/core": "^7.3.3",

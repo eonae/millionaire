@@ -1,0 +1,488 @@
+body {
+	margin: 0;
+	padding: 0;
+	background-size: 100%;
+	font-family: 'IBM Plex Sans', sans-serif;
+}
+
+body .hidden {
+	display: none;
+}
+
+.content-wrapper,
+.mainHeader,
+footer {
+	margin: 0;
+}
+
+.game-btn,
+.gameHeader button,
+.options button,
+.modal-window .buttons button {
+	text-decoration: none;
+	outline: none;
+	display: block;
+	color: #242412;
+	font-size: 15px;
+	font-weight: 700;
+	padding: 20px 20px;
+	border: 2px solid #242412;
+	border-radius: 10px;
+	background: none;
+}
+
+.content-wrapper {
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+	flex-grow: 1;
+}
+
+.frame {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	min-height: 320px;
+	min-width: 320px;
+	padding: 2vh 2vh 1vh;
+	box-sizing: border-box;
+}
+
+.mainHeader {
+	width: 100%;
+	padding: 0;
+	display: flex;
+	justify-content: space-between;
+	flex-direction: row;
+}
+
+.mainHeader .title {
+	font-size: 60px;
+	font-weight: 700;
+	color: #222;
+}
+
+.mainHeader .mainBar {
+	margin-top: 20px;
+}
+
+.mainHeader .mainMenu {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: row;
+}
+
+.mainHeader .mainMenu a {
+	text-decoration: none;
+	outline: none;
+	display: block;
+	color: #242412;
+	font-size: 25px;
+	font-weight: 700;
+	padding: 6px 20px;
+	border: 2px solid #242412;
+	border-radius: 10px;
+}
+
+.mainHeader .mainMenu a:hover {
+	color: black;
+	border-color: black;
+}
+
+.mainHeader .mainMenu > *:not(:last-child) {
+	margin-right: 15px;
+}
+
+.mainHeader .greetings {
+	margin-top: 10px;
+	text-align: center;
+}
+
+.mainHeader .greetings > span {
+	color: palevioletred;
+}
+
+footer {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: row;
+	width: 100%;
+	font-size: 0.5em;
+}
+
+footer a {
+	text-decoration: none;
+	outline: none;
+	display: block;
+}
+
+.gameHeader {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	flex-direction: row;
+	width: 100%;
+}
+
+.gameHeader button {
+	line-height: 1em;
+}
+
+#menu {
+	width: 20%;
+}
+
+.controls {
+	display: flex;
+	align-items: center;
+	flex-direction: row;
+}
+
+.controls button {
+	margin-left: 10px;
+}
+
+.controls .hints {
+	display: flex;
+	flex-direction: row;
+}
+
+.player {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	border: 2px solid #222;
+	padding: 5px 15px;
+	border-radius: 10px;
+	max-width: 230px;
+}
+
+.player > div:first-child {
+	font-size: 15px;
+	font-weight: 400;
+	text-align: center;
+	margin-bottom: 5px;
+}
+
+.player > div:last-child {
+	font-size: 20px;
+	font-weight: 700;
+	color: palevioletred;
+}
+
+.content-wrapper {
+	margin-top: 2vh;
+	justify-content: space-between;
+	margin-bottom: 1vh;
+}
+
+.wrapper {
+	display: flex;
+	flex-direction: column;
+	width: 78%;
+}
+
+.question-text {
+	font-size: 3vw;
+	font-weight: 800;
+	color: #222;
+	position: relative;
+	border: 2px solid #222;
+	border-radius: 15px;
+	box-sizing: border-box;
+	padding: 2vh 2vw;
+	flex-grow: 1;
+	overflow: hidden;
+}
+
+.ladder {
+	display: flex;
+	justify-content: space-between;
+	align-items: stretch;
+	flex-direction: column;
+	width: 20%;
+	height: 100%;
+	box-sizing: border-box;
+}
+
+.ladder > div {
+	font-size: 2.5vh;
+	text-align: center;
+	box-sizing: border-box;
+	width: 100%;
+	border-radius: 15px;
+	padding: 1vh 2vw;
+	border: 1px solid #222;
+}
+
+.options {
+	width: 100%;
+	margin-top: 2vh;
+}
+
+.options .options-row {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	flex-direction: row;
+	margin-bottom: 1vh;
+}
+
+.options .options-row:last-child {
+	margin: 0;
+}
+
+.options button {
+	box-sizing: border-box;
+	width: 49%;
+	height: 45px;
+	position: relative;
+	padding: 0;
+	border-radius: 20px;
+}
+
+.options button .letterFrame {
+	box-sizing: border-box;
+	position: absolute;
+	height: 45px;
+	width: 45px;
+	transform: scale(0.95) rotateZ(45deg);
+	top: -2px;
+	left: -5px;
+	background: white;
+	border-radius: 40%;
+	border: 2px solid #222;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: row;
+}
+
+.options button .letterFrame .letter {
+	line-height: 1em;
+	transform: rotateZ(-45deg);
+	font-size: 20px;
+	font-weight: 700;
+	color: #222;
+}
+
+.modal-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: black;
+	opacity: 0.5;
+}
+
+.modal-window {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background: white;
+}
+
+.modal-window .message {
+	padding: 5%;
+	text-align: center;
+}
+
+.modal-window .buttons {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: row;
+}
+
+.modal-window .buttons button {
+	padding: 10px 30px;
+	margin: 5%;
+	margin-top: 1%;
+}
+
+.modal-window-lg {
+	width: 80%;
+	height: 80%;
+}
+
+.modal-window-md {
+	width: 60%;
+	height: 60%;
+}
+
+.modal-window-sm {
+	min-width: 40%;
+}
+
+@media (max-width: 1040px) {
+
+.mainHeader {
+	flex-direction: column;
+	align-items: center;
+}
+
+}
+
+@media (max-width: 760px) {
+
+.mainHeader .title {
+	font-size: 30px;
+}
+
+.mainHeader .mainBar {
+	width: 100%;
+	margin: 0;
+	display: flex;
+	flex-direction: column-reverse;
+}
+
+.mainHeader .mainMenu {
+	flex-direction: column;
+}
+
+.mainHeader .mainMenu a {
+	display: block;
+	width: 100%;
+	margin-right: 0 !important;
+	border: 0;
+	border-top: 1px solid #242412;
+	border-radius: 0;
+	text-align: center;
+}
+
+.mainHeader .mainMenu > :last-child {
+	border-bottom: 1px solid #242412;
+}
+
+.mainHeader .greetings {
+	margin-bottom: 15px;
+}
+
+.gameHeader {
+	align-items: initial;
+}
+
+.controls {
+	flex-direction: column;
+	width: 78%;
+}
+
+.controls .hints {
+	margin-top: 1vh;
+	width: 100%;
+	justify-content: space-between;
+}
+
+.controls .hints > button {
+	margin: 0;
+	width: 32%;
+	padding: 5px;
+}
+
+.player {
+	max-width: unset;
+	width: 100%;
+	box-sizing: border-box;
+	flex-direction: row;
+}
+
+.player > div:first-child {
+	margin: 0 3% 0 0;
+}
+
+.ladder > div {
+	font-size: 2vh;
+}
+
+.options .options-row {
+	flex-direction: column;
+}
+
+.options button {
+	width: 100%;
+	height: 40px;
+}
+
+.options button:first-child {
+	margin-bottom: .6vh;
+}
+
+.options button .letterFrame {
+	width: 40px;
+	height: 40px;
+}
+
+}
+
+@media (max-width: 480px) {
+
+.gameHeader button {
+	font-size: 13px;
+}
+
+#menu {
+	width: 23%;
+}
+
+.controls {
+	box-sizing: border-box;
+	width: 75%;
+}
+
+.player > div:first-child {
+	display: none;
+}
+
+.player > div:last-child {
+	font-size: 16px;
+}
+
+.wrapper {
+	width: 75%;
+}
+
+.question-text {
+	font-size: 3vh;
+}
+
+.ladder {
+	width: 23%;
+}
+
+}
+
+@media (max-width: 380px) {
+
+.mainHeader .title {
+	font-size: 25px;
+}
+
+}
+
+@media (max-height: 400px) {
+
+.options button {
+	height: 28px;
+}
+
+.options button .letterFrame {
+	width: 28px;
+	height: 28px;
+}
+
+.options button .letterFrame .letter {
+	font-size: 16px;
+}
+
+}
+

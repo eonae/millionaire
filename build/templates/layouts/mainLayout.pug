@@ -1,0 +1,15 @@
+extends ./layout.pug
+
+block header
+  header.mainHeader
+    .title Wanna be a millionaire?
+    .mainBar
+      nav.mainMenu
+        a(href="/play") Play
+        a(href="/contribute") Contribute
+      .greetings Hello, 
+        span #{player}
+
+block content
+
+    

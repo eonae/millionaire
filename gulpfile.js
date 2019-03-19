@@ -4,14 +4,9 @@ const gulp = require('gulp');
 const sass = require('gulp-sass');
 const mmq = require('gulp-merge-media-queries')
 const del = require('del');
-const rigger = require('gulp-rigger');
-const htmlval = require('gulp-htmlhint');
-const eslint = require('gulp-eslint');
-const babel = require('gulp-babel');
 const webpack_stream = require('webpack-stream');
 const path = require('path');
 const browserSync = require('browser-sync').create();
-const rename = require('gulp-rename');
 const defineModule = require('gulp-define-module');
 const concat = require('gulp-concat');
 const wrap = require('gulp-wrap');
@@ -22,36 +17,32 @@ const replace = require('gulp-replace');
 const prettier = require('gulp-prettier');
 const pug = require('gulp-pug');
 
-const paths = require('./paths');
 const webpack_config = require('./webpack.config');
 
+// Компиляция scss-кода в main.css
 
 gulp.task('sass', () => {
-    return gulp.src(paths.sass_src + '/main.scss')
+    return gulp.src('./src/sass/main.scss')
                .pipe(sass().on('error', sass.logError))
                .pipe(mmq({
                    log: true
                }))
-               .pipe(gulp.dest(paths.css_build))
+               .pipe(gulp.dest('./build/static'))
                .pipe(browserSync.stream());
 });
 
-gulp.task('html', () => {
-    return gulp.src(`${paths.html_src}/*.html`)
-               .pipe(rigger())
-               .pipe(htmlval())
-               .pipe(htmlval.failAfterError())
-               .pipe(gulp.dest(paths.html_build))
+// Копирование некомпилируемых шаблонов
+
+gulp.task('templates', () => {
+    return gulp.src('./src/templates/**/*')
+               .pipe(gulp.dest('build/templates'))
                .pipe(browserSync.stream());
 });
 
-gulp.task('libs', () => {
-    return gulp.src(paths.libs_src + '/*.js')
-               .pipe(gulp.dest(paths.libs_build));
-});
+// Прекомпиляция клиентских шаблонов
 
-gulp.task('pug-precompile', () => {
-    return gulp.src('./src/frontend/pug-client/**/*.pug')
+gulp.task('precompile', () => {
+    return gulp.src('./src/templates-client/**/*.pug')
           .pipe(
             foreach(
                 (stream, file) => {
@@ -78,57 +69,58 @@ gulp.task('pug-precompile', () => {
           .pipe(defineModule('es6'))
           .pipe(ins.prepend("import pug from 'vendor/pug-runtime-es6'\n\r"))
           .pipe(prettier())
-          .pipe(gulp.dest('./src/frontend/js/views/templates'));
+          .pipe(gulp.dest('./src/frontend/views/templates'));
   });
 
-
-gulp.task('js', () => {
-    return gulp.src(`${paths.js_src}/app.js`)
-               .pipe(eslint())
-               .pipe(eslint.format())
-               //.pipe(eslint.failAfterError())
-            //    .pipe(babel({
-            //        presets: ['@babel/env']
-            //    }))
+gulp.task('bundle', () => {
+    return gulp.src('./src/frontend/main.js')
                .pipe(webpack_stream(webpack_config), webpack)
-               .pipe(gulp.dest(paths.js_build))
+               .pipe(gulp.dest('./build/static'))
                .pipe(browserSync.stream());
 });
 
 gulp.task('assets', () => {
-    return gulp.src(`${paths.assets_src}/**/*`)
-               .pipe(gulp.dest(paths.assets_build));
+    return gulp.src('./src/assets/**/*')
+               .pipe(gulp.dest('./build/static'));
 });
 
 gulp.task('server', () => {
-    return gulp.src(`${paths.back_src}/**`)
-               //.pipe(eslint())
-               //.pipe(eslint.format())
-               //.pipe(eslint.failAfterError())
-               //.pipe(babel({
-               //     presets: ['@babel/env']
-               //}))
-               .pipe(gulp.dest(paths.back_build));
+    return gulp.src('./src/server/**/*')
+               .pipe(gulp.dest('./build/server'));
 });
 
+gulp.task('game', () => {
+  return gulp.src('./src/game/**/*')
+             .pipe(gulp.dest('./build/game'));
+});
+
+gulp.task('app', () => {
+  return gulp.src('./src/app.js')
+             .pipe(gulp.dest('./build'));
+});
 
 gulp.task('clean', () => {
-    return del([`${paths.build}/**/*`, `!${paths.build}`])
+    return del('./build/**/*');
 });
 
-gulp.task('all', gulp.series('clean', 'assets', 'sass', 'html', 'pug-precompile', 'js', 'libs', 'server'));
+
+gulp.task('all', gulp.series('clean', 'assets', 'templates', 'sass', 'server', 'game', 'app', 'precompile', 'bundle'));
 
 gulp.task('default', () => {
-    gulp.task('all')();
+
+    //gulp.task('all')();
+
     browserSync.init({
         server: {
-            baseDir: paths.build
+            baseDir: './build'
         }
     });
     
-    gulp.watch(paths.sass_src, gulp.series('sass'));
-    gulp.watch(paths.html_src, gulp.series('html'));
-    gulp.watch(paths.js_src, gulp.series('js'));
-    gulp.watch(paths.back_src, gulp.series('server'));
-    gulp.watch(paths.templates_src, gulp.series('pug-precompile', 'js'));
+    gulp.watch('./src/sass', gulp.series('sass'));
+    gulp.watch('./src/templates', gulp.series('templates'));
+    gulp.watch('./src/templates-client', gulp.series('precompile', 'bundle'));
+    gulp.watch('./src/frontend', gulp.series('bundle'));
+    gulp.watch('./src/server', gulp.series('server'));
+    gulp.watch('./src/game', gulp.series('game'));
+    gulp.watch('./src/app.js', gulp.series('app'));
 });
