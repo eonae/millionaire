@@ -3,10 +3,17 @@ import GameView from 'views/gameView';
 import util from 'util.js';
 import modals from './views/modal/modals.js';
 
-modals.inputBox('Hello, My little friend!', data => {
-  const $name = document.querySelector('.greetings span');
-  $name.textContent = data;
-});
+// window.onload = () => {
+  
+//   modals.inputBox('Please enter your name', data => {
+//     util.ajax('/name', { name: data }, () => {
+//       const $name = document.querySelector('.greetings span');
+//       $name.textContent = data;
+//     });
+//   });
+// };
+
+
 // modals.confirmBox('Hello, My little friend!', data => alert(data));
 // modals.inputBox('Please enter your name!', data => alert(data));
 // debugger;

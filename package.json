@@ -24,7 +24,9 @@
   "homepage": "https://github.com/eonae/geekbrains#readme",
   "dependencies": {
     "body-parser": "^1.18.3",
+    "connect-mongo": "^2.0.3",
     "express-pug": "^1.0.0",
+    "express-session": "^1.15.6",
     "gulp": "^4.0.0",
     "gulp-handlebars": "^4.0.0",
     "mime": "^2.4.0",
