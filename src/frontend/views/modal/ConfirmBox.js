@@ -1,4 +1,4 @@
-import ModalWindow from 'views/modal/base/ModalWindow.js'
+import ModalWindow from 'views/base/ModalWindow.js'
 
 export default class ConfirmBox extends ModalWindow {
 

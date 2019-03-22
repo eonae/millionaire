@@ -27,34 +27,6 @@
   }
 }
 
-.ladder {
-  @include flex(space-between, stretch, column);
-  width: 20%;
-  height: 100%;
-  box-sizing: border-box;
-
-  @media (max-width: $medium) {
-    // width: 
-  }
-  @media (max-width: $small) {
-    width: 23%;
-  }
-
-  & > div {
-    font-size: 2.5vh;
-    text-align: center;
-    box-sizing: border-box;
-    width: 100%;
-    border-radius: 15px;
-    padding: 1vh 2vw;
-    border: 1px solid #222;
-
-    @media (max-width: $medium) {
-      font-size: 2vh;
-    }
-  }
-}
-
 .options {
   width: 100%;
   margin-top: 2vh;

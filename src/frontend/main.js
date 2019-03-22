@@ -1,7 +1,45 @@
-import IntroView from 'views/introView';
-import GameView from 'views/gameView';
-import util from 'util.js';
-import modals from './views/modal/modals.js';
+// import modals from './views/modal/modals.js';
+// import MainController from './controllers/MainController.js';
+import initializeView from 'views/base/initializeView';
+
+
+window.onload = () => {
+  window.view = initializeView();
+  view.gameLayout.render();
+
+  // view.mainLayout.mainMenu.on('play', () => alert('play!'));
+  // view.mainLayout.mainMenu.on('contribute', () => alert('contribute!'));
+
+
+};
+
+
+
+  // debugger;
+  // window.controller = new MainController({
+  //   mainView: new MainView(),
+  //   gameView: new GameView()
+  // });
+
+  // controller.update();
+
+
+  // util.ajax('/state', {}, state => {
+  //   switch (state.status) {
+  //     case 0:
+        
+  //       break;
+  //     case 1:
+  //       break;
+  //     case 2:
+  //   }
+
+  //   document.body.innerHTML = templates.render_gameView();
+  //   const btn0 = document.getElementById('0');
+  //   console.log(btn0);
+  // });
+
+  // Дальше в зависимости от полученного state рисуем основное окно.
 
 // window.onload = () => {
   

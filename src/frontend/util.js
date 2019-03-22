@@ -20,9 +20,10 @@ export default {
         xhr.onload = () => {
             if (xhr.status != 200) {
                 alert('AJAX failed!');
+                callback(new Error('Error'));
             }
             else {
-                callback(null, JSON.parse(xhr.responseText));
+                callback(JSON.parse(xhr.responseText));
             }
         };
     },
@@ -61,9 +62,4 @@ export default {
         }
         return elements;
     }
-    // getElementsObj(values, keys) {
-        
-
-
-    // }
 }

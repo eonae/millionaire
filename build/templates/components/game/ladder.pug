@@ -1,0 +1,14 @@
+//- child component
+.ladder
+  each stage, index in stages
+    if (index < currentStage)
+      if (stage.immune)
+        .done-immune= stage.prize
+      else
+        .done= stage.prize
+    else
+      if (stage.immune)
+        .immune= stage.prize
+      else
+        .general= stage.prize
+

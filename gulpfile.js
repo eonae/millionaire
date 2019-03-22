@@ -42,7 +42,7 @@ gulp.task('templates', () => {
 // Прекомпиляция клиентских шаблонов
 
 gulp.task('precompile', () => {
-    return gulp.src('./src/templates-client/**/*.pug')
+    return gulp.src('./src/templates/components/**/*.pug')
           .pipe(
             foreach(
                 (stream, file) => {
@@ -117,8 +117,7 @@ gulp.task('default', () => {
     });
     
     gulp.watch('./src/sass', gulp.series('sass'));
-    gulp.watch('./src/templates', gulp.series('templates'));
-    gulp.watch('./src/templates-client', gulp.series('precompile', 'bundle'));
+    gulp.watch('./src/templates', gulp.series('templates', 'precompile', 'bundle'));
     gulp.watch('./src/frontend', gulp.series('bundle'));
     gulp.watch('./src/server', gulp.series('server'));
     gulp.watch('./src/game', gulp.series('game'));

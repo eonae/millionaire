@@ -1,0 +1,6 @@
+div
+  each book,index in books
+    if book.green
+      .green= index+1 + ' ' + book.title
+    else
+      .red= index+1 + ' ' + book.title

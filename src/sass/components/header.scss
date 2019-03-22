@@ -2,7 +2,7 @@
   @extend %container;
   width: 100%;
   padding: 0;
-  @include flex(space-between, default);
+  @include flex(space-between, center);
 
   @media (max-width: $lg) {
     flex-direction: column;
@@ -38,8 +38,8 @@
     @media (max-width: $medium) {
       flex-direction: column;
     }
-
-    a {
+// Тут надо будет смотреть...
+    button {
       @include notLikeLink();
       color: #242412;
       @include font(25px, 700);

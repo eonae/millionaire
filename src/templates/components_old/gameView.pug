@@ -1,0 +1,45 @@
+//- master component
+.frame
+  header.gameHeader
+    .controls
+      .player
+        div Player:
+        div #{player}
+      .hints
+        button(type="button" id="fifty") 50/50
+        button(type="button" id="hint1") Disabled
+        button(type="button" id="hint2") Disabled
+        
+    button(type="button" id="menu") Menu
+
+
+  .content-wrapper
+    .wrapper
+      .question-text Lorem ipsum dolor sit at? Nostrum vuptatibus totam sint quia porro, dolorum cupiditate officia? Doloremque labore incidunt cupiditate, nisi numquam reprehenderit maiores in!
+      .options
+        .options-row
+          button(type="button" id="option-0") Баба-Яга
+            .letterFrame
+              .letter A
+          button(type="button" id="option-1") Джон Уик
+            .letterFrame
+              .letter B
+        .options-row
+          button(type="button" id="option-2") Линда Гамильтон
+            .letterFrame
+              .letter C
+          button(type="button" id="option-3") Джеймс Престон
+            .letterFrame
+              .letter D
+    .ladder
+      div 100000
+      div 50000
+      div 20000
+      div 10000
+      div 5000
+      div 2000
+      div 1000
+      
+  footer
+    a(href="https://github.com/eonae/millionaire" target="_blank").
+      copyright app by Eonae &#xa9

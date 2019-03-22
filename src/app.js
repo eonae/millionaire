@@ -1,17 +1,14 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const logger = require('morgan');
-const pug = require('express-pug');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
+const State = require('./server/state');
 
 // const gameController = require('./deprecated/backend/game/gameController.js');
 // const gameManager = require('./server/gameManager.js/index.js');
 
 const app = express();
-
-app.set('view engine', 'pug');
-//app.set('view', __dirname + '/templates');
 
 app.use( session({
   cookie: {
@@ -20,29 +17,33 @@ app.use( session({
   store: new MongoStore({ url: 'mongodb://localhost/millionaire'}),
   secret: 'wow, what a GAME!',
   resave: true,
-  saveUninitialized: true
+  saveUninitialized: false
 }));
 
 app.use(logger('dev'));
-
-app.use((req, res, next) => {
-  if (!(req.session.name))
-    req.session.count = 1;
-  else
-    req.session.count++;
-  next();
-});
 
 app.use( bodyParser.urlencoded({ extended: true }) );
 app.use( bodyParser.json() );
 
 app.use( express.static(__dirname + '/static') );
 
-app.get('/', (req, res) => {
-  res.render(__dirname + '/templates/blocks/mainView.pug', {
-    player: session.player || 'dear friend!'
-  });
+app.use( (req, res, next) => {
+
+  if (!(req.session.state))
+    req.session.state = new State();
+  next();
 });
+
+app.get('/', (req, res) => {
+  console.log('sending layout...');
+  res.render(__dirname + '/templates/layout.pug');
+});
+
+function sendState(req, res) {
+  res.send(req.session.state);
+}
+
+app.get('/state', sendState);
 
 app.get('/session', (req, res) => {
   res.send(req.session);
@@ -55,7 +56,7 @@ app.get('/name', (req, res) => {
 });
 
 app.get('/game', (req, res) => {
-  const name = session.name;
+  const name = 'dear friend';
   res.render(__dirname + '/templates/blocks/gameView.pug', {
     player: name
   });

@@ -91,203 +91,6 @@
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./src/frontend/views/introView.js
-let _$introView = document.querySelector('.introScreen');
-let _startHandler = null;
-
-class IntroView {
-
-    constructor() {
-        this.$btnStart = document.querySelector('#newGame');
-        this.$btnStart.addEventListener('click', () => {
-            _startHandler();
-        });
-    }
-
-    setStartHandler(handler) {
-        _startHandler = handler;
-    }
-
-    toggle() {
-        _$introView.classList.toggle('hidden');
-    }
-}
-// CONCATENATED MODULE: ./src/frontend/util.js
-function constructGetUrl(url, paramsObj) {
-    let query = url;
-    if (paramsObj && Object.keys(paramsObj).length != 0) {
-        let delim = '?';
-        for (let key in paramsObj) {
-            query += `${delim}${key}=${paramsObj[key]}`;
-        }
-    }
-    return query;
-}
-
-/* harmony default export */ var util = ({
-
-    // Обёртка над обыкновенным XHR-запросом.
-    // Принимает url, объект с параметрами и callback, который будет вызван при получении ответа.
-    ajax(url, params, callback) {
-        let xhr = new XMLHttpRequest();
-        xhr.open('GET', constructGetUrl(url, params));
-        xhr.send();
-        xhr.onload = () => {
-            if (xhr.status != 200) {
-                alert('AJAX failed!');
-            }
-            else {
-                callback(null, JSON.parse(xhr.responseText));
-            }
-        };
-    },
-
-    setInnerText(element, value) {
-        element.textContent = value;
-    },
-
-    create(tagName, classList, text) {
-        var $elem = document.createElement(tagName);
-        if (classList) {
-            for (var cls of classList)
-                $elem.classList.add(cls);
-        }
-        if (text)
-            $elem.textContent = text;
-    
-        return $elem;
-    },
-
-    getElements() {
-        const elements = [];
-
-        function push(selector) {
-            const element = document.querySelector(selector);
-            if (element) elements.push(element);
-        }
-
-        for (let argument of arguments) {
-            if (argument instanceof Array) {
-                for (let value of argument)
-                    push(value);
-            } else {
-                push(argument);
-            }
-        }
-        return elements;
-    }
-    // getElementsObj(values, keys) {
-        
-
-
-    // }
-});
-// CONCATENATED MODULE: ./src/frontend/base/eventEmitter.js
-class EventEmitter {
-
-  constructor() {
-    this.handlers = {};
-  }
-  
-  on(eventName, handler) {
-      if (eventName in this.handlers) {
-          this.handlers[eventName].push(handler);
-      } else {
-          this.handlers[eventName] = [ handler ];
-      }
-  };
-
-  off(eventName, handler) {
-      //..
-  };
-
-  emit(eventName, args) {
-      if (eventName in this.handlers) {
-          for (var handler of this.handlers[eventName]) {
-              setTimeout(() => { handler(args); }, 0);
-          }
-      }
-  }
-}
-// CONCATENATED MODULE: ./src/frontend/base/component.js
-// gameView < MasterComponent < Component < EventEmitter
-// questionView < SlaveComponent < Component
-
-
-
-class component_Component extends EventEmitter {
-  constructor() {
-    super();
-  }
-}
-
-// CONCATENATED MODULE: ./src/frontend/views/gameView.js
-
-
-
-let _gw = document.querySelector('.gameScreen');
-
-class gameView_GameView extends component_Component {
-
-    constructor() {
-        super();
-        var elems = util.getElements('#quit', '#flee', '#percent', '#half', '.question', '.options');
-        //debugger;
-        //Object.assign(this, util);
-
-        this.btnQuit = document.querySelector('#quit');
-        this.btnFlee = document.querySelector('#flee');
-        this.btnHintPercent = document.querySelector('#percent');
-        this.btnHintHalf = document.querySelector('#half');
-        this.questionField = document.querySelector('.question');
-        this.optionButtonsPanel = document.querySelector('.options');
-        this.optionButtons = Array.from(this.optionButtonsPanel.children);
-    }
-
-    toggle() {
-        _gw.classList.toggle('hidden');
-    }
-
-    update() {
-        var nextPrize = this._currentGame.rounds[this._currentGame.current].prize;
-        var prize = this._currentGame.prize;
-        switch (this._currentGame.status) {
-            case 'start':
-                alert(`Вопрос на ${nextPrize}р.`); // Будет другое.
-                this.showQuestion();
-                break;
-            case 'promote':
-                alert('Всё верно!');
-                alert(`Вопрос на ${nextPrize}р.`); // Будет другое.
-                this.showQuestion();
-                break;
-            case 'loose':
-                alert(`Вы проиграли! Ваш выирыш составил ${prize}p.`);
-                view.mainScreen.classList.remove('hidden');
-                view.gameScreen.classList.add('hidden');
-                break;
-                // тяп ляп.. не успеваю.
-            case 'flee':
-                alert(`Вы забрали деньги! Ваш выирыш составил ${prize}p.`);
-                view.mainScreen.classList.remove('hidden');
-                view.gameScreen.classList.add('hidden');
-                break;
-                // тяп ляп.. не успеваю.
-            case 'win':
-                alert(`Вы выиграли! Ваш выирыш составил ${prize}p.`);
-                view.mainScreen.classList.remove('hidden');
-                view.gameScreen.classList.add('hidden');
-                break;
-        }
-    }
-    showQuestion(question) {
-        const buttons = this.optionButtonsPanel.children;
-        util.setInnerText(this.questionField, question.text);
-        for (var i = 0; i < this.optionButtons.length; i++) {
-            util.setInnerText(this.optionButtons[i], question.options[i]);
-        }
-    }
-}
 // CONCATENATED MODULE: ./src/frontend/vendor/pug-runtime-es6.js
 // На данный момент не будет работать функци rethrow, т. к. она не может найти модуль fs...
 
@@ -476,155 +279,266 @@ class Pug {
 
 /* harmony default export */ var pug_runtime_es6 = (new Pug());
 // CONCATENATED MODULE: ./src/frontend/views/templates/templates.js
-/* harmony default export */ var templates = ({  render_confirmBox: function(locals) {    var pug_html = "",      pug_mixins = {},      pug_interp;    var locals_for_with = locals || {};    (function(buttons, message) {      var pug_indent = [];      pug_html =        pug_html +        '\n\u003Cdiv id="modal-wrapper"\u003E\n  \u003Cdiv class="modal-overlay"\u003E\u003C\u002Fdiv\u003E\n  \u003Cdiv class="modal-window confirm-box"\u003E\n    \u003Cdiv class="message"\u003E' +        pug_runtime_es6.escape(null == (pug_interp = message) ? "" : pug_interp) +        '\u003C\u002Fdiv\u003E\n    \u003Cdiv class="buttons"\u003E\n      \u003Cbutton type="button" id="positive"\u003E' +        pug_runtime_es6.escape(null == (pug_interp = buttons.positive) ? "" : pug_interp) +        '\u003C\u002Fbutton\u003E\n      \u003Cbutton type="button" id="negative"\u003E' +        pug_runtime_es6.escape(null == (pug_interp = buttons.negative) ? "" : pug_interp) +        "\u003C\u002Fbutton\u003E\n    \u003C\u002Fdiv\u003E\n  \u003C\u002Fdiv\u003E\n\u003C\u002Fdiv\u003E";    }.call(      this,      "buttons" in locals_for_with        ? locals_for_with.buttons        : typeof buttons !== "undefined"        ? buttons        : undefined,      "message" in locals_for_with        ? locals_for_with.message        : typeof message !== "undefined"        ? message        : undefined    ));    return pug_html;  },  render_inputBox: function(locals) {    var pug_html = "",      pug_mixins = {},      pug_interp;    var locals_for_with = locals || {};    (function(buttons, message, placeholder) {      var pug_indent = [];      pug_html =        pug_html +        '\n\u003Cdiv id="modal-wrapper"\u003E\n  \u003Cdiv class="modal-overlay"\u003E\u003C\u002Fdiv\u003E\n  \u003Cdiv class="modal-window modal-window-sm input-box"\u003E\n    \u003Cdiv class="message"\u003E' +        pug_runtime_es6.escape(null == (pug_interp = message) ? "" : pug_interp) +        "\u003C\u002Fdiv\u003E\n    \u003Cinput" +        (' type="text"' +          pug_runtime_es6.attr("placeholder", `${placeholder}`, true, false) +          ' id="modal-input"') +        '\u002F\u003E\n    \u003Cdiv class="buttons"\u003E\n      \u003Cbutton type="button" id="positive"\u003E' +        pug_runtime_es6.escape(null == (pug_interp = buttons.positive) ? "" : pug_interp) +        '\u003C\u002Fbutton\u003E\n      \u003Cbutton type="button" id="negative"\u003E' +        pug_runtime_es6.escape(null == (pug_interp = buttons.negative) ? "" : pug_interp) +        "\u003C\u002Fbutton\u003E\n    \u003C\u002Fdiv\u003E\n  \u003C\u002Fdiv\u003E\n\u003C\u002Fdiv\u003E";    }.call(      this,      "buttons" in locals_for_with        ? locals_for_with.buttons        : typeof buttons !== "undefined"        ? buttons        : undefined,      "message" in locals_for_with        ? locals_for_with.message        : typeof message !== "undefined"        ? message        : undefined,      "placeholder" in locals_for_with        ? locals_for_with.placeholder        : typeof placeholder !== "undefined"        ? placeholder        : undefined    ));    return pug_html;  },  render_messageBox: function(locals) {    var pug_html = "",      pug_mixins = {},      pug_interp;    var locals_for_with = locals || {};    (function(buttons, message) {      var pug_indent = [];      pug_html =        pug_html +        '\n\u003Cdiv id="modal-wrapper"\u003E\n  \u003Cdiv class="modal-overlay"\u003E\u003C\u002Fdiv\u003E\n  \u003Cdiv class="modal-window message-box"\u003E\n    \u003Cdiv class="message"\u003E' +        pug_runtime_es6.escape(null == (pug_interp = message) ? "" : pug_interp) +        '\u003C\u002Fdiv\u003E\n    \u003Cdiv class="buttons"\u003E\n      \u003Cbutton type="button" id="positive"\u003E' +        pug_runtime_es6.escape(null == (pug_interp = buttons.positive) ? "" : pug_interp) +        "\u003C\u002Fbutton\u003E\n    \u003C\u002Fdiv\u003E\n  \u003C\u002Fdiv\u003E\n\u003C\u002Fdiv\u003E";    }.call(      this,      "buttons" in locals_for_with        ? locals_for_with.buttons        : typeof buttons !== "undefined"        ? buttons        : undefined,      "message" in locals_for_with        ? locals_for_with.message        : typeof message !== "undefined"        ? message        : undefined    ));    return pug_html;  },  render_modalLayout: function(locals) {    var pug_html = "",      pug_mixins = {},      pug_interp;    var locals_for_with = locals || {};    (function(message) {      var pug_indent = [];      pug_html =        pug_html +        '\n\u003Cdiv id="modal-wrapper"\u003E\n  \u003Cdiv class="modal-overlay"\u003E\u003C\u002Fdiv\u003E\n  \u003Cdiv class="modal-window modal-window-lg" style="background: white"\u003E' +        pug_runtime_es6.escape(null == (pug_interp = message) ? "" : pug_interp) +        "\u003C\u002Fdiv\u003E\n\u003C\u002Fdiv\u003E";    }.call(      this,      "message" in locals_for_with        ? locals_for_with.message        : typeof message !== "undefined"        ? message        : undefined    ));    return pug_html;  }});
-// CONCATENATED MODULE: ./src/frontend/views/modal/base/ModalWindow.js
+/* harmony default export */ var templates = ({  render_gameLayout: function(locals) {    var pug_html = "",      pug_mixins = {},      pug_interp;    var pug_indent = [];    pug_html =      pug_html +      '\n\u003Cdiv class="frame"\u003E\n  \u003Cheader class="gameHeader"\u003E\n    \u003Cdiv class="controls"\u003E\n      \u003Cdiv id="player"\u003E\u003C\u002Fdiv\u003E\n      \u003Cdiv id="hints"\u003E\u003C\u002Fdiv\u003E\n    \u003C\u002Fdiv\u003E\n    \u003Cdiv id="menu"\u003E\u003C\u002Fdiv\u003E\n  \u003C\u002Fheader\u003E\n  \u003Cdiv class="content-wrapper"\u003E\n    \u003Cdiv id="question"\u003E\u003C\u002Fdiv\u003E\n    \u003Cdiv id="ladder"\u003E\u003C\u002Fdiv\u003E\n  \u003C\u002Fdiv\u003E\n  \u003Cfooter\u003E\u003Ca href="https:\u002F\u002Fgithub.com\u002Feonae\u002Fmillionaire" target="_blank"\u003Ecopyright app by Eonae &#xa9\u003C\u002Fa\u003E\u003C\u002Ffooter\u003E\n\u003C\u002Fdiv\u003E';    return pug_html;  },  render_hints: function(locals) {    var pug_html = "",      pug_mixins = {},      pug_interp;    var pug_indent = [];    pug_html =      pug_html +      '\n\u003Cdiv class="hints"\u003E\n  \u003Cbutton type="button" id="hint-0"\u003E50\u002F50\u003C\u002Fbutton\u003E\n  \u003Cbutton type="button" id="hint-1"\u003EDisabled\u003C\u002Fbutton\u003E\n  \u003Cbutton type="button" id="hint-2"\u003EDisabled\u003C\u002Fbutton\u003E\n\u003C\u002Fdiv\u003E';    return pug_html;  },  render_ladder: function(locals) {    var pug_html = "",      pug_mixins = {},      pug_interp;    var locals_for_with = locals || {};    (function(currentStage, stages) {      var pug_indent = [];      pug_html = pug_html + '\n\u003Cdiv class="ladder"\u003E';      // iterate stages      (function() {        var $$obj = stages;        if ("number" == typeof $$obj.length) {          for (var index = 0, $$l = $$obj.length; index < $$l; index++) {            var stage = $$obj[index];            if (index < currentStage) {              if (stage.immune) {                pug_html =                  pug_html +                  '\n  \u003Cdiv class="done-immune"\u003E' +                  pug_runtime_es6.escape(                    null == (pug_interp = stage.prize) ? "" : pug_interp                  ) +                  "\u003C\u002Fdiv\u003E";              } else {                pug_html =                  pug_html +                  '\n  \u003Cdiv class="done"\u003E' +                  pug_runtime_es6.escape(                    null == (pug_interp = stage.prize) ? "" : pug_interp                  ) +                  "\u003C\u002Fdiv\u003E";              }            } else {              if (stage.immune) {                pug_html =                  pug_html +                  '\n  \u003Cdiv class="immune"\u003E' +                  pug_runtime_es6.escape(                    null == (pug_interp = stage.prize) ? "" : pug_interp                  ) +                  "\u003C\u002Fdiv\u003E";              } else {                pug_html =                  pug_html +                  '\n  \u003Cdiv class="general"\u003E' +                  pug_runtime_es6.escape(                    null == (pug_interp = stage.prize) ? "" : pug_interp                  ) +                  "\u003C\u002Fdiv\u003E";              }            }          }        } else {          var $$l = 0;          for (var index in $$obj) {            $$l++;            var stage = $$obj[index];            if (index < currentStage) {              if (stage.immune) {                pug_html =                  pug_html +                  '\n  \u003Cdiv class="done-immune"\u003E' +                  pug_runtime_es6.escape(                    null == (pug_interp = stage.prize) ? "" : pug_interp                  ) +                  "\u003C\u002Fdiv\u003E";              } else {                pug_html =                  pug_html +                  '\n  \u003Cdiv class="done"\u003E' +                  pug_runtime_es6.escape(                    null == (pug_interp = stage.prize) ? "" : pug_interp                  ) +                  "\u003C\u002Fdiv\u003E";              }            } else {              if (stage.immune) {                pug_html =                  pug_html +                  '\n  \u003Cdiv class="immune"\u003E' +                  pug_runtime_es6.escape(                    null == (pug_interp = stage.prize) ? "" : pug_interp                  ) +                  "\u003C\u002Fdiv\u003E";              } else {                pug_html =                  pug_html +                  '\n  \u003Cdiv class="general"\u003E' +                  pug_runtime_es6.escape(                    null == (pug_interp = stage.prize) ? "" : pug_interp                  ) +                  "\u003C\u002Fdiv\u003E";              }            }          }        }      }.call(this));      pug_html = pug_html + "\n\u003C\u002Fdiv\u003E";    }.call(      this,      "currentStage" in locals_for_with        ? locals_for_with.currentStage        : typeof currentStage !== "undefined"        ? currentStage        : undefined,      "stages" in locals_for_with        ? locals_for_with.stages        : typeof stages !== "undefined"        ? stages        : undefined    ));    return pug_html;  },  render_menu: function(locals) {    var pug_html = "",      pug_mixins = {},      pug_interp;    var pug_indent = [];    pug_html =      pug_html +      '\n\u003Cbutton type="button" id="menu"\u003EMenu\u003C\u002Fbutton\u003E';    return pug_html;  },  render_player: function(locals) {    var pug_html = "",      pug_mixins = {},      pug_interp;    var locals_for_with = locals || {};    (function(player) {      var pug_indent = [];      pug_html =        pug_html +        '\n\u003Cdiv class="player"\u003E\n  \u003Cdiv\u003EPlayer:\u003C\u002Fdiv\u003E\n  \u003Cdiv\u003E' +        pug_runtime_es6.escape(null == (pug_interp = player) ? "" : pug_interp) +        "\u003C\u002Fdiv\u003E\n\u003C\u002Fdiv\u003E";    }.call(      this,      "player" in locals_for_with        ? locals_for_with.player        : typeof player !== "undefined"        ? player        : undefined    ));    return pug_html;  },  render_question: function(locals) {    var pug_html = "",      pug_mixins = {},      pug_interp;    var locals_for_with = locals || {};    (function(answers, question) {      var pug_indent = [];      pug_html =        pug_html +        '\n\u003Cdiv class="wrapper"\u003E\n  \u003Cdiv class="question-text"\u003E' +        pug_runtime_es6.escape(null == (pug_interp = question) ? "" : pug_interp) +        '\u003C\u002Fdiv\u003E\n  \u003Cdiv class="options"\u003E\n    \u003Cdiv class="options-row"\u003E\n      \u003Cbutton type="button" id="option-0"\u003E' +        pug_runtime_es6.escape(null == (pug_interp = answers[0]) ? "" : pug_interp) +        '\n        \u003Cdiv class="letterFrame"\u003E\n          \u003Cdiv class="letter"\u003EA\u003C\u002Fdiv\u003E\n        \u003C\u002Fdiv\u003E\n      \u003C\u002Fbutton\u003E\n      \u003Cbutton type="button" id="option-1"\u003E' +        pug_runtime_es6.escape(null == (pug_interp = answers[1]) ? "" : pug_interp) +        '\n        \u003Cdiv class="letterFrame"\u003E\n          \u003Cdiv class="letter"\u003EB\u003C\u002Fdiv\u003E\n        \u003C\u002Fdiv\u003E\n      \u003C\u002Fbutton\u003E\n    \u003C\u002Fdiv\u003E\n    \u003Cdiv class="options-row"\u003E\n      \u003Cbutton type="button" id="option-2"\u003E' +        pug_runtime_es6.escape(null == (pug_interp = answers[2]) ? "" : pug_interp) +        '\n        \u003Cdiv class="letterFrame"\u003E\n          \u003Cdiv class="letter"\u003EC\u003C\u002Fdiv\u003E\n        \u003C\u002Fdiv\u003E\n      \u003C\u002Fbutton\u003E\n      \u003Cbutton type="button" id="option-3"\u003E' +        pug_runtime_es6.escape(null == (pug_interp = answers[3]) ? "" : pug_interp) +        '\n        \u003Cdiv class="letterFrame"\u003E\n          \u003Cdiv class="letter"\u003ED\u003C\u002Fdiv\u003E\n        \u003C\u002Fdiv\u003E\n      \u003C\u002Fbutton\u003E\n    \u003C\u002Fdiv\u003E\n  \u003C\u002Fdiv\u003E\n\u003C\u002Fdiv\u003E';    }.call(      this,      "answers" in locals_for_with        ? locals_for_with.answers        : typeof answers !== "undefined"        ? answers        : undefined,      "question" in locals_for_with        ? locals_for_with.question        : typeof question !== "undefined"        ? question        : undefined    ));    return pug_html;  },  render_greetings: function(locals) {    var pug_html = "",      pug_mixins = {},      pug_interp;    var locals_for_with = locals || {};    (function(player) {      var pug_indent = [];      pug_html =        pug_html +        '\n\u003Cdiv class="greetings"\u003EHello, \u003Cspan\u003E' +        pug_runtime_es6.escape(null == (pug_interp = player) ? "" : pug_interp) +        "\u003C\u002Fspan\u003E\u003C\u002Fdiv\u003E";    }.call(      this,      "player" in locals_for_with        ? locals_for_with.player        : typeof player !== "undefined"        ? player        : undefined    ));    return pug_html;  },  render_mainLayout: function(locals) {    var pug_html = "",      pug_mixins = {},      pug_interp;    var pug_indent = [];    pug_html =      pug_html +      '\n\u003Cdiv class="frame"\u003E\n  \u003Cheader class="mainHeader"\u003E\n    \u003Cdiv class="title"\u003EWanna be a millionaire?\u003C\u002Fdiv\u003E\n    \u003Cdiv class="mainBar"\u003E\n      \u003Cdiv id="mainMenu"\u003E\u003C\u002Fdiv\u003E\n      \u003Cdiv id="greetings"\u003E\u003C\u002Fdiv\u003E\n    \u003C\u002Fdiv\u003E\n  \u003C\u002Fheader\u003E\n  \u003Cdiv class="content-wrapper"\u003E\u003C\u002Fdiv\u003E\n  \u003Cfooter\u003E\u003Ca href="https:\u002F\u002Fgithub.com\u002Feonae\u002Fmillionaire" target="_blank"\u003Ecopyright app by Eonae &#xa9\u003C\u002Fa\u003E\u003C\u002Ffooter\u003E\n\u003C\u002Fdiv\u003E';    return pug_html;  },  render_mainMenu: function(locals) {    var pug_html = "",      pug_mixins = {},      pug_interp;    var pug_indent = [];    pug_html =      pug_html +      '\n\u003Cnav class="mainMenu"\u003E\n  \u003Cbutton type="button" id="play"\u003EPlay\u003C\u002Fbutton\u003E\n  \u003Cbutton type="button" id="contribute"\u003EContribute\u003C\u002Fbutton\u003E\n\u003C\u002Fnav\u003E';    return pug_html;  },  render_confirmBox: function(locals) {    var pug_html = "",      pug_mixins = {},      pug_interp;    var locals_for_with = locals || {};    (function(buttons, message) {      var pug_indent = [];      pug_html =        pug_html +        '\n\u003Cdiv id="modal-wrapper"\u003E\n  \u003Cdiv class="modal-overlay"\u003E\u003C\u002Fdiv\u003E\n  \u003Cdiv class="modal-window confirm-box"\u003E\n    \u003Cdiv class="message"\u003E' +        pug_runtime_es6.escape(null == (pug_interp = message) ? "" : pug_interp) +        '\u003C\u002Fdiv\u003E\n    \u003Cdiv class="buttons"\u003E\n      \u003Cbutton type="button" id="positive"\u003E' +        pug_runtime_es6.escape(null == (pug_interp = buttons.positive) ? "" : pug_interp) +        '\u003C\u002Fbutton\u003E\n      \u003Cbutton type="button" id="negative"\u003E' +        pug_runtime_es6.escape(null == (pug_interp = buttons.negative) ? "" : pug_interp) +        "\u003C\u002Fbutton\u003E\n    \u003C\u002Fdiv\u003E\n  \u003C\u002Fdiv\u003E\n\u003C\u002Fdiv\u003E";    }.call(      this,      "buttons" in locals_for_with        ? locals_for_with.buttons        : typeof buttons !== "undefined"        ? buttons        : undefined,      "message" in locals_for_with        ? locals_for_with.message        : typeof message !== "undefined"        ? message        : undefined    ));    return pug_html;  },  render_inputBox: function(locals) {    var pug_html = "",      pug_mixins = {},      pug_interp;    var locals_for_with = locals || {};    (function(buttons, message, placeholder) {      var pug_indent = [];      pug_html =        pug_html +        '\n\u003Cdiv id="modal-wrapper"\u003E\n  \u003Cdiv class="modal-overlay"\u003E\u003C\u002Fdiv\u003E\n  \u003Cdiv class="modal-window modal-window-sm input-box"\u003E\n    \u003Cdiv class="message"\u003E' +        pug_runtime_es6.escape(null == (pug_interp = message) ? "" : pug_interp) +        "\u003C\u002Fdiv\u003E\n    \u003Cinput" +        (' type="text"' +          pug_runtime_es6.attr("placeholder", `${placeholder}`, true, false) +          ' id="modal-input"') +        '\u002F\u003E\n    \u003Cdiv class="buttons"\u003E\n      \u003Cbutton type="button" id="positive"\u003E' +        pug_runtime_es6.escape(null == (pug_interp = buttons.positive) ? "" : pug_interp) +        '\u003C\u002Fbutton\u003E\n      \u003Cbutton type="button" id="negative"\u003E' +        pug_runtime_es6.escape(null == (pug_interp = buttons.negative) ? "" : pug_interp) +        "\u003C\u002Fbutton\u003E\n    \u003C\u002Fdiv\u003E\n  \u003C\u002Fdiv\u003E\n\u003C\u002Fdiv\u003E";    }.call(      this,      "buttons" in locals_for_with        ? locals_for_with.buttons        : typeof buttons !== "undefined"        ? buttons        : undefined,      "message" in locals_for_with        ? locals_for_with.message        : typeof message !== "undefined"        ? message        : undefined,      "placeholder" in locals_for_with        ? locals_for_with.placeholder        : typeof placeholder !== "undefined"        ? placeholder        : undefined    ));    return pug_html;  },  render_messageBox: function(locals) {    var pug_html = "",      pug_mixins = {},      pug_interp;    var locals_for_with = locals || {};    (function(buttons, message) {      var pug_indent = [];      pug_html =        pug_html +        '\n\u003Cdiv id="modal-wrapper"\u003E\n  \u003Cdiv class="modal-overlay"\u003E\u003C\u002Fdiv\u003E\n  \u003Cdiv class="modal-window message-box"\u003E\n    \u003Cdiv class="message"\u003E' +        pug_runtime_es6.escape(null == (pug_interp = message) ? "" : pug_interp) +        '\u003C\u002Fdiv\u003E\n    \u003Cdiv class="buttons"\u003E\n      \u003Cbutton type="button" id="positive"\u003E' +        pug_runtime_es6.escape(null == (pug_interp = buttons.positive) ? "" : pug_interp) +        "\u003C\u002Fbutton\u003E\n    \u003C\u002Fdiv\u003E\n  \u003C\u002Fdiv\u003E\n\u003C\u002Fdiv\u003E";    }.call(      this,      "buttons" in locals_for_with        ? locals_for_with.buttons        : typeof buttons !== "undefined"        ? buttons        : undefined,      "message" in locals_for_with        ? locals_for_with.message        : typeof message !== "undefined"        ? message        : undefined    ));    return pug_html;  },  render_modalLayout: function(locals) {    var pug_html = "",      pug_mixins = {},      pug_interp;    var locals_for_with = locals || {};    (function(message) {      var pug_indent = [];      pug_html =        pug_html +        '\n\u003Cdiv id="modal-wrapper"\u003E\n  \u003Cdiv class="modal-overlay"\u003E\u003C\u002Fdiv\u003E\n  \u003Cdiv class="modal-window modal-window-lg" style="background: white"\u003E' +        pug_runtime_es6.escape(null == (pug_interp = message) ? "" : pug_interp) +        "\u003C\u002Fdiv\u003E\n\u003C\u002Fdiv\u003E";    }.call(      this,      "message" in locals_for_with        ? locals_for_with.message        : typeof message !== "undefined"        ? message        : undefined    ));    return pug_html;  }});
+// CONCATENATED MODULE: ./src/frontend/base/EventEmitter.js
+class EventEmitter {
 
-
-class ModalWindow_ModalWindow {
-
-  constructor(template, data, callback) {
-    this.wrapper = document.createElement('div');
-    this.template = template;
-
-    this.data = data;
-    this.callback = callback;
-    this.output = null;
+  constructor() {
+    this.handlers = {};
   }
   
-  open() {
-
-    const render = templates[`render_${this.template}`];
-    if (render) {
-      this.wrapper.innerHTML = render(this.data);
-      document.body.appendChild(this.wrapper);
-    }
-    else {
-      throw new Error(`Template ${this.template} not found!`);
-    }
-  }
-
-  close() {
-    document.body.removeChild(this.wrapper);
-    this.callback(this.output);
-  }
-}
-// CONCATENATED MODULE: ./src/frontend/views/modal/MessageBox.js
-
-
-class MessageBox_MessageBox extends ModalWindow_ModalWindow {
-
-  constructor(data, callback) {
-    
-    const settings = Object.assign({
-      buttons: { positive: 'Continue' },
-      message: ''
-    }, (data instanceof Object) ? data : { message: data });
-
-    super('messageBox', settings, callback);
-  }
-
-  show() {
-    this.open();
-    document.getElementById('positive').addEventListener('click', () => {
-      this.close();
-    });
-  }
-}
-// CONCATENATED MODULE: ./src/frontend/views/modal/ConfirmBox.js
-
-
-class ConfirmBox_ConfirmBox extends ModalWindow_ModalWindow {
-
-  constructor(data, callback) {
-    const settings = Object.assign({
-      buttons: {
-        positive: 'Yes',
-        negative: 'No'
-      },
-      message: ''
-    }, (data instanceof Object) ? data : { message: data });
-    super('confirmBox', settings, callback);
-  }
-
-  show() {
-
-    this.open();
-    const buttons = document.querySelector('.modal-window .buttons');
-    buttons.addEventListener('click', (e) => {
-      this.output = e.target.id === 'positive';
-      console.log(this.output);
-      this.close();
-    });
-  }
-}
-// CONCATENATED MODULE: ./src/frontend/views/modal/InputBox.js
-
-
-class InputBox_ConfirmBox extends ModalWindow_ModalWindow {
-
-  constructor(data, callback) {
-    const settings = Object.assign({
-      buttons: {
-        positive: 'Continue',
-        negative: 'Back'
-      },
-      placeholder: 'Your input',
-      message: ''
-    }, (data instanceof Object) ? data : { message: data });
-    super('inputBox', settings, callback);
-  }
-
-  show() {
-
-    this.open();
-    const buttons = document.querySelector('.modal-window .buttons');
-    buttons.addEventListener('click', (e) => {
-      this.output = (e.target.id === 'positive')
-        ? document.getElementById('modal-input').value
-        : undefined;
-      console.log(this.output);
-      this.close();
-    });
-  }
-}
-// CONCATENATED MODULE: ./src/frontend/views/modal/modals.js
-
-
-
-
-/* harmony default export */ var modals = ({
-
-  messageBox(options, callback) {
-    new MessageBox_MessageBox(options, callback).show();
-  },
-
-  confirmBox(options, callback) {
-    new ConfirmBox_ConfirmBox(options, callback).show();
-  },
-
-  inputBox(options, callback) {
-    new InputBox_ConfirmBox(options, callback).show();
-
-    /*
-      На будущее:
-      new InputBox({
-        validation: {
-          constraint: 'email',
-          type: 'submit || 'input'
-        },
-        placeholder: '...'
-      }, (value) => {
-        // do something;
+  on(eventName, handler) {
+      if (eventName in this.handlers) {
+          this.handlers[eventName].push(handler);
+      } else {
+          this.handlers[eventName] = [ handler ];
       }
-      )
-    */
+  };
+
+  off(eventName, handler) {
+      //..
+  };
+
+  emit(eventName, args) {
+      if (eventName in this.handlers) {
+          for (var handler of this.handlers[eventName]) {
+              setTimeout(() => { handler(args); }, 0);
+          }
+      }
   }
-});
+}
+// CONCATENATED MODULE: ./src/frontend/views/base/Component.js
+
+
+
+
+
+// Private
+
+function getRenderer(name) {
+  const renderer = templates['render_' + name];
+  if (!renderer) throw new Error(`Template >> ${name} << not found!`);
+  return renderer;
+}
+
+function render_master(template, data) {
+  document.body.innerHTML = getRenderer(template)(data);
+}
+
+function render_slot(template,  data, slot) {
+
+  const parent = slot.parentElement;
+  const temp = document.createElement('template');
+
+  temp.innerHTML = getRenderer(template)(data);
+  
+  //debugger;
+  const root = temp.content.firstElementChild;
+  parent.insertBefore(root, slot);
+  parent.removeChild(slot);
+
+  return root;
+}
+
+// Class
+
+class Component_Component extends EventEmitter {
+  constructor(settings) {
+    super();
+    this.data = settings.data;
+    if (settings.slot) {
+      this.slotSelector = settings.slot;
+    }
+
+    if (settings.children) {
+      this.children = settings.children;
+      Object.assign(this, settings.children); // Для более простого доступа.
+    }
+
+    this.render = () => {
+      //debugger;
+      if (this.slotSelector) {
+        if (!this.slot) {
+          this.slot = document.querySelector(settings.slot);
+          if (!this.slot) throw new Error(`Slot >> ${this.slotSelector} << not found!`);
+        }
+        this.slot = render_slot(settings.template, this.data, this.slot);
+      }
+      else
+        render_master(settings.template, this.data);
+
+      if (settings.events) {
+        this.setEvents();
+      }
+
+      if (this.children)
+        for (let child of Object.values(this.children)) {
+          child.render();
+        }
+    }
+
+    if (settings.events) {
+      this.setEvents = () => {
+        for (let event of settings.events) {
+          const element = document.querySelector(event.element);
+          if (!element)
+            throw new Error (`Can't assign listener for element >> ${event.element} <<. Element not found!`);
+          element.addEventListener(event.on, (e) => {
+            this.emit(event.emit, Object.assign(e, this.data)); // насчёт аргументов надо подумать.... Могут быть конфликты...
+          });
+        }
+      }
+    }
+
+    if (settings.data) {
+      this.setData = (entries) => {
+        Object.assign(this.data, entries);
+        this.render();
+      }
+    }
+  }
+}
+
+/**
+ * Виды компонентов:
+  *  - master     - контейнер, рендерится прямо в body
+  *  - switch     - контейнер, способный "переключать содержимое"
+  *  - container  - контейнер, рендерится "замещением"
+  *  - child      - "лист" дерева компонентов, вложенных компонентов не имеет.
+  * 
+  * Каждый компонет умеет:
+  *  - рендерится
+  *  - запускать рендер вложенных компонентов
+  *  - самостоятельно обновляться при изменении данных.
+  *  - эмиттить события.
+  *  
+ */
+// CONCATENATED MODULE: ./src/frontend/views/base/initializeView.js
+
+
+// mainLayout.greetings.setData({ name: 'Sergey'});
+
+function initializeView() {
+
+  return {
+    mainLayout: new Component_Component({
+      template: 'mainLayout',
+      children: {
+    
+        mainMenu: new Component_Component({
+          template: 'mainMenu',
+          slot: '#mainMenu',
+          events: [
+            { element: '#play', on: 'click', emit: 'play' },
+            { element: '#contribute', on: 'click', emit: 'contribute' }
+          ]
+        }),
+    
+        greetings: new Component_Component({
+          template: 'greetings',
+          slot: '#greetings',
+          data: { player: 'dear friend' }
+        })
+      }
+    }),
+
+    gameLayout: new Component_Component({
+
+      template: 'gameLayout',
+      children: {
+    
+        player: new Component_Component({
+          template: 'player',
+          slot: '#player',
+          data: { player: '' },
+        }),
+    
+        hints: new Component_Component({
+          template: 'hints',
+          slot: '#hints',
+          events: [
+            { element: '#hint-0', on: 'click', emit: 'hint_0' },
+            { element: '#hint-1', on: 'click', emit: 'hint_1' },
+            { element: '#hint-2', on: 'click', emit: 'hint_2' },
+          ]
+        }),
+    
+        menu: new Component_Component({
+          template: 'menu',
+          slot: '#menu'
+        }),
+    
+        question: new Component_Component({
+          template: 'question',
+          slot: '#question',
+          data: { question: '', answers: [] },
+          events: [
+            { element: '#option-0', on: 'click', emit: 'option_0' },
+            { element: '#option-1', on: 'click', emit: 'option_1' },
+            { element: '#option-2', on: 'click', emit: 'option_2' },
+            { element: '#option-3', on: 'click', emit: 'option_3' }
+          ]
+        }),
+    
+        ladder: new Component_Component({
+          template: 'ladder',
+          slot: '#ladder',
+          data: {
+            stages: [
+              { prize: 1000, immune: false },
+              { prize: 2000, immune: true },
+              { prize: 5000, immune: false },
+              { prize: 6000, immune: true }
+            ],
+            currentStage: 0 }
+        })
+      }
+    })
+  }
+}
 // CONCATENATED MODULE: ./src/frontend/main.js
+// import modals from './views/modal/modals.js';
+// import MainController from './controllers/MainController.js';
 
 
 
+window.onload = () => {
+  window.view = initializeView();
+  view.gameLayout.render();
 
+  // view.mainLayout.mainMenu.on('play', () => alert('play!'));
+  // view.mainLayout.mainMenu.on('contribute', () => alert('contribute!'));
+
+
+};
+
+
+
+  // debugger;
+  // window.controller = new MainController({
+  //   mainView: new MainView(),
+  //   gameView: new GameView()
+  // });
+
+  // controller.update();
+
+
+  // util.ajax('/state', {}, state => {
+  //   switch (state.status) {
+  //     case 0:
+        
+  //       break;
+  //     case 1:
+  //       break;
+  //     case 2:
+  //   }
+
+  //   document.body.innerHTML = templates.render_gameView();
+  //   const btn0 = document.getElementById('0');
+  //   console.log(btn0);
+  // });
+
+  // Дальше в зависимости от полученного state рисуем основное окно.
 
 // window.onload = () => {
   
