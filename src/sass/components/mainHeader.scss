@@ -40,6 +40,7 @@
     }
 // Тут надо будет смотреть...
     button {
+      @extend .game-btn;
       @include notLikeLink();
       color: #242412;
       @include font(25px, 700);

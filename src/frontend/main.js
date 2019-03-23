@@ -2,18 +2,26 @@
 // import MainController from './controllers/MainController.js';
 import initializeView from 'views/base/initializeView';
 
+// class Controller {
+//   constructor(MainView) {
+    
+//   }
+// }
 
 window.onload = () => {
+  // window.view = initializeView();
+  // view.gameLayout.render();
+  window.state = {
+    status: 0
+  }
   window.view = initializeView();
-  view.gameLayout.render();
-
-  // view.mainLayout.mainMenu.on('play', () => alert('play!'));
-  // view.mainLayout.mainMenu.on('contribute', () => alert('contribute!'));
-
-
+  view.mainLayout.on('play', (args) => {
+    console.log(args);
+  });
+  view.mainLayout.mainMenu.on('contribute', (args) => {
+    console.log(args);
+  });
 };
-
-
 
   // debugger;
   // window.controller = new MainController({

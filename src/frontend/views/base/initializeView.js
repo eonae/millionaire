@@ -1,43 +1,49 @@
 import Component from 'views/base/Component';
 
-// mainLayout.greetings.setData({ name: 'Sergey'});
+class View {
+  constructor(tree) {
+    for (let layout of Object.entries(tree)) {
+      this[layout[0]] = new Component(layout[1]);
+    }
+  }
+
+  switchTo(layout) {
+    this[layout].render();
+  }
+}
 
 export default function initializeView() {
 
-  return {
-    mainLayout: new Component({
+  return new View({
+    mainLayout: {
       template: 'mainLayout',
       children: {
-    
-        mainMenu: new Component({
+        mainMenu: {
           template: 'mainMenu',
           slot: '#mainMenu',
           events: [
             { element: '#play', on: 'click', emit: 'play' },
             { element: '#contribute', on: 'click', emit: 'contribute' }
           ]
-        }),
-    
-        greetings: new Component({
+        },
+        greetings: {
           template: 'greetings',
           slot: '#greetings',
           data: { player: 'dear friend' }
-        })
+        }
       }
-    }),
-
-    gameLayout: new Component({
-
+    },
+    gameLayout: {
       template: 'gameLayout',
       children: {
-    
-        player: new Component({
+
+        player: {
           template: 'player',
           slot: '#player',
-          data: { player: '' },
-        }),
+          data: { player: 'Incognito' },
+        },
     
-        hints: new Component({
+        hints: {
           template: 'hints',
           slot: '#hints',
           events: [
@@ -45,26 +51,26 @@ export default function initializeView() {
             { element: '#hint-1', on: 'click', emit: 'hint_1' },
             { element: '#hint-2', on: 'click', emit: 'hint_2' },
           ]
-        }),
+        },
     
-        menu: new Component({
+        menu: {
           template: 'menu',
           slot: '#menu'
-        }),
+        },
     
-        question: new Component({
+        question: {
           template: 'question',
           slot: '#question',
           data: { question: '', answers: [] },
           events: [
-            { element: '#option-0', on: 'click', emit: 'option_0' },
-            { element: '#option-1', on: 'click', emit: 'option_1' },
-            { element: '#option-2', on: 'click', emit: 'option_2' },
-            { element: '#option-3', on: 'click', emit: 'option_3' }
+            { element: '#option-0', on: 'click', emit: 'try' },
+            { element: '#option-1', on: 'click', emit: 'try' },
+            { element: '#option-2', on: 'click', emit: 'try' },
+            { element: '#option-3', on: 'click', emit: 'try' }
           ]
-        }),
+        },
     
-        ladder: new Component({
+        ladder: {
           template: 'ladder',
           slot: '#ladder',
           data: {
@@ -75,8 +81,8 @@ export default function initializeView() {
               { prize: 6000, immune: true }
             ],
             currentStage: 0 }
-        })
+        }
       }
-    })
-  }
-}
+    }
+  });
+};

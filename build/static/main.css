@@ -16,6 +16,7 @@ footer {
 }
 
 .game-btn,
+.mainHeader .mainMenu button,
 .gameHeader button,
 .options button,
 .message-box .buttons button,
@@ -36,6 +37,7 @@ footer {
 }
 
 .game-btn:hover,
+.mainHeader .mainMenu button:hover,
 .gameHeader button:hover,
 .options button:hover,
 .message-box .buttons button:hover,

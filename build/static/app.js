@@ -332,7 +332,6 @@ function render_slot(template,  data, slot) {
 
   temp.innerHTML = getRenderer(template)(data);
   
-  //debugger;
   const root = temp.content.firstElementChild;
   parent.insertBefore(root, slot);
   parent.removeChild(slot);
@@ -346,19 +345,16 @@ class Component_Component extends EventEmitter {
   constructor(settings) {
     super();
     this.data = settings.data;
-    if (settings.slot) {
-      this.slotSelector = settings.slot;
-    }
+    // if (settings.slot) {
+    //   this.slotSelector = settings.slot;
+    // }
 
-    if (settings.children) {
-      this.children = settings.children;
-      Object.assign(this, settings.children); // Для более простого доступа.
-    }
+    this.render = (inCascade) => {
+    // inCascade - флаг указывающий на то, рендерится объект сам по себе или его рендеринг
+    // вызван родительским компонентом.
 
-    this.render = () => {
-      //debugger;
-      if (this.slotSelector) {
-        if (!this.slot) {
+      if (settings.slot) {
+        if (!this.slot || inCascade) {
           this.slot = document.querySelector(settings.slot);
           if (!this.slot) throw new Error(`Slot >> ${this.slotSelector} << not found!`);
         }
@@ -373,7 +369,7 @@ class Component_Component extends EventEmitter {
 
       if (this.children)
         for (let child of Object.values(this.children)) {
-          child.render();
+          child.render(true);
         }
     }
 
@@ -384,7 +380,8 @@ class Component_Component extends EventEmitter {
           if (!element)
             throw new Error (`Can't assign listener for element >> ${event.element} <<. Element not found!`);
           element.addEventListener(event.on, (e) => {
-            this.emit(event.emit, Object.assign(e, this.data)); // насчёт аргументов надо подумать.... Могут быть конфликты...
+            this.raiseEvent(event.emit, { component: this, nativeEvent: e }); // насчёт аргументов надо подумать.... Могут быть конфликты...
+            // console.log (this.handlers);
           });
         }
       }
@@ -396,8 +393,31 @@ class Component_Component extends EventEmitter {
         this.render();
       }
     }
+
+    if (settings.children) {
+      this.children = {};
+      for (let child of Object.entries(settings.children)) {
+        var key = child[0], componentSettings = child[1];
+        this.children[key] = new Component_Component(componentSettings);
+        this.children[key].parent = this;
+        this[key] = this.children[key]; // Исключительно, чтобы навигация по дереву была чуть приятнее
+      }
+    }
+  }
+
+  raiseEvent(name, args) {
+    if (this.handlers[name]) {
+      this.emit(name, args);
+    }
+    // Если событие никем не отловлено оно передаётся родителю.
+    else if (this.parent) {
+      this.parent.raiseEvent(name, args);
+    }
+
   }
 }
+
+
 
 /**
  * Виды компонентов:
@@ -416,44 +436,50 @@ class Component_Component extends EventEmitter {
 // CONCATENATED MODULE: ./src/frontend/views/base/initializeView.js
 
 
-// mainLayout.greetings.setData({ name: 'Sergey'});
+class initializeView_View {
+  constructor(tree) {
+    for (let layout of Object.entries(tree)) {
+      this[layout[0]] = new Component_Component(layout[1]);
+    }
+  }
+
+  switchTo(layout) {
+    this[layout].render();
+  }
+}
 
 function initializeView() {
 
-  return {
-    mainLayout: new Component_Component({
+  return new initializeView_View({
+    mainLayout: {
       template: 'mainLayout',
       children: {
-    
-        mainMenu: new Component_Component({
+        mainMenu: {
           template: 'mainMenu',
           slot: '#mainMenu',
           events: [
             { element: '#play', on: 'click', emit: 'play' },
             { element: '#contribute', on: 'click', emit: 'contribute' }
           ]
-        }),
-    
-        greetings: new Component_Component({
+        },
+        greetings: {
           template: 'greetings',
           slot: '#greetings',
           data: { player: 'dear friend' }
-        })
+        }
       }
-    }),
-
-    gameLayout: new Component_Component({
-
+    },
+    gameLayout: {
       template: 'gameLayout',
       children: {
-    
-        player: new Component_Component({
+
+        player: {
           template: 'player',
           slot: '#player',
-          data: { player: '' },
-        }),
+          data: { player: 'Incognito' },
+        },
     
-        hints: new Component_Component({
+        hints: {
           template: 'hints',
           slot: '#hints',
           events: [
@@ -461,26 +487,26 @@ function initializeView() {
             { element: '#hint-1', on: 'click', emit: 'hint_1' },
             { element: '#hint-2', on: 'click', emit: 'hint_2' },
           ]
-        }),
+        },
     
-        menu: new Component_Component({
+        menu: {
           template: 'menu',
           slot: '#menu'
-        }),
+        },
     
-        question: new Component_Component({
+        question: {
           template: 'question',
           slot: '#question',
           data: { question: '', answers: [] },
           events: [
-            { element: '#option-0', on: 'click', emit: 'option_0' },
-            { element: '#option-1', on: 'click', emit: 'option_1' },
-            { element: '#option-2', on: 'click', emit: 'option_2' },
-            { element: '#option-3', on: 'click', emit: 'option_3' }
+            { element: '#option-0', on: 'click', emit: 'try' },
+            { element: '#option-1', on: 'click', emit: 'try' },
+            { element: '#option-2', on: 'click', emit: 'try' },
+            { element: '#option-3', on: 'click', emit: 'try' }
           ]
-        }),
+        },
     
-        ladder: new Component_Component({
+        ladder: {
           template: 'ladder',
           slot: '#ladder',
           data: {
@@ -491,28 +517,37 @@ function initializeView() {
               { prize: 6000, immune: true }
             ],
             currentStage: 0 }
-        })
+        }
       }
-    })
-  }
-}
+    }
+  });
+};
+
 // CONCATENATED MODULE: ./src/frontend/main.js
 // import modals from './views/modal/modals.js';
 // import MainController from './controllers/MainController.js';
 
 
+// class Controller {
+//   constructor(MainView) {
+    
+//   }
+// }
 
 window.onload = () => {
+  // window.view = initializeView();
+  // view.gameLayout.render();
+  window.state = {
+    status: 0
+  }
   window.view = initializeView();
-  view.gameLayout.render();
-
-  // view.mainLayout.mainMenu.on('play', () => alert('play!'));
-  // view.mainLayout.mainMenu.on('contribute', () => alert('contribute!'));
-
-
+  view.mainLayout.on('play', (args) => {
+    console.log(args);
+  });
+  view.mainLayout.mainMenu.on('contribute', (args) => {
+    console.log(args);
+  });
 };
-
-
 
   // debugger;
   // window.controller = new MainController({

@@ -22,7 +22,6 @@ function render_slot(template,  data, slot) {
 
   temp.innerHTML = getRenderer(template)(data);
   
-  //debugger;
   const root = temp.content.firstElementChild;
   parent.insertBefore(root, slot);
   parent.removeChild(slot);
@@ -36,19 +35,16 @@ export default class Component extends EventEmitter {
   constructor(settings) {
     super();
     this.data = settings.data;
-    if (settings.slot) {
-      this.slotSelector = settings.slot;
-    }
+    // if (settings.slot) {
+    //   this.slotSelector = settings.slot;
+    // }
 
-    if (settings.children) {
-      this.children = settings.children;
-      Object.assign(this, settings.children); // Для более простого доступа.
-    }
+    this.render = (inCascade) => {
+    // inCascade - флаг указывающий на то, рендерится объект сам по себе или его рендеринг
+    // вызван родительским компонентом.
 
-    this.render = () => {
-      //debugger;
-      if (this.slotSelector) {
-        if (!this.slot) {
+      if (settings.slot) {
+        if (!this.slot || inCascade) {
           this.slot = document.querySelector(settings.slot);
           if (!this.slot) throw new Error(`Slot >> ${this.slotSelector} << not found!`);
         }
@@ -63,7 +59,7 @@ export default class Component extends EventEmitter {
 
       if (this.children)
         for (let child of Object.values(this.children)) {
-          child.render();
+          child.render(true);
         }
     }
 
@@ -74,7 +70,8 @@ export default class Component extends EventEmitter {
           if (!element)
             throw new Error (`Can't assign listener for element >> ${event.element} <<. Element not found!`);
           element.addEventListener(event.on, (e) => {
-            this.emit(event.emit, Object.assign(e, this.data)); // насчёт аргументов надо подумать.... Могут быть конфликты...
+            this.raiseEvent(event.emit, { component: this, nativeEvent: e }); // насчёт аргументов надо подумать.... Могут быть конфликты...
+            // console.log (this.handlers);
           });
         }
       }
@@ -86,8 +83,31 @@ export default class Component extends EventEmitter {
         this.render();
       }
     }
+
+    if (settings.children) {
+      this.children = {};
+      for (let child of Object.entries(settings.children)) {
+        var key = child[0], componentSettings = child[1];
+        this.children[key] = new Component(componentSettings);
+        this.children[key].parent = this;
+        this[key] = this.children[key]; // Исключительно, чтобы навигация по дереву была чуть приятнее
+      }
+    }
+  }
+
+  raiseEvent(name, args) {
+    if (this.handlers[name]) {
+      this.emit(name, args);
+    }
+    // Если событие никем не отловлено оно передаётся родителю.
+    else if (this.parent) {
+      this.parent.raiseEvent(name, args);
+    }
+
   }
 }
+
+
 
 /**
  * Виды компонентов:
