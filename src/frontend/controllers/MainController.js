@@ -1,47 +1,34 @@
-import util from 'util';
-import modals from 'views/modal/modals';
+'use strict';
 
 export default class MainController {
+  constructor(view, state) {
 
-  constructor(views) {
-    this.views = views;
-    this.activeView = null;
-    debugger;
-    this.views.mainView.on('play', () => {
-      debugger;
-      this.activate(this.views.gameView, {});
+    state.on('status_change', (args) => {
+      switch (args.value) {
+        case 0:
+          view.switchTo('mainLayout');
+          view.askName();
+          break;
+        case 1:
+          view.switchTo('mainLayout');
+          break;
+        case 2:
+          view.switchTo('gameLayout');
+      }
     });
-  }
 
-  update() {
-    modals.inputBox({ message: 'Please enter your name:'}, (player) => {
-      this.activate(this.views.mainView, { player });
+    view.on('changePlayerName', args => {
+      state._player = args.player;
+      view.mainLayout.greetings.setData({ player: args.player });
+      view.gameLayout.player.setData({ player: args.player });
+
+    })
+
+    view.on('contribute', args => {
+      alert('contribute!');
     });
-    // util.ajax('/state', {}, (state) => {
-    //   switch(state.status) {
-    //     case 0:
-    //       modals.inputBox({ message: 'Please enter your name:'}, (name) => {
-    //         this.activate(this.views.mainView, { name });
-    //       });
-    //       break;
-    //     case 1:
-    //       this.activate( this.views.mainVIew, { name: state.name });
-    //       break;
-    //     case 2:
-    //       this.activate( this.views.gameView, state);
-    //       break;
-    //   }
-    // });
-  }
-
-  activate(view, data) {
-    if (this.activeView == view) {
-      view.setData(data);
-    } else {
-      if (this.activeView)
-        this.activeView.destroy();
-      this.activeView = view;
-      view.activate(data);
-    }
+    view.on('play', args => {
+      state.status = 2;
+    });
   }
 }

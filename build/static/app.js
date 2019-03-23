@@ -280,6 +280,155 @@ class Pug {
 /* harmony default export */ var pug_runtime_es6 = (new Pug());
 // CONCATENATED MODULE: ./src/frontend/views/templates/templates.js
 /* harmony default export */ var templates = ({  render_gameLayout: function(locals) {    var pug_html = "",      pug_mixins = {},      pug_interp;    var pug_indent = [];    pug_html =      pug_html +      '\n\u003Cdiv class="frame"\u003E\n  \u003Cheader class="gameHeader"\u003E\n    \u003Cdiv class="controls"\u003E\n      \u003Cdiv id="player"\u003E\u003C\u002Fdiv\u003E\n      \u003Cdiv id="hints"\u003E\u003C\u002Fdiv\u003E\n    \u003C\u002Fdiv\u003E\n    \u003Cdiv id="menu"\u003E\u003C\u002Fdiv\u003E\n  \u003C\u002Fheader\u003E\n  \u003Cdiv class="content-wrapper"\u003E\n    \u003Cdiv id="question"\u003E\u003C\u002Fdiv\u003E\n    \u003Cdiv id="ladder"\u003E\u003C\u002Fdiv\u003E\n  \u003C\u002Fdiv\u003E\n  \u003Cfooter\u003E\u003Ca href="https:\u002F\u002Fgithub.com\u002Feonae\u002Fmillionaire" target="_blank"\u003Ecopyright app by Eonae &#xa9\u003C\u002Fa\u003E\u003C\u002Ffooter\u003E\n\u003C\u002Fdiv\u003E';    return pug_html;  },  render_hints: function(locals) {    var pug_html = "",      pug_mixins = {},      pug_interp;    var pug_indent = [];    pug_html =      pug_html +      '\n\u003Cdiv class="hints"\u003E\n  \u003Cbutton type="button" id="hint-0"\u003E50\u002F50\u003C\u002Fbutton\u003E\n  \u003Cbutton type="button" id="hint-1"\u003EDisabled\u003C\u002Fbutton\u003E\n  \u003Cbutton type="button" id="hint-2"\u003EDisabled\u003C\u002Fbutton\u003E\n\u003C\u002Fdiv\u003E';    return pug_html;  },  render_ladder: function(locals) {    var pug_html = "",      pug_mixins = {},      pug_interp;    var locals_for_with = locals || {};    (function(currentStage, stages) {      var pug_indent = [];      pug_html = pug_html + '\n\u003Cdiv class="ladder"\u003E';      // iterate stages      (function() {        var $$obj = stages;        if ("number" == typeof $$obj.length) {          for (var index = 0, $$l = $$obj.length; index < $$l; index++) {            var stage = $$obj[index];            if (index < currentStage) {              if (stage.immune) {                pug_html =                  pug_html +                  '\n  \u003Cdiv class="done-immune"\u003E' +                  pug_runtime_es6.escape(                    null == (pug_interp = stage.prize) ? "" : pug_interp                  ) +                  "\u003C\u002Fdiv\u003E";              } else {                pug_html =                  pug_html +                  '\n  \u003Cdiv class="done"\u003E' +                  pug_runtime_es6.escape(                    null == (pug_interp = stage.prize) ? "" : pug_interp                  ) +                  "\u003C\u002Fdiv\u003E";              }            } else {              if (stage.immune) {                pug_html =                  pug_html +                  '\n  \u003Cdiv class="immune"\u003E' +                  pug_runtime_es6.escape(                    null == (pug_interp = stage.prize) ? "" : pug_interp                  ) +                  "\u003C\u002Fdiv\u003E";              } else {                pug_html =                  pug_html +                  '\n  \u003Cdiv class="general"\u003E' +                  pug_runtime_es6.escape(                    null == (pug_interp = stage.prize) ? "" : pug_interp                  ) +                  "\u003C\u002Fdiv\u003E";              }            }          }        } else {          var $$l = 0;          for (var index in $$obj) {            $$l++;            var stage = $$obj[index];            if (index < currentStage) {              if (stage.immune) {                pug_html =                  pug_html +                  '\n  \u003Cdiv class="done-immune"\u003E' +                  pug_runtime_es6.escape(                    null == (pug_interp = stage.prize) ? "" : pug_interp                  ) +                  "\u003C\u002Fdiv\u003E";              } else {                pug_html =                  pug_html +                  '\n  \u003Cdiv class="done"\u003E' +                  pug_runtime_es6.escape(                    null == (pug_interp = stage.prize) ? "" : pug_interp                  ) +                  "\u003C\u002Fdiv\u003E";              }            } else {              if (stage.immune) {                pug_html =                  pug_html +                  '\n  \u003Cdiv class="immune"\u003E' +                  pug_runtime_es6.escape(                    null == (pug_interp = stage.prize) ? "" : pug_interp                  ) +                  "\u003C\u002Fdiv\u003E";              } else {                pug_html =                  pug_html +                  '\n  \u003Cdiv class="general"\u003E' +                  pug_runtime_es6.escape(                    null == (pug_interp = stage.prize) ? "" : pug_interp                  ) +                  "\u003C\u002Fdiv\u003E";              }            }          }        }      }.call(this));      pug_html = pug_html + "\n\u003C\u002Fdiv\u003E";    }.call(      this,      "currentStage" in locals_for_with        ? locals_for_with.currentStage        : typeof currentStage !== "undefined"        ? currentStage        : undefined,      "stages" in locals_for_with        ? locals_for_with.stages        : typeof stages !== "undefined"        ? stages        : undefined    ));    return pug_html;  },  render_menu: function(locals) {    var pug_html = "",      pug_mixins = {},      pug_interp;    var pug_indent = [];    pug_html =      pug_html +      '\n\u003Cbutton type="button" id="menu"\u003EMenu\u003C\u002Fbutton\u003E';    return pug_html;  },  render_player: function(locals) {    var pug_html = "",      pug_mixins = {},      pug_interp;    var locals_for_with = locals || {};    (function(player) {      var pug_indent = [];      pug_html =        pug_html +        '\n\u003Cdiv class="player"\u003E\n  \u003Cdiv\u003EPlayer:\u003C\u002Fdiv\u003E\n  \u003Cdiv\u003E' +        pug_runtime_es6.escape(null == (pug_interp = player) ? "" : pug_interp) +        "\u003C\u002Fdiv\u003E\n\u003C\u002Fdiv\u003E";    }.call(      this,      "player" in locals_for_with        ? locals_for_with.player        : typeof player !== "undefined"        ? player        : undefined    ));    return pug_html;  },  render_question: function(locals) {    var pug_html = "",      pug_mixins = {},      pug_interp;    var locals_for_with = locals || {};    (function(answers, question) {      var pug_indent = [];      pug_html =        pug_html +        '\n\u003Cdiv class="wrapper"\u003E\n  \u003Cdiv class="question-text"\u003E' +        pug_runtime_es6.escape(null == (pug_interp = question) ? "" : pug_interp) +        '\u003C\u002Fdiv\u003E\n  \u003Cdiv class="options"\u003E\n    \u003Cdiv class="options-row"\u003E\n      \u003Cbutton type="button" id="option-0"\u003E' +        pug_runtime_es6.escape(null == (pug_interp = answers[0]) ? "" : pug_interp) +        '\n        \u003Cdiv class="letterFrame"\u003E\n          \u003Cdiv class="letter"\u003EA\u003C\u002Fdiv\u003E\n        \u003C\u002Fdiv\u003E\n      \u003C\u002Fbutton\u003E\n      \u003Cbutton type="button" id="option-1"\u003E' +        pug_runtime_es6.escape(null == (pug_interp = answers[1]) ? "" : pug_interp) +        '\n        \u003Cdiv class="letterFrame"\u003E\n          \u003Cdiv class="letter"\u003EB\u003C\u002Fdiv\u003E\n        \u003C\u002Fdiv\u003E\n      \u003C\u002Fbutton\u003E\n    \u003C\u002Fdiv\u003E\n    \u003Cdiv class="options-row"\u003E\n      \u003Cbutton type="button" id="option-2"\u003E' +        pug_runtime_es6.escape(null == (pug_interp = answers[2]) ? "" : pug_interp) +        '\n        \u003Cdiv class="letterFrame"\u003E\n          \u003Cdiv class="letter"\u003EC\u003C\u002Fdiv\u003E\n        \u003C\u002Fdiv\u003E\n      \u003C\u002Fbutton\u003E\n      \u003Cbutton type="button" id="option-3"\u003E' +        pug_runtime_es6.escape(null == (pug_interp = answers[3]) ? "" : pug_interp) +        '\n        \u003Cdiv class="letterFrame"\u003E\n          \u003Cdiv class="letter"\u003ED\u003C\u002Fdiv\u003E\n        \u003C\u002Fdiv\u003E\n      \u003C\u002Fbutton\u003E\n    \u003C\u002Fdiv\u003E\n  \u003C\u002Fdiv\u003E\n\u003C\u002Fdiv\u003E';    }.call(      this,      "answers" in locals_for_with        ? locals_for_with.answers        : typeof answers !== "undefined"        ? answers        : undefined,      "question" in locals_for_with        ? locals_for_with.question        : typeof question !== "undefined"        ? question        : undefined    ));    return pug_html;  },  render_greetings: function(locals) {    var pug_html = "",      pug_mixins = {},      pug_interp;    var locals_for_with = locals || {};    (function(player) {      var pug_indent = [];      pug_html =        pug_html +        '\n\u003Cdiv class="greetings"\u003EHello, \u003Cspan\u003E' +        pug_runtime_es6.escape(null == (pug_interp = player) ? "" : pug_interp) +        "\u003C\u002Fspan\u003E\u003C\u002Fdiv\u003E";    }.call(      this,      "player" in locals_for_with        ? locals_for_with.player        : typeof player !== "undefined"        ? player        : undefined    ));    return pug_html;  },  render_mainLayout: function(locals) {    var pug_html = "",      pug_mixins = {},      pug_interp;    var pug_indent = [];    pug_html =      pug_html +      '\n\u003Cdiv class="frame"\u003E\n  \u003Cheader class="mainHeader"\u003E\n    \u003Cdiv class="title"\u003EWanna be a millionaire?\u003C\u002Fdiv\u003E\n    \u003Cdiv class="mainBar"\u003E\n      \u003Cdiv id="mainMenu"\u003E\u003C\u002Fdiv\u003E\n      \u003Cdiv id="greetings"\u003E\u003C\u002Fdiv\u003E\n    \u003C\u002Fdiv\u003E\n  \u003C\u002Fheader\u003E\n  \u003Cdiv class="content-wrapper"\u003E\u003C\u002Fdiv\u003E\n  \u003Cfooter\u003E\u003Ca href="https:\u002F\u002Fgithub.com\u002Feonae\u002Fmillionaire" target="_blank"\u003Ecopyright app by Eonae &#xa9\u003C\u002Fa\u003E\u003C\u002Ffooter\u003E\n\u003C\u002Fdiv\u003E';    return pug_html;  },  render_mainMenu: function(locals) {    var pug_html = "",      pug_mixins = {},      pug_interp;    var pug_indent = [];    pug_html =      pug_html +      '\n\u003Cnav class="mainMenu"\u003E\n  \u003Cbutton type="button" id="play"\u003EPlay\u003C\u002Fbutton\u003E\n  \u003Cbutton type="button" id="contribute"\u003EContribute\u003C\u002Fbutton\u003E\n\u003C\u002Fnav\u003E';    return pug_html;  },  render_confirmBox: function(locals) {    var pug_html = "",      pug_mixins = {},      pug_interp;    var locals_for_with = locals || {};    (function(buttons, message) {      var pug_indent = [];      pug_html =        pug_html +        '\n\u003Cdiv id="modal-wrapper"\u003E\n  \u003Cdiv class="modal-overlay"\u003E\u003C\u002Fdiv\u003E\n  \u003Cdiv class="modal-window confirm-box"\u003E\n    \u003Cdiv class="message"\u003E' +        pug_runtime_es6.escape(null == (pug_interp = message) ? "" : pug_interp) +        '\u003C\u002Fdiv\u003E\n    \u003Cdiv class="buttons"\u003E\n      \u003Cbutton type="button" id="positive"\u003E' +        pug_runtime_es6.escape(null == (pug_interp = buttons.positive) ? "" : pug_interp) +        '\u003C\u002Fbutton\u003E\n      \u003Cbutton type="button" id="negative"\u003E' +        pug_runtime_es6.escape(null == (pug_interp = buttons.negative) ? "" : pug_interp) +        "\u003C\u002Fbutton\u003E\n    \u003C\u002Fdiv\u003E\n  \u003C\u002Fdiv\u003E\n\u003C\u002Fdiv\u003E";    }.call(      this,      "buttons" in locals_for_with        ? locals_for_with.buttons        : typeof buttons !== "undefined"        ? buttons        : undefined,      "message" in locals_for_with        ? locals_for_with.message        : typeof message !== "undefined"        ? message        : undefined    ));    return pug_html;  },  render_inputBox: function(locals) {    var pug_html = "",      pug_mixins = {},      pug_interp;    var locals_for_with = locals || {};    (function(buttons, message, placeholder) {      var pug_indent = [];      pug_html =        pug_html +        '\n\u003Cdiv id="modal-wrapper"\u003E\n  \u003Cdiv class="modal-overlay"\u003E\u003C\u002Fdiv\u003E\n  \u003Cdiv class="modal-window modal-window-sm input-box"\u003E\n    \u003Cdiv class="message"\u003E' +        pug_runtime_es6.escape(null == (pug_interp = message) ? "" : pug_interp) +        "\u003C\u002Fdiv\u003E\n    \u003Cinput" +        (' type="text"' +          pug_runtime_es6.attr("placeholder", `${placeholder}`, true, false) +          ' id="modal-input"') +        '\u002F\u003E\n    \u003Cdiv class="buttons"\u003E\n      \u003Cbutton type="button" id="positive"\u003E' +        pug_runtime_es6.escape(null == (pug_interp = buttons.positive) ? "" : pug_interp) +        '\u003C\u002Fbutton\u003E\n      \u003Cbutton type="button" id="negative"\u003E' +        pug_runtime_es6.escape(null == (pug_interp = buttons.negative) ? "" : pug_interp) +        "\u003C\u002Fbutton\u003E\n    \u003C\u002Fdiv\u003E\n  \u003C\u002Fdiv\u003E\n\u003C\u002Fdiv\u003E";    }.call(      this,      "buttons" in locals_for_with        ? locals_for_with.buttons        : typeof buttons !== "undefined"        ? buttons        : undefined,      "message" in locals_for_with        ? locals_for_with.message        : typeof message !== "undefined"        ? message        : undefined,      "placeholder" in locals_for_with        ? locals_for_with.placeholder        : typeof placeholder !== "undefined"        ? placeholder        : undefined    ));    return pug_html;  },  render_messageBox: function(locals) {    var pug_html = "",      pug_mixins = {},      pug_interp;    var locals_for_with = locals || {};    (function(buttons, message) {      var pug_indent = [];      pug_html =        pug_html +        '\n\u003Cdiv id="modal-wrapper"\u003E\n  \u003Cdiv class="modal-overlay"\u003E\u003C\u002Fdiv\u003E\n  \u003Cdiv class="modal-window message-box"\u003E\n    \u003Cdiv class="message"\u003E' +        pug_runtime_es6.escape(null == (pug_interp = message) ? "" : pug_interp) +        '\u003C\u002Fdiv\u003E\n    \u003Cdiv class="buttons"\u003E\n      \u003Cbutton type="button" id="positive"\u003E' +        pug_runtime_es6.escape(null == (pug_interp = buttons.positive) ? "" : pug_interp) +        "\u003C\u002Fbutton\u003E\n    \u003C\u002Fdiv\u003E\n  \u003C\u002Fdiv\u003E\n\u003C\u002Fdiv\u003E";    }.call(      this,      "buttons" in locals_for_with        ? locals_for_with.buttons        : typeof buttons !== "undefined"        ? buttons        : undefined,      "message" in locals_for_with        ? locals_for_with.message        : typeof message !== "undefined"        ? message        : undefined    ));    return pug_html;  },  render_modalLayout: function(locals) {    var pug_html = "",      pug_mixins = {},      pug_interp;    var locals_for_with = locals || {};    (function(message) {      var pug_indent = [];      pug_html =        pug_html +        '\n\u003Cdiv id="modal-wrapper"\u003E\n  \u003Cdiv class="modal-overlay"\u003E\u003C\u002Fdiv\u003E\n  \u003Cdiv class="modal-window modal-window-lg" style="background: white"\u003E' +        pug_runtime_es6.escape(null == (pug_interp = message) ? "" : pug_interp) +        "\u003C\u002Fdiv\u003E\n\u003C\u002Fdiv\u003E";    }.call(      this,      "message" in locals_for_with        ? locals_for_with.message        : typeof message !== "undefined"        ? message        : undefined    ));    return pug_html;  }});
+// CONCATENATED MODULE: ./src/frontend/vendor/modals/ModalWindow.js
+
+
+class ModalWindow_ModalWindow {
+
+  constructor(template, data, callback) {
+    this.wrapper = document.createElement('div');
+    this.template = template;
+
+    this.data = data;
+    this.callback = callback;
+    this.output = null;
+  }
+  
+  open() {
+
+    const render = templates[`render_${this.template}`];
+    if (render) {
+      this.wrapper.innerHTML = render(this.data);
+      document.body.appendChild(this.wrapper);
+    }
+    else {
+      throw new Error(`Template ${this.template} not found!`);
+    }
+  }
+
+  close() {
+    document.body.removeChild(this.wrapper);
+    this.callback(this.output);
+  }
+}
+// CONCATENATED MODULE: ./src/frontend/vendor/modals/MessageBox.js
+
+
+
+
+class MessageBox_MessageBox extends ModalWindow_ModalWindow {
+
+  constructor(data, callback) {
+    
+    const settings = Object.assign({
+      buttons: { positive: 'Continue' },
+      message: ''
+    }, (data instanceof Object) ? data : { message: data });
+
+    super('messageBox', settings, callback);
+  }
+
+  show() {
+    this.open();
+    document.getElementById('positive').addEventListener('click', () => {
+      this.close();
+    });
+  }
+}
+// CONCATENATED MODULE: ./src/frontend/vendor/modals/ConfirmBox.js
+
+
+
+
+class ConfirmBox_ConfirmBox extends ModalWindow_ModalWindow {
+
+  constructor(data, callback) {
+    const settings = Object.assign({
+      buttons: {
+        positive: 'Yes',
+        negative: 'No'
+      },
+      message: ''
+    }, (data instanceof Object) ? data : { message: data });
+    super('confirmBox', settings, callback);
+  }
+
+  show() {
+
+    this.open();
+    const buttons = document.querySelector('.modal-window .buttons');
+    buttons.addEventListener('click', (e) => {
+      this.output = e.target.id === 'positive';
+      console.log(this.output);
+      this.close();
+    });
+  }
+}
+// CONCATENATED MODULE: ./src/frontend/vendor/modals/InputBox.js
+
+
+
+
+class InputBox_ConfirmBox extends ModalWindow_ModalWindow {
+
+  constructor(data, callback) {
+    const settings = Object.assign({
+      buttons: {
+        positive: 'Continue',
+        negative: 'Back'
+      },
+      placeholder: 'Your input',
+      message: ''
+    }, (data instanceof Object) ? data : { message: data });
+    super('inputBox', settings, callback);
+  }
+
+  show() {
+
+    this.open();
+    const buttons = document.querySelector('.modal-window .buttons');
+    buttons.addEventListener('click', (e) => {
+      this.output = (e.target.id === 'positive')
+        ? document.getElementById('modal-input').value
+        : undefined;
+      console.log(this.output);
+      this.close();
+    });
+  }
+}
+// CONCATENATED MODULE: ./src/frontend/vendor/modals/modals.js
+
+
+
+
+/* harmony default export */ var modals = ({
+
+  messageBox(options, callback) {
+    new MessageBox_MessageBox(options, callback).show();
+  },
+
+  confirmBox(options, callback) {
+    new ConfirmBox_ConfirmBox(options, callback).show();
+  },
+
+  inputBox(options, callback) {
+    new InputBox_ConfirmBox(options, callback).show();
+
+    /*
+      На будущее:
+      new InputBox({
+        validation: {
+          constraint: 'email',
+          type: 'submit || 'input'
+        },
+        placeholder: '...'
+      }, (value) => {
+        // do something;
+      }
+      )
+    */
+  }
+});
 // CONCATENATED MODULE: ./src/frontend/base/EventEmitter.js
 class EventEmitter {
 
@@ -307,9 +456,7 @@ class EventEmitter {
       }
   }
 }
-// CONCATENATED MODULE: ./src/frontend/views/base/Component.js
-
-
+// CONCATENATED MODULE: ./src/frontend/base/Component.js
 
 
 
@@ -383,8 +530,7 @@ class Component_Component extends EventEmitter {
           if (!element)
             throw new Error (`Can't assign listener for element >> ${event.element} <<. Element not found!`);
           element.addEventListener(event.on, (e) => {
-            this.raiseEvent(event.emit, { component: this, nativeEvent: e }); // насчёт аргументов надо подумать.... Могут быть конфликты...
-            // console.log (this.handlers);
+            this.raiseEvent(event.emit, { component: this, nativeEvent: e });
           });
         }
       }
@@ -416,7 +562,12 @@ class Component_Component extends EventEmitter {
     }
     // Если событие никем не отловлено оно передаётся родителю.
     else if (this.parent) {
-      this.parent.raiseEvent(name, args);
+      if (this.parent instanceof Component_Component) {
+        this.parent.raiseEvent(name, args);
+      } else {
+        this.parent.emit(name, args);
+      }
+    
     }
 
   }
@@ -448,13 +599,18 @@ class Component_Component extends EventEmitter {
   *  - эмиттить события.
   *  
  */
-// CONCATENATED MODULE: ./src/frontend/views/base/initializeView.js
+// CONCATENATED MODULE: ./src/frontend/base/BaseView.js
 
 
-class initializeView_View {
+
+// Надо бы это дело отнаследовать от Component, тогда будет действительно гибко.
+
+class BaseView_BaseView extends EventEmitter {
   constructor(tree) {
+    super();
     for (let layout of Object.entries(tree)) {
       this[layout[0]] = new Component_Component(layout[1]);
+      this[layout[0]].parent = this;                // В статическом языке это было бы невозможно...
     }
     this.activeLayout = null;
   }
@@ -472,109 +628,191 @@ class initializeView_View {
     }
   }
 }
+// CONCATENATED MODULE: ./src/frontend/views/View.js
 
-function initializeView() {
 
-  return new initializeView_View({
-    mainLayout: {
-      template: 'mainLayout',
-      children: {
-        mainMenu: {
-          template: 'mainMenu',
-          slot: '#mainMenu',
-          events: [
-            { element: '#play', on: 'click', emit: 'play' },
-            { element: '#contribute', on: 'click', emit: 'contribute' }
-          ]
-        },
-        greetings: {
-          template: 'greetings',
-          slot: '#greetings',
-          data: { player: 'dear friend' }
+
+
+
+class View_View extends BaseView_BaseView {
+  constructor() {
+    super({
+      mainLayout: {
+        template: 'mainLayout',
+        children: {
+          mainMenu: {
+            template: 'mainMenu',
+            slot: '#mainMenu',
+            events: [
+              { element: '#play', on: 'click', emit: 'play' },
+              { element: '#contribute', on: 'click', emit: 'contribute' }
+            ]
+          },
+          greetings: {
+            template: 'greetings',
+            slot: '#greetings',
+            data: { player: 'dear friend' }
+          }
+        }
+      },
+      gameLayout: {
+        template: 'gameLayout',
+        children: {
+  
+          player: {
+            template: 'player',
+            slot: '#player',
+            data: { player: 'Incognito' },
+          },
+      
+          hints: {
+            template: 'hints',
+            slot: '#hints',
+            events: [
+              { element: '#hint-0', on: 'click', emit: 'hint_0' },
+              { element: '#hint-1', on: 'click', emit: 'hint_1' },
+              { element: '#hint-2', on: 'click', emit: 'hint_2' },
+            ]
+          },
+      
+          menu: {
+            template: 'menu',
+            slot: '#menu'
+          },
+      
+          question: {
+            template: 'question',
+            slot: '#question',
+            data: { question: '', answers: [] },
+            events: [
+              { element: '#option-0', on: 'click', emit: 'try' },
+              { element: '#option-1', on: 'click', emit: 'try' },
+              { element: '#option-2', on: 'click', emit: 'try' },
+              { element: '#option-3', on: 'click', emit: 'try' }
+            ]
+          },
+      
+          ladder: {
+            template: 'ladder',
+            slot: '#ladder',
+            data: {
+              stages: [
+                { prize: 1000, immune: false },
+                { prize: 2000, immune: true },
+                { prize: 5000, immune: false },
+                { prize: 6000, immune: true }
+              ],
+              currentStage: 0 }
+          }
         }
       }
-    },
-    gameLayout: {
-      template: 'gameLayout',
-      children: {
+    });
+  }
 
-        player: {
-          template: 'player',
-          slot: '#player',
-          data: { player: 'Incognito' },
-        },
-    
-        hints: {
-          template: 'hints',
-          slot: '#hints',
-          events: [
-            { element: '#hint-0', on: 'click', emit: 'hint_0' },
-            { element: '#hint-1', on: 'click', emit: 'hint_1' },
-            { element: '#hint-2', on: 'click', emit: 'hint_2' },
-          ]
-        },
-    
-        menu: {
-          template: 'menu',
-          slot: '#menu'
-        },
-    
-        question: {
-          template: 'question',
-          slot: '#question',
-          data: { question: '', answers: [] },
-          events: [
-            { element: '#option-0', on: 'click', emit: 'try' },
-            { element: '#option-1', on: 'click', emit: 'try' },
-            { element: '#option-2', on: 'click', emit: 'try' },
-            { element: '#option-3', on: 'click', emit: 'try' }
-          ]
-        },
-    
-        ladder: {
-          template: 'ladder',
-          slot: '#ladder',
-          data: {
-            stages: [
-              { prize: 1000, immune: false },
-              { prize: 2000, immune: true },
-              { prize: 5000, immune: false },
-              { prize: 6000, immune: true }
-            ],
-            currentStage: 0 }
-        }
-      }
-    }
-  });
+  askName() {
+    modals.inputBox({ message: 'Please enter your name' }, player => {
+      this.emit('changePlayerName', { player } );
+    });
+  }
 };
 
+
+// CONCATENATED MODULE: ./src/frontend/base/BaseModel.js
+
+
+class BaseModel_BaseModel extends EventEmitter {
+  constructor(schema) {
+    super();
+    // schema представляет собой объект с необходимыми в модели свойствами и их начальными значениями.
+    for (let prop of Object.keys(schema)) {
+      const privateProp = '_' + prop
+      this[privateProp] = schema[prop];
+      Object.defineProperty(this, prop, {
+        set: value => {
+
+          const oldValue = this[privateProp];
+          this[privateProp] = value;
+          this.emit(prop + '_change', {
+            model: this,
+            changed: prop,
+            oldValue,
+            value
+          });
+        },
+        get: () => {
+          return this[privateProp];
+        }
+     });
+    //  Object.defineProperty(this, prop, {
+
+    //  })
+    }
+  }
+  // Это будет работать только при изменении "корневых" свойств.
+}
+// CONCATENATED MODULE: ./src/frontend/models/State.js
+
+
+
+
+class State_State extends BaseModel_BaseModel {
+  constructor() {
+    super({
+      status: 0,
+      player: 'Incognito'
+    });
+  }
+};
+// CONCATENATED MODULE: ./src/frontend/controllers/MainController.js
+
+
+class MainController {
+  constructor(view, state) {
+
+    state.on('status_change', (args) => {
+      switch (args.value) {
+        case 0:
+          view.switchTo('mainLayout');
+          view.askName();
+          break;
+        case 1:
+          view.switchTo('mainLayout');
+          break;
+        case 2:
+          view.switchTo('gameLayout');
+      }
+    });
+
+    view.on('changePlayerName', args => {
+      state._player = args.player;
+      view.mainLayout.greetings.setData({ player: args.player });
+      view.gameLayout.player.setData({ player: args.player });
+
+    })
+
+    view.on('contribute', args => {
+      alert('contribute!');
+    });
+    view.on('play', args => {
+      state.status = 2;
+    });
+  }
+}
 // CONCATENATED MODULE: ./src/frontend/main.js
-// import modals from './views/modal/modals.js';
-// import MainController from './controllers/MainController.js';
 
 
-// class Controller {
-//   constructor(MainView) {
-    
-//   }
-// }
+
+
+
 
 window.onload = () => {
   // window.view = initializeView();
   // view.gameLayout.render();
-  window.state = {
-    status: 0,
-    player: ''
-  }
-  window.view = initializeView();
-  
-  switch (state.status) {
-    case 0:
-      
-    case 1:
 
-    case 2:
-  }
+
+  window.view = new View_View();
+  window.state = new State_State();
+  window.controller = new MainController(view, state);
 
 };
 

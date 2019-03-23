@@ -1,29 +1,17 @@
-// import modals from './views/modal/modals.js';
-// import MainController from './controllers/MainController.js';
-import initializeView from 'views/base/initializeView';
+'use strict';
 
-// class Controller {
-//   constructor(MainView) {
-    
-//   }
-// }
+import View from 'views/View';
+import State from 'models/State';
+import MainController from 'controllers/MainController';
 
 window.onload = () => {
   // window.view = initializeView();
   // view.gameLayout.render();
-  window.state = {
-    status: 0,
-    player: ''
-  }
-  window.view = initializeView();
-  
-  switch (state.status) {
-    case 0:
-      
-    case 1:
 
-    case 2:
-  }
+
+  window.view = new View();
+  window.state = new State();
+  window.controller = new MainController(view, state);
 
 };
 

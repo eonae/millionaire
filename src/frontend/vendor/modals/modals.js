@@ -1,6 +1,6 @@
-import MessageBox from 'views/modal/MessageBox';
-import ConfirmBox from 'views/modal/ConfirmBox';
-import InputBox from 'views/modal/InputBox';
+import MessageBox from 'vendor/modals/MessageBox';
+import ConfirmBox from 'vendor/modals/ConfirmBox';
+import InputBox from 'vendor/modals/InputBox';
 
 export default {
 

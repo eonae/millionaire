@@ -1,5 +1,3 @@
-'use strict'
-
 import templates from 'views/templates/templates';
 import EventEmitter from 'base/EventEmitter';
 
@@ -73,8 +71,7 @@ export default class Component extends EventEmitter {
           if (!element)
             throw new Error (`Can't assign listener for element >> ${event.element} <<. Element not found!`);
           element.addEventListener(event.on, (e) => {
-            this.raiseEvent(event.emit, { component: this, nativeEvent: e }); // насчёт аргументов надо подумать.... Могут быть конфликты...
-            // console.log (this.handlers);
+            this.raiseEvent(event.emit, { component: this, nativeEvent: e });
           });
         }
       }
@@ -106,7 +103,12 @@ export default class Component extends EventEmitter {
     }
     // Если событие никем не отловлено оно передаётся родителю.
     else if (this.parent) {
-      this.parent.raiseEvent(name, args);
+      if (this.parent instanceof Component) {
+        this.parent.raiseEvent(name, args);
+      } else {
+        this.parent.emit(name, args);
+      }
+    
     }
 
   }

@@ -1,4 +1,6 @@
-import ModalWindow from 'views/base/ModalWindow.js'
+'use strict';
+
+import ModalWindow from 'vendor/modals/ModalWindow.js'
 
 export default class MessageBox extends ModalWindow {
 
