@@ -5,10 +5,20 @@ class View {
     for (let layout of Object.entries(tree)) {
       this[layout[0]] = new Component(layout[1]);
     }
+    this.activeLayout = null;
   }
 
-  switchTo(layout) {
-    this[layout].render();
+  switchTo(layoutName) {
+    const layout = this[layoutName];
+    if (layout) {
+      if (this.activeLayout) {
+        this.activeLayout.deactivate();
+      }
+      this.activeLayout = layout;
+      layout.render();
+    } else {
+      throw new Error(`No layout >> ${layoutName} << found in this view`);
+    }
   }
 }
 

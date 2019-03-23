@@ -317,7 +317,9 @@ class EventEmitter {
 
 function getRenderer(name) {
   const renderer = templates['render_' + name];
-  if (!renderer) throw new Error(`Template >> ${name} << not found!`);
+  if (!renderer) {
+    throw new Error(`Template >> ${name} << not found!`);
+  }
   return renderer;
 }
 
@@ -344,6 +346,7 @@ function render_slot(template,  data, slot) {
 class Component_Component extends EventEmitter {
   constructor(settings) {
     super();
+    this.isActive = false;
     this.data = settings.data;
     // if (settings.slot) {
     //   this.slotSelector = settings.slot;
@@ -352,7 +355,7 @@ class Component_Component extends EventEmitter {
     this.render = (inCascade) => {
     // inCascade - флаг указывающий на то, рендерится объект сам по себе или его рендеринг
     // вызван родительским компонентом.
-
+      this.isActive = true;
       if (settings.slot) {
         if (!this.slot || inCascade) {
           this.slot = document.querySelector(settings.slot);
@@ -390,7 +393,9 @@ class Component_Component extends EventEmitter {
     if (settings.data) {
       this.setData = (entries) => {
         Object.assign(this.data, entries);
-        this.render();
+        if (this.isActive) {
+          this.render();
+        }
       }
     }
 
@@ -415,7 +420,17 @@ class Component_Component extends EventEmitter {
     }
 
   }
+
+  deactivate() {
+    this.isActive = false;
+    if (this.children) {
+      for (let child of Object.values(this.children)) {
+        child.isActive = false;
+      }
+    }
+  }  
 }
+
 
 
 
@@ -441,10 +456,20 @@ class initializeView_View {
     for (let layout of Object.entries(tree)) {
       this[layout[0]] = new Component_Component(layout[1]);
     }
+    this.activeLayout = null;
   }
 
-  switchTo(layout) {
-    this[layout].render();
+  switchTo(layoutName) {
+    const layout = this[layoutName];
+    if (layout) {
+      if (this.activeLayout) {
+        this.activeLayout.deactivate();
+      }
+      this.activeLayout = layout;
+      layout.render();
+    } else {
+      throw new Error(`No layout >> ${layoutName} << found in this view`);
+    }
   }
 }
 
@@ -538,15 +563,19 @@ window.onload = () => {
   // window.view = initializeView();
   // view.gameLayout.render();
   window.state = {
-    status: 0
+    status: 0,
+    player: ''
   }
   window.view = initializeView();
-  view.mainLayout.on('play', (args) => {
-    console.log(args);
-  });
-  view.mainLayout.mainMenu.on('contribute', (args) => {
-    console.log(args);
-  });
+  
+  switch (state.status) {
+    case 0:
+      
+    case 1:
+
+    case 2:
+  }
+
 };
 
   // debugger;

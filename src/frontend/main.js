@@ -12,15 +12,19 @@ window.onload = () => {
   // window.view = initializeView();
   // view.gameLayout.render();
   window.state = {
-    status: 0
+    status: 0,
+    player: ''
   }
   window.view = initializeView();
-  view.mainLayout.on('play', (args) => {
-    console.log(args);
-  });
-  view.mainLayout.mainMenu.on('contribute', (args) => {
-    console.log(args);
-  });
+  
+  switch (state.status) {
+    case 0:
+      
+    case 1:
+
+    case 2:
+  }
+
 };
 
   // debugger;

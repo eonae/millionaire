@@ -7,7 +7,9 @@ import EventEmitter from 'base/EventEmitter';
 
 function getRenderer(name) {
   const renderer = templates['render_' + name];
-  if (!renderer) throw new Error(`Template >> ${name} << not found!`);
+  if (!renderer) {
+    throw new Error(`Template >> ${name} << not found!`);
+  }
   return renderer;
 }
 
@@ -34,6 +36,7 @@ function render_slot(template,  data, slot) {
 export default class Component extends EventEmitter {
   constructor(settings) {
     super();
+    this.isActive = false;
     this.data = settings.data;
     // if (settings.slot) {
     //   this.slotSelector = settings.slot;
@@ -42,7 +45,7 @@ export default class Component extends EventEmitter {
     this.render = (inCascade) => {
     // inCascade - флаг указывающий на то, рендерится объект сам по себе или его рендеринг
     // вызван родительским компонентом.
-
+      this.isActive = true;
       if (settings.slot) {
         if (!this.slot || inCascade) {
           this.slot = document.querySelector(settings.slot);
@@ -80,7 +83,9 @@ export default class Component extends EventEmitter {
     if (settings.data) {
       this.setData = (entries) => {
         Object.assign(this.data, entries);
-        this.render();
+        if (this.isActive) {
+          this.render();
+        }
       }
     }
 
@@ -105,7 +110,17 @@ export default class Component extends EventEmitter {
     }
 
   }
+
+  deactivate() {
+    this.isActive = false;
+    if (this.children) {
+      for (let child of Object.values(this.children)) {
+        child.isActive = false;
+      }
+    }
+  }  
 }
+
 
 
 
