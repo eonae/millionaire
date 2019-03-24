@@ -3,7 +3,7 @@ import Component from 'base/Component';
 
 // Надо бы это дело отнаследовать от Component, тогда будет действительно гибко.
 
-export default class BaseView extends EventEmitter {
+export default class LayoutSwitch extends EventEmitter {
   constructor(tree) {
     super();
     for (let layout of Object.entries(tree)) {

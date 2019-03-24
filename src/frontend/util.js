@@ -20,7 +20,7 @@ export default {
         xhr.onload = () => {
             if (xhr.status != 200) {
                 alert('AJAX failed!');
-                callback(new Error('Error'));
+                callback(null, new Error('Error'));
             }
             else {
                 callback(JSON.parse(xhr.responseText));

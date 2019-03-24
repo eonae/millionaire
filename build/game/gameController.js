@@ -1,10 +1,11 @@
 const Game = require('./game.js');
 
-module.exports = {
+module.exports = class GameController {
+    constructor() {
+        this.currentGame = null;
+    }
 
-    currentGame: null,
-
-    callApi: function(command, params, callback) {
+    callApi(command, params, callback) {
 
         switch (command) {
 

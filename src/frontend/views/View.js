@@ -1,14 +1,14 @@
 'use strict';
 
 import modals from 'vendor/modals/modals';
-import BaseView from 'base/BaseView';
+import LayoutSwitch from 'base/LayoutSwitch';
 
-export default class View extends BaseView {
+export default class View extends LayoutSwitch {
   constructor() {
     super({
       mainLayout: {
-        template: 'mainLayout',
-        children: {
+        template: 'mainLayout', //
+        children: {             //
           mainMenu: {
             template: 'mainMenu',
             slot: '#mainMenu',
@@ -78,10 +78,37 @@ export default class View extends BaseView {
     });
   }
 
+  loss(args) {
+    modals.confirmBox( { message:
+      `We are really sorry, but you are wrong (((
+      Correct answer was
+      ${String.fromCharCode(args.correct + 65)}: ${this.question.answers[args.correct]}
+      Would you play once more?`}, (oneMore) => {
+        if (oneMore) alert('One more!');
+      });
+  }
+
+  win(prize) {
+    modals.confirmBox( { message:
+      `Congratulations! You were really great!
+      Your prize: ${prize}
+      Would you play once more?`}, (oneMore) => {
+        if (oneMore) alert('One more!');
+      });
+  }
+
   askName() {
     modals.inputBox({ message: 'Please enter your name' }, player => {
       this.emit('changePlayerName', { player } );
     });
   }
+
+  error(args) {
+    modals.messageBox( { message: 'Something gone wrong with our server. We appologize for inconvenience. We will try to reconnect...'}, () => {
+      document.location.reload(true);
+    });
+  }
+
+
 };
 

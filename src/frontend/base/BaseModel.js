@@ -22,10 +22,7 @@ export default class BaseModel extends EventEmitter {
         get: () => {
           return this[privateProp];
         }
-     });
-    //  Object.defineProperty(this, prop, {
-
-    //  })
+      });
     }
   }
   // Это будет работать только при изменении "корневых" свойств.

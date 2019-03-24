@@ -2,7 +2,7 @@
 .ladder
   each stage, index in stages
     if (index < currentStage)
-      if (stage.immune)
+      if (stage.isFixed)
         .done-immune= stage.prize
       else
         .done= stage.prize

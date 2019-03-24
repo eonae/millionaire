@@ -1,36 +1,6 @@
 import templates from 'views/templates/templates';
 import EventEmitter from 'base/EventEmitter';
 
-// Private
-
-function getRenderer(name) {
-  const renderer = templates['render_' + name];
-  if (!renderer) {
-    throw new Error(`Template >> ${name} << not found!`);
-  }
-  return renderer;
-}
-
-function render_master(template, data) {
-  document.body.innerHTML = getRenderer(template)(data);
-}
-
-function render_slot(template,  data, slot) {
-
-  const parent = slot.parentElement;
-  const temp = document.createElement('template');
-
-  temp.innerHTML = getRenderer(template)(data);
-  
-  const root = temp.content.firstElementChild;
-  parent.insertBefore(root, slot);
-  parent.removeChild(slot);
-
-  return root;
-}
-
-// Class
-
 export default class Component extends EventEmitter {
   constructor(settings) {
     super();
@@ -123,6 +93,33 @@ export default class Component extends EventEmitter {
   }  
 }
 
+// Private
+
+function getRenderer(name) {
+  const renderer = templates['render_' + name];
+  if (!renderer) {
+    throw new Error(`Template >> ${name} << not found!`);
+  }
+  return renderer;
+}
+
+function render_master(template, data) {
+  document.body.innerHTML = getRenderer(template)(data);
+}
+
+function render_slot(template,  data, slot) {
+
+  const parent = slot.parentElement;
+  const temp = document.createElement('template');
+
+  temp.innerHTML = getRenderer(template)(data);
+  
+  const root = temp.content.firstElementChild;
+  parent.insertBefore(root, slot);
+  parent.removeChild(slot);
+
+  return root;
+}
 
 
 

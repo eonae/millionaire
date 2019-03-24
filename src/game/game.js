@@ -84,8 +84,8 @@ module.exports = class Game {
 
         let { questions, answers } = getQuestions(this.ladder);
 
-        console.dir(questions);
-        console.log(answers);
+        // console.dir(questions);
+        // console.log(answers);
 
         this.questions = questions;
         this.answers = answers;
@@ -108,7 +108,7 @@ module.exports = class Game {
     }
 
     get currentPrize() {
-        console.log(this.ladder[this.currentPosition].prize)
+        // console.log(this.ladder[this.currentPosition].prize)
         return this.ladder[this.currentPosition].prize;
     }
 
@@ -130,13 +130,13 @@ module.exports = class Game {
 ///////////////////////////////////
 
     try(params, callback) {
-        console.log('Command - "try"');
+        // console.log('Command - "try"');
 
-        console.log(+(params.option));
+        // console.log(+(params.option));
 
         let correct = (this.currentAnswer === (+(params.option)) );
-        console.log(this.currentAnswer + ' ');
-        console.log(correct);
+        // console.log(this.currentAnswer + ' ');
+        // console.log(correct);
         
         if (correct) {
             if (this.isLastRound) {
@@ -148,7 +148,7 @@ module.exports = class Game {
                 callback(null, new GameResponse(this.status, this.result));
             } else {
                 this.currentPosition++;
-                console.log('now your postion is ' + this.currentPosition);
+                // console.log('now your postion is ' + this.currentPosition);
                 this.status = 'promoting';
                 callback(null, new GameResponse(this.status, {}) );
             }
@@ -164,13 +164,13 @@ module.exports = class Game {
     }
 
     question(params, callback) {
-        console.log('Command - "question"');
+        // console.log('Command - "question"');
         callback(null, new GameResponse(this.status, this.currentQuestion));
     }
 
     flee(params, callback) {
 
-        console.log('Command - "flee"');
+        // console.log('Command - "flee"');
 
         if (this.CurrentPostion != 0) {
             this.status = 'finished';
