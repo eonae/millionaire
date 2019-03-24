@@ -3,22 +3,12 @@
 export default class MainController {
   constructor(view, state) {
 
-    debugger;
-    this.updatePlayerName(state.player);
-    this.updateLadderStages(state.ladder);
-    this.updateQuestion(state.question);
-    state.status = 0;
-
-    {
-
-    }
-
     state.on('status_change', (args) => {
-      this.updateStatus(args.status);
+      this.updateStatus(args.value);
     });
 
     state.on('player_change', args => {
-      this.updatePlayerName(args.player);
+      this.updatePlayerName(args.value);
     });
 
     state.on('serverError', args => {
@@ -35,7 +25,7 @@ export default class MainController {
 
 
     view.on('newPlayer', args => {
-      state.player = args.player;
+      state.setPlayer(args.player);
     });
 
     view.on('contribute', args => {
@@ -45,6 +35,14 @@ export default class MainController {
     view.on('play', args => {
       state.startNewGame();
     });
+
+    this.updateStatus(state.status)
+    this.updatePlayerName(state.player);
+    if (state.status == 'playing') {
+      this.updateLadder(state.ladder);
+      this.updateCurrentPosition(state.currentPosition);
+      this.updateQuestion(state.question, state.options);
+    }
   }
 
   updateStatus(status) {
@@ -54,7 +52,7 @@ export default class MainController {
           view.switchTo('mainLayout');
           view.askName();
           break;
-        case 'welcome':
+        case 'idle':
           view.switchTo('mainLayout');
           break;
         case 'playing':
@@ -69,20 +67,15 @@ export default class MainController {
     view.gameLayout.player.setData( { player } );
   }
 
-  updateQuestion(question, answers) {
-    view.gameLayout.question.setData( { question, answers });
+  updateQuestion(question, options) {
+    view.gameLayout.question.setData( { question, options });
   }
 
-  updateLadderStages(stages) {
+  updateLadder(stages) {
     view.gameLayout.ladder.setData( { stages });
   }
 
-  updateLadderCurrentStage(currentStage) {
+  updateCurrentPosition(currentStage) {
     view.gameLayout.ladder.setData( { currentStage });
   }
-
-  setPlayerName(player) {
-    state._player = player;
-  }
-
 }

@@ -1,19 +1,8 @@
-function constructGetUrl(url, paramsObj) {
-    let query = url;
-    if (paramsObj && Object.keys(paramsObj).length != 0) {
-        let delim = '?';
-        for (let key in paramsObj) {
-            query += `${delim}${key}=${paramsObj[key]}`;
-        }
-    }
-    return query;
-}
-
 export default {
 
     // Обёртка над обыкновенным XHR-запросом.
     // Принимает url, объект с параметрами и callback, который будет вызван при получении ответа.
-    ajax(url, params, callback) {
+    request(url, params, callback) {
         let xhr = new XMLHttpRequest();
         xhr.open('GET', constructGetUrl(url, params));
         xhr.send();

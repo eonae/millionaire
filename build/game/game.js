@@ -75,20 +75,27 @@ function getRandomQuestion(level) {
 
 module.exports = class Game {
 
-    constructor() {
+    constructor(source) {
 
-        this.ladder = require('./ladder.js');           // Создаём лесенку (призы, несгораемые суммы)
-        this.currentPosition = 0;
-        this.status = 'start';
-        this.result = null;
+        if (!source) {
+            this.ladder = require('./ladder.js');           // Создаём лесенку (призы, несгораемые суммы)
+            this.currentPosition = 0;
+            this.status = 'start';
+            this.result = null;
+    
+            let { questions, answers } = getQuestions(this.ladder);
+    
+            this.questions = questions;
+            this.answers = answers;
+        } else {
+            this.ladder = source.ladder;
+            this.currentPosition = source.currentPosition;
+            this.status = source.status;
+            this.result = source.result;
+            this.questions = source.questions;
+            this.answers = source.answers;
+        }
 
-        let { questions, answers } = getQuestions(this.ladder);
-
-        // console.dir(questions);
-        // console.log(answers);
-
-        this.questions = questions;
-        this.answers = answers;
     }
 
     get currentQuestion() {
@@ -180,5 +187,9 @@ module.exports = class Game {
         }
     
         callback(null, new GameResponse(this.status, this.result));
+    }
+
+    static readFrom(source) {
+        return new Game(source);
     }
 }

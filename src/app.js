@@ -5,7 +5,7 @@ const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const State = require('./server/state');
 const api = require('./server/routes/api');
-const StateReport = require('../../server/StateReport');
+
 const app = express();
 
 app.use( session({
@@ -26,13 +26,18 @@ app.use( bodyParser.json() );
 app.use( express.static(__dirname + '/static') );
 
 app.use( (req, res, next) => {
-  if (!(req.session.state))
+
+  if (!(req.session.state)) {
+    console.log('new session');
     req.session.state = new State();
+  }
   next();
+
 });
 
 app.get('/', (req, res) => {
-  const report = new StateReport(req.session.state).stringify();
+                                                                                                                                                                                                 
+  const report = State.createReport(req.session.state);
   console.log(report);
   res.render(__dirname + '/templates/base.pug', { report });
 });

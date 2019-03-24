@@ -1,7 +1,7 @@
 //- child component
 .ladder
-  each stage, index in stages
-    if (index < currentStage)
+  each stage, index in ladder
+    if (index < currentPosition)
       if (stage.isFixed)
         .done-immune= stage.prize
       else

@@ -52,7 +52,7 @@ export default class View extends LayoutSwitch {
           question: {
             template: 'question',
             slot: '#question',
-            data: { question: '', answers: [] },
+            data: { question: '', options: [] },
             events: [
               { element: '#option-0', on: 'click', emit: 'try' },
               { element: '#option-1', on: 'click', emit: 'try' },
@@ -65,13 +65,13 @@ export default class View extends LayoutSwitch {
             template: 'ladder',
             slot: '#ladder',
             data: {
-              stages: [
-                { prize: 1000, immune: false },
-                { prize: 2000, immune: true },
-                { prize: 5000, immune: false },
-                { prize: 6000, immune: true }
+              ladder: [
+                { prize: 1000, isFixed: false },
+                { prize: 2000, isFixed: true },
+                { prize: 5000, isFixed: false },
+                { prize: 6000, isFixed: true }
               ],
-              currentStage: 0 }
+              currentPosition: 0 }
           }
         }
       }
@@ -99,7 +99,7 @@ export default class View extends LayoutSwitch {
 
   askName() {
     modals.inputBox({ message: 'Please enter your name' }, player => {
-      this.emit('changePlayerName', { player } );
+      this.emit('newPlayer', { player } );
     });
   }
 

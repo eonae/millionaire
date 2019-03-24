@@ -1,5 +1,6 @@
 'use strict';
-import util from 'util';
+
+import ajax from 'ajax.js';
 import BaseModel from 'base/BaseModel';
 
 export default class State extends BaseModel {
@@ -8,8 +9,19 @@ export default class State extends BaseModel {
     super(initialState);
   }
 
+  setPlayer(player) {
+    this.player = player; // C вызовом события.
+    ajax.get('/api/player', { player }, (err, res) => {
+      if (err) {
+        this.emit('serverError', {
+          model: this, message: 'startNewGame failed'
+        });
+      }
+    });
+  }
+
   startNewGame() {
-    util.ajax('/api/new', {}, (err, res) => {
+    ajax.get('/api/new', {}, (err, res) => {
       if (err) {
         this.emit('serverError', {
           model: this, message: 'startNewGame failed'
@@ -17,15 +29,15 @@ export default class State extends BaseModel {
       } else {
         this.status = res.status;
         this.question = res.question;
-        this.answers = res.answers;
-        this.ladderCurrentStage = res.ladderCurrentStage;
-        this.ladderStages = res.ladderStages;
+        this.options = res.options;
+        this.currentPosition = res.currentPosition;
+        this.ladder = res.ladder;
       }
     });
   }
 
   tryAnswer(option) {
-    util.ajax('/api/try', { option }, (err, res) => {
+    ajax.get('/api/try', { option }, (err, res) => {
       if (err) {
         this.emit('serverError', {
           model: this, message: 'checking answer failed'
@@ -47,7 +59,7 @@ export default class State extends BaseModel {
   }
 
   flee() {
-    util.ajax('/api/flee', {}, (err, res) => {
+    ajax.get('/api/flee', {}, (err, res) => {
       if (err) {
         this.emit('serverError', {
           model: this, message: 'flee failed'

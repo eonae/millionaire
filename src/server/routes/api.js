@@ -1,11 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const StateReport = require('../../server/StateReport');
+const State = require('../State');
 const Game = require('../../game/game.js');
 
 router.get('/:api', (req, res) => {
   console.log('router is online...');
-  debugger;
   const command = req.params.api,
         params = req.query;
         state = req.session.state;
@@ -15,18 +14,24 @@ router.get('/:api', (req, res) => {
     case 'new':
       state.currentGame = new Game();
       state.status = 'playing';
-      res.send(new StateReport(state).stringify());
+      res.send(State.createReport(state));
       break;
   
+    case 'player':
+      state.player = params.player;
+      state.status = 'idle';
+      res.send({});
+      break;
     case 'quit':
       state.currentGame = null;
-      state.status = 'welcome';
-      res.sendStatus(200);
+      state.status = 'idle';
+      res.send({});
       break;
   
     default:
-      if (state.currentGame && state.currentGame.status != 'finished' && (command in state.currentGame)) {
-        state.currentGame[command](params, (err, gameResponse) => {
+      if (state.currentGame && state.currentGame.status != 'finished') {
+        const currentGame = Game.readFrom(state.currentGame);
+        currentGame[command](params, (err, gameResponse) => {
           if (err) {
             res.sendStatus(500);
           } else {
