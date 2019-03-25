@@ -1,6 +1,6 @@
 'use strict';
 
-import ajax from 'ajax.js';
+import ajax from 'vendor/ajax';
 import BaseModel from 'base/BaseModel';
 
 export default class State extends BaseModel {

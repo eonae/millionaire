@@ -34,7 +34,6 @@ export default class MainController {
       this.updateOptions(state.options)
     });
 
-
     view.on('newPlayer', args => {
       state.setPlayer(args.player);
     });
@@ -47,6 +46,7 @@ export default class MainController {
       debugger;
       state.startNewGame(); 
     });
+    
     view.on('try', args => {
       console.log(args);
       const option = args.nativeEvent.target.id.split('_')[1];

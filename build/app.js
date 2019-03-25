@@ -42,7 +42,7 @@ app.get('/', (req, res) => {
   res.set({
     'Cache-Control': 'no-cache'
   })
-  res.render(__dirname + '/templates/base.pug', { report });
+  res.render(__dirname + '/server/base.pug', { report });
 });
 
 app.use('/api', api);

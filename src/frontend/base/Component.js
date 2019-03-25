@@ -1,4 +1,4 @@
-import templates from 'views/templates/templates';
+import templates from 'views/templates';
 import EventEmitter from 'base/EventEmitter';
 
 export default class Component extends EventEmitter {

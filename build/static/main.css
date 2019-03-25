@@ -10,15 +10,15 @@ body .hidden {
 }
 
 .content-wrapper,
-.mainHeader,
-footer {
+footer,
+.mainHeader {
 	margin: 0;
 }
 
 .game-btn,
-.mainHeader .mainMenu button,
 .gameHeader button,
 .options button,
+.mainHeader .mainMenu button,
 .message-box .buttons button,
 .confirm-box .buttons button,
 .input-box .buttons button {
@@ -37,9 +37,9 @@ footer {
 }
 
 .game-btn:hover,
-.mainHeader .mainMenu button:hover,
 .gameHeader button:hover,
 .options button:hover,
+.mainHeader .mainMenu button:hover,
 .message-box .buttons button:hover,
 .confirm-box .buttons button:hover,
 .input-box .buttons button:hover {
@@ -66,62 +66,6 @@ footer {
 	min-width: 320px;
 	padding: 2vh 2vh 1vh;
 	box-sizing: border-box;
-}
-
-.mainHeader {
-	width: 100%;
-	padding: 0;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	flex-direction: row;
-}
-
-.mainHeader .title {
-	font-size: 60px;
-	font-weight: 700;
-	color: #222;
-}
-
-.mainHeader .mainBar {
-	margin-top: 20px;
-}
-
-.mainHeader .mainMenu {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: row;
-}
-
-.mainHeader .mainMenu button {
-	text-decoration: none;
-	outline: none;
-	display: block;
-	color: #242412;
-	font-size: 25px;
-	font-weight: 700;
-	padding: 6px 20px;
-	border: 2px solid #242412;
-	border-radius: 10px;
-}
-
-.mainHeader .mainMenu a:hover {
-	color: black;
-	border-color: black;
-}
-
-.mainHeader .mainMenu > *:not(:last-child) {
-	margin-right: 15px;
-}
-
-.mainHeader .greetings {
-	margin-top: 10px;
-	text-align: center;
-}
-
-.mainHeader .greetings > span {
-	color: palevioletred;
 }
 
 footer {
@@ -151,10 +95,6 @@ footer a {
 	line-height: 1em;
 }
 
-#menu {
-	width: 20%;
-}
-
 .controls {
 	display: flex;
 	align-items: center;
@@ -165,9 +105,45 @@ footer a {
 	margin-left: 10px;
 }
 
-.controls .hints {
+.hints {
 	display: flex;
 	flex-direction: row;
+}
+
+.ladder {
+	display: flex;
+	justify-content: space-between;
+	align-items: stretch;
+	flex-direction: column-reverse;
+	width: 20%;
+	height: 100%;
+	box-sizing: border-box;
+}
+
+.ladder > div {
+	font-size: 2.5vh;
+	text-align: center;
+	box-sizing: border-box;
+	width: 100%;
+	border-radius: 15px;
+	padding: 1vh 2vw;
+	border: 1px solid #222;
+}
+
+.ladder .done-immune {
+	background: darkgreen;
+}
+
+.ladder .done {
+	background: green;
+}
+
+.ladder .immune {
+	background: yellow;
+}
+
+#menu {
+	width: 20%;
 }
 
 .player {
@@ -270,36 +246,60 @@ footer a {
 	color: #222;
 }
 
-.ladder {
+.greetings {
+	margin-top: 10px;
+	text-align: center;
+}
+
+.greetings > span {
+	color: palevioletred;
+}
+
+.mainHeader {
+	width: 100%;
+	padding: 0;
 	display: flex;
 	justify-content: space-between;
-	align-items: stretch;
-	flex-direction: column-reverse;
-	width: 20%;
-	height: 100%;
-	box-sizing: border-box;
+	align-items: center;
+	flex-direction: row;
 }
 
-.ladder > div {
-	font-size: 2.5vh;
-	text-align: center;
-	box-sizing: border-box;
-	width: 100%;
-	border-radius: 15px;
-	padding: 1vh 2vw;
-	border: 1px solid #222;
+.mainHeader .title {
+	font-size: 60px;
+	font-weight: 700;
+	color: #222;
 }
 
-.ladder .done-immune {
-	background: darkgreen;
+.mainHeader .mainBar {
+	margin-top: 20px;
 }
 
-.ladder .done {
-	background: green;
+.mainHeader .mainMenu {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: row;
 }
 
-.ladder .immune {
-	background: yellow;
+.mainHeader .mainMenu button {
+	text-decoration: none;
+	outline: none;
+	display: block;
+	color: #242412;
+	font-size: 25px;
+	font-weight: 700;
+	padding: 6px 20px;
+	border: 2px solid #242412;
+	border-radius: 10px;
+}
+
+.mainHeader .mainMenu a:hover {
+	color: black;
+	border-color: black;
+}
+
+.mainHeader .mainMenu > *:not(:last-child) {
+	margin-right: 15px;
 }
 
 .modal-overlay {
@@ -445,39 +445,6 @@ footer a {
 
 @media (max-width: 760px) {
 
-.mainHeader .title {
-	font-size: 30px;
-}
-
-.mainHeader .mainBar {
-	width: 100%;
-	margin: 0;
-	display: flex;
-	flex-direction: column-reverse;
-}
-
-.mainHeader .mainMenu {
-	flex-direction: column;
-}
-
-.mainHeader .mainMenu button {
-	display: block;
-	width: 100%;
-	margin-right: 0 !important;
-	border: 0;
-	border-top: 1px solid #242412;
-	border-radius: 0;
-	text-align: center;
-}
-
-.mainHeader .mainMenu > :last-child {
-	border-bottom: 1px solid #242412;
-}
-
-.mainHeader .greetings {
-	margin-bottom: 15px;
-}
-
 .gameHeader {
 	align-items: initial;
 }
@@ -487,16 +454,20 @@ footer a {
 	width: 78%;
 }
 
-.controls .hints {
+.hints {
 	margin-top: 1vh;
 	width: 100%;
 	justify-content: space-between;
 }
 
-.controls .hints > button {
+.hints > button {
 	margin: 0;
 	width: 32%;
 	padding: 5px;
+}
+
+.ladder > div {
+	font-size: 2vh;
 }
 
 .player {
@@ -528,8 +499,37 @@ footer a {
 	height: 40px;
 }
 
-.ladder > div {
-	font-size: 2vh;
+.greetings {
+	margin-bottom: 15px;
+}
+
+.mainHeader .title {
+	font-size: 30px;
+}
+
+.mainHeader .mainBar {
+	width: 100%;
+	margin: 0;
+	display: flex;
+	flex-direction: column-reverse;
+}
+
+.mainHeader .mainMenu {
+	flex-direction: column;
+}
+
+.mainHeader .mainMenu button {
+	display: block;
+	width: 100%;
+	margin-right: 0 !important;
+	border: 0;
+	border-top: 1px solid #242412;
+	border-radius: 0;
+	text-align: center;
+}
+
+.mainHeader .mainMenu > :last-child {
+	border-bottom: 1px solid #242412;
 }
 
 }
@@ -540,13 +540,17 @@ footer a {
 	font-size: 13px;
 }
 
-#menu {
-	width: 23%;
-}
-
 .controls {
 	box-sizing: border-box;
 	width: 75%;
+}
+
+.ladder {
+	width: 23%;
+}
+
+#menu {
+	width: 23%;
 }
 
 .player > div:last-child {
@@ -561,20 +565,16 @@ footer a {
 	font-size: 3vh;
 }
 
-.ladder {
-	width: 23%;
-}
-
 }
 
 @media (max-width: 380px) {
 
-.mainHeader .title {
-	font-size: 25px;
-}
-
 .player > div:first-child {
 	display: none;
+}
+
+.mainHeader .title {
+	font-size: 25px;
 }
 
 }

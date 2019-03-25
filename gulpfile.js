@@ -16,37 +16,29 @@ const ins = require('gulp-insert');
 const replace = require('gulp-replace');
 const prettier = require('gulp-prettier');
 const pug = require('gulp-pug');
+const extract = require('./gulp-eonae-extract');
+const debug = require('gulp-debug');
+const ext_replace = require('gulp-ext-replace');
+const filter = require('gulp-filter');
 
 const webpack_config = require('./webpack.config');
 
+const vueFilter = filter('**/*.vue', { restore: true });
+
 // Компиляция scss-кода в main.css
 
-gulp.task('sass', () => {
-    return gulp.src('./src/sass/main.scss')
-               .pipe(sass().on('error', sass.logError))
-               .pipe(mmq({
-                   log: true
-               }))
-               .pipe(gulp.dest('./build/static'))
-               .pipe(browserSync.stream());
-});
-
-// Копирование некомпилируемых шаблонов
-
-gulp.task('templates', () => {
-    return gulp.src('./src/templates/**/*')
-               .pipe(gulp.dest('build/templates'))
-               .pipe(browserSync.stream());
-});
-
-// Прекомпиляция клиентских шаблонов
-
 gulp.task('precompile', () => {
-    return gulp.src('./src/templates/components/**/*.pug')
-          .pipe(
-            foreach(
+  return gulp.src(['./src/frontend/views/components/**/*.vue',
+                   './src/frontend/views/components/**/*.pug',
+                   './src/frontend/vendor/**/*.pug'])
+            .pipe(vueFilter)
+            .pipe(extract('<template lang=\\"pug\\">','<\\/template>'))
+            .pipe(ext_replace('.pug'))
+            .pipe(vueFilter.restore)
+            .pipe(
+              foreach(
                 (stream, file) => {
-                    console.log(file.path)
+                  console.log(file.path)
                   return stream
                     .pipe(pug({
                       client: true,
@@ -60,33 +52,56 @@ gulp.task('precompile', () => {
                       return name + ': function';
                     }))
                 }
+              )
             )
-          )
-          .pipe(concat('templates.js', {
-            newLine: ','
-          }))
-          .pipe(wrap('{ <%= contents %> }\n\r'))
-          .pipe(defineModule('es6'))
-          .pipe(ins.prepend("import pug from 'vendor/pug-runtime-es6'\n\r"))
-          .pipe(prettier())
-          .pipe(gulp.dest('./src/frontend/views/templates'));
-  });
-
-gulp.task('bundle', () => {
-    return gulp.src('./src/frontend/main.js')
-               .pipe(webpack_stream(webpack_config), webpack)
-               .pipe(gulp.dest('./build/static'))
-               .pipe(browserSync.stream());
+            .pipe(concat('templates.js', {
+              newLine: ','
+            }))
+            .pipe(wrap('{ <%= contents %> }\n\r'))
+            .pipe(defineModule('es6'))
+            .pipe(ins.prepend("import pug from 'vendor/pug-runtime-es6'\n\r"))
+            .pipe(prettier())
+            .pipe(gulp.dest('./src/frontend/views'));
 });
 
+gulp.task('prepare-sass', () => {
+  return gulp.src(['./src/frontend/views/components/**/*.vue', './src/frontend/views/components/**/*.scss'])
+            .pipe(vueFilter)
+            .pipe(extract('<style lang=\\"scss\\">','<\\/style>'))
+            .pipe(ext_replace('.scss'))
+            .pipe(vueFilter.restore)
+            .pipe(gulp.dest('./src/frontend/views/sass/temp'));
+});
+
+gulp.task('sass', () => {
+  return gulp.src('./src/frontend/views/sass/main.scss')
+            .pipe(sass().on('error', sass.logError))
+            .pipe(mmq({
+                log: true
+            }))
+            .pipe(gulp.dest('./build/static'))
+            .pipe(browserSync.stream());
+});
+
+// Копирование некомпилируемых шаблонов
+
+gulp.task('bundle', () => {
+  return gulp.src('./src/frontend/main.js')
+              .pipe(webpack_stream(webpack_config), webpack)
+              .pipe(gulp.dest('./build/static'))
+              .pipe(browserSync.stream());
+});
+
+// Copying /////////////////////////////////////////
+
 gulp.task('assets', () => {
-    return gulp.src('./src/assets/**/*')
-               .pipe(gulp.dest('./build/static'));
+  return gulp.src('./src/assets/**/*')
+              .pipe(gulp.dest('./build/static'));
 });
 
 gulp.task('server', () => {
-    return gulp.src('./src/server/**/*')
-               .pipe(gulp.dest('./build/server'));
+  return gulp.src('./src/server/**/*')
+              .pipe(gulp.dest('./build/server'));
 });
 
 gulp.task('game', () => {
@@ -99,16 +114,19 @@ gulp.task('app', () => {
              .pipe(gulp.dest('./build'));
 });
 
+// Copying /////////////////////////////////////////
+
 gulp.task('clean', () => {
-    return del('./build/**/*');
+  return del('./build/**/*');
 });
 
+gulp.task('all-sass', gulp.series('prepare-sass', 'sass'));
+gulp.task('all-js', gulp.series('precompile', 'bundle'));
+gulp.task('')
 
-gulp.task('all', gulp.series('clean', 'assets', 'templates', 'sass', 'server', 'game', 'app', 'precompile', 'bundle'));
+gulp.task('all', gulp.series('clean', 'assets', 'server', 'game', 'app', 'all-sass', 'all-js', ));
 
 gulp.task('default', () => {
-
-    //gulp.task('all')();
 
     browserSync.init({
         server: {
@@ -116,10 +134,20 @@ gulp.task('default', () => {
         }
     });
     
-    gulp.watch('./src/sass', gulp.series('sass'));
-    gulp.watch('./src/templates', gulp.series('templates', 'precompile', 'bundle'));
-    gulp.watch('./src/frontend', gulp.series('bundle'));
+    gulp.watch('./src/frontend/views/sass/**/*.scss', gulp.series('sass'));
+    gulp.watch('./src/frontend/views/components/**/*.vue', gulp.series('prepare-sass', 'precompile'));
+    gulp.watch('./src/frontend/**/*.js', gulp.series('bundle'));
+
     gulp.watch('./src/server', gulp.series('server'));
     gulp.watch('./src/game', gulp.series('game'));
     gulp.watch('./src/app.js', gulp.series('app'));
 });
+
+
+// gulp.task('testing', () => {
+//   return gulp.src(['./src/test/*.vue', './src/test/*.pug'])
+//             .pipe(vueFilter)
+//             .pipe(ext_replace('.eonae'))
+//             .pipe(vueFilter.restore)
+//             .pipe(gulp.dest('./src/test/vue'));
+// });

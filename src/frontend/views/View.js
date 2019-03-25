@@ -1,22 +1,18 @@
 'use strict';
 
-import modals from 'vendor/modals/modals';
+import modals from 'vendor/modals/modals.js';
 import LayoutSwitch from 'base/LayoutSwitch';
 
 export default class View extends LayoutSwitch {
   constructor() {
     super({
       mainLayout: {
-        template: 'mainLayout', //
-        children: {             //
-          mainMenu: {
-            template: 'mainMenu',
-            slot: '#mainMenu',
-            events: [
-              { element: '#play', on: 'click', emit: 'play' },
-              { element: '#contribute', on: 'click', emit: 'contribute' }
-            ]
-          },
+        template: 'mainLayout',
+        events: [
+          { element: '#play', on: 'click', emit: 'play' },
+          { element: '#contribute', on: 'click', emit: 'contribute' }
+        ],
+        children: {             
           greetings: {
             template: 'greetings',
             slot: '#greetings',
