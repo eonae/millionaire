@@ -83,8 +83,6 @@ gulp.task('sass', () => {
             .pipe(browserSync.stream());
 });
 
-// Копирование некомпилируемых шаблонов
-
 gulp.task('bundle', () => {
   return gulp.src('./src/frontend/main.js')
               .pipe(webpack_stream(webpack_config), webpack)
@@ -135,7 +133,7 @@ gulp.task('default', () => {
     });
     
     gulp.watch('./src/frontend/views/sass/**/*.scss', gulp.series('sass'));
-    gulp.watch('./src/frontend/views/components/**/*.vue', gulp.series('prepare-sass', 'precompile'));
+    gulp.watch('./src/frontend/views/components/**/*.vue', gulp.series(['prepare-sass', 'precompile']));
     gulp.watch('./src/frontend/**/*.js', gulp.series('bundle'));
 
     gulp.watch('./src/server', gulp.series('server'));
@@ -143,11 +141,3 @@ gulp.task('default', () => {
     gulp.watch('./src/app.js', gulp.series('app'));
 });
 
-
-// gulp.task('testing', () => {
-//   return gulp.src(['./src/test/*.vue', './src/test/*.pug'])
-//             .pipe(vueFilter)
-//             .pipe(ext_replace('.eonae'))
-//             .pipe(vueFilter.restore)
-//             .pipe(gulp.dest('./src/test/vue'));
-// });
