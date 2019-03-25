@@ -10,7 +10,7 @@ const app = express();
 
 app.use( session({
   cookie: {
-    maxAge: 120000,
+    maxAge: 30000,
   },
   store: new MongoStore({ url: 'mongodb://localhost/millionaire'}),
   secret: 'wow, what a GAME!',
@@ -36,9 +36,12 @@ app.use( (req, res, next) => {
 });
 
 app.get('/', (req, res) => {
-                                                                                                                                                                                                 
+  debugger;                                                                                                                                                                                      
   const report = State.createReport(req.session.state);
   console.log(report);
+  res.set({
+    'Cache-Control': 'no-cache'
+  })
   res.render(__dirname + '/templates/base.pug', { report });
 });
 

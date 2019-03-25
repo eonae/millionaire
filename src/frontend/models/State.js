@@ -6,6 +6,10 @@ import BaseModel from 'base/BaseModel';
 export default class State extends BaseModel {
 
   constructor(initialState) {
+    if (!initialState.question) initialState.question = null;
+    if (!initialState.options) initialState.options = null;
+    if (!initialState.currentPosition) initialState.currentPosition = 0;
+    if (!initialState.ladder) initialState.ladder = null;
     super(initialState);
   }
 
@@ -27,11 +31,12 @@ export default class State extends BaseModel {
           model: this, message: 'startNewGame failed'
         });
       } else {
-        this.status = res.status;
+        debugger;
         this.question = res.question;
         this.options = res.options;
         this.currentPosition = res.currentPosition;
         this.ladder = res.ladder;
+        this.status = res.status;
       }
     });
   }

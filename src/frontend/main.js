@@ -6,7 +6,7 @@ import MainController from 'controllers/MainController';
 
 window.onload = () => {
   window.initialState = JSON.parse(document.getElementById('state').innerHTML);
-  
+  debugger;
   window.state = new State(initialState);
   window.view = new View();
 

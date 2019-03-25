@@ -8,6 +8,7 @@ module.exports = class State {
   }
 
   static createReport(state) {
+    debugger;
     const report = {
       player: state.player,
       status: state.status

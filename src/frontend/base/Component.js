@@ -13,6 +13,8 @@ export default class Component extends EventEmitter {
     this.render = (inCascade) => {
     // inCascade - флаг указывающий на то, рендерится объект сам по себе или его рендеринг
     // вызван родительским компонентом.
+      if (settings.template == 'ladder')
+        debugger;
       this.isActive = true;
       if (settings.slot) {
         if (!this.slot || inCascade) {
