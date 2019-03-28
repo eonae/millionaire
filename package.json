@@ -4,7 +4,7 @@
   "description": "online shop",
   "main": "index.js",
   "scripts": {
-    "start": "node ./build/app.js --inspect",
+    "start": "node ./build/app.js",
     "dev": "nodemon ./build/app.js"
   },
   "repository": {
