@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const logger = require('morgan');
 const session = require('express-session');
-const MongoStore = require('connect-mongo')(session);
+//const MongoStore = require('connect-mongo')(session);
 const api = require('./server/api');
 const helpers = require('./server/helpers');
 
@@ -12,7 +12,7 @@ app.use( session({
   cookie: {
     maxAge: 30000,
   },
-  store: new MongoStore({ url: 'mongodb://localhost/millionaire'}),
+  //store: new MongoStore({ url: 'mongodb://localhost/millionaire'}),
   secret: 'wow, what a GAME!',
   resave: true,
   saveUninitialized: false
