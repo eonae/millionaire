@@ -5,6 +5,7 @@ export default class EventEmitter {
   }
   
   on(eventName, handler) {
+
       if (eventName in this.handlers) {
           this.handlers[eventName].push(handler);
       } else {
@@ -19,7 +20,7 @@ export default class EventEmitter {
   emit(eventName, args) {
       if (eventName in this.handlers) {
           for (var handler of this.handlers[eventName]) {
-              setTimeout(() => { handler(args); }, 0);
+              setTimeout(() => { handler.call(this, args); }, 0);
           }
       }
   }

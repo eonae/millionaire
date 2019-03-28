@@ -1,17 +1,17 @@
 <template lang="pug">
 
 .ladder
-  each stage, index in ladder
-    if (index < currentPosition)
-      if (stage.isFixed)
-        .done-immune= stage.prize
+  each st, index in ladder
+    if (index < stage)
+      if (st.isFixed)
+        .done-immune= st.prize
       else
-        .done= stage.prize
+        .done= st.prize
     else
-      if (stage.isFixed)
-        .immune= stage.prize
+      if (st.isFixed)
+        .immune= st.prize
       else
-        .general= stage.prize
+        .general= st.prize
         
 </template>
 

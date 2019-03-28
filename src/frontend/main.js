@@ -1,14 +1,27 @@
 'use strict';
 
-import View from 'views/View';
 import State from 'models/State';
-import MainController from 'controllers/MainController';
+import Controller from 'controllers/Controller';
+import GameView from 'views/GameView';
+import MainView from 'views/MainView';
 
 window.onload = () => {
-  window.initialState = JSON.parse(document.getElementById('state').innerHTML);
-  debugger;
-  window.state = new State(initialState);
-  window.view = new View();
 
-  window.controller = new MainController(view, state);
+  window.state = new State();
+
+  window.controller = new Controller({
+    main: new MainView(state),
+    game: new GameView(state)
+  });
+
+  window.initialState = JSON.parse(document.getElementById('state').innerHTML);
+
+  debugger;
+
+  state.set(initialState);
+
+  const activeView = (state.inProgress)
+    ? controller.views.game
+    : controller.views.main;
+  controller.show(activeView);
 };

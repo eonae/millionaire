@@ -10,9 +10,9 @@
       "type": "node",
       "request": "launch",
       "name": "Launch Program",
-      // "program": "${workspaceFolder}\\build/app.js"
-      "program": "${workspaceFolder}/node_modules/gulp/bin/gulp.js",
-      "args": [ "vue-pug"]
+      "program": "${workspaceFolder}\\build/app.js"
+      // "program": "${workspaceFolder}/node_modules/gulp/bin/gulp.js",
+      // "args": [ "vue-pug"]
     }
   ]
 }

@@ -1,33 +1,18 @@
 'use strict';
 
 import modals from 'vendor/modals/modals.js';
-import LayoutSwitch from 'base/LayoutSwitch';
+import Component from 'base/Component';
 
-export default class View extends LayoutSwitch {
-  constructor() {
+export default class GameView extends Component {
+  constructor(model) {
     super({
-      mainLayout: {
-        template: 'mainLayout',
-        events: [
-          { element: '#play', on: 'click', emit: 'play' },
-          { element: '#contribute', on: 'click', emit: 'contribute' }
-        ],
-        children: {             
-          greetings: {
-            template: 'greetings',
-            slot: '#greetings',
-            data: { player: 'dear friend' }
-          }
-        }
-      },
-      gameLayout: {
         template: 'gameLayout',
         children: {
   
           player: {
             template: 'player',
             slot: '#player',
-            data: { player: 'Incognito' },
+            uses: [ 'player' ]
           },
       
           hints: {
@@ -48,7 +33,7 @@ export default class View extends LayoutSwitch {
           question: {
             template: 'question',
             slot: '#question',
-            data: { question: '', options: [] },
+            uses: [ 'question' ],
             events: [
               { element: '#option-0', on: 'click', emit: 'try' },
               { element: '#option-1', on: 'click', emit: 'try' },
@@ -60,25 +45,19 @@ export default class View extends LayoutSwitch {
           ladder: {
             template: 'ladder',
             slot: '#ladder',
-            data: {
-              ladder: [
-                { prize: 1000, isFixed: false },
-                { prize: 2000, isFixed: true },
-                { prize: 5000, isFixed: false },
-                { prize: 6000, isFixed: true }
-              ],
-              currentPosition: 0 }
+            uses: [ 'ladder', 'stage' ]
           }
         }
-      }
-    });
+        
+    }, model);
   }
 
   loss(args) {
+    debugger;
     modals.confirmBox( { message:
-      `We are really sorry, but you are wrong (((
+      `We are really sorry, but you are wrong (((<br>
       Correct answer was
-      ${String.fromCharCode(args.correct + 65)}: ${this.question.answers[args.correct]}
+      ${String.fromCharCode(args.correct + 65)}: ${args.options[args.correct]}
       Would you play once more?`}, (oneMore) => {
         if (oneMore) alert('One more!');
       });
@@ -93,18 +72,11 @@ export default class View extends LayoutSwitch {
       });
   }
 
-  askName() {
-    modals.inputBox({ message: 'Please enter your name' }, player => {
-      this.emit('newPlayer', { player } );
-    });
-  }
-
   error(args) {
     modals.messageBox( { message: 'Something gone wrong with our server. We appologize for inconvenience. We will try to reconnect...'}, () => {
       document.location.reload(true);
     });
   }
-
 
 };
 

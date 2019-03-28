@@ -16,9 +16,9 @@ export default {
     xhr.open('GET', constructGetUrl(url, params));
     xhr.send();
     xhr.onload = () => {
+        console.log(xhr.responseText);
         if (xhr.status != 200) {
-            alert('AJAX failed!');
-            callback(new Error('Error'));
+            callback( { statusCode: xhr.status } );
         } else {
             callback(null, JSON.parse(xhr.responseText));
         }

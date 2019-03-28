@@ -3,14 +3,14 @@ const bodyParser = require('body-parser');
 const logger = require('morgan');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
-const State = require('./server/state');
-const api = require('./server/routes/api');
+const api = require('./server/api');
+const helpers = require('./server/helpers');
 
 const app = express();
 
 app.use( session({
   cookie: {
-    maxAge: 30000,
+    maxAge: 60000,
   },
   store: new MongoStore({ url: 'mongodb://localhost/millionaire'}),
   secret: 'wow, what a GAME!',
@@ -18,26 +18,25 @@ app.use( session({
   saveUninitialized: false
 }));
 
-app.use(logger('dev'));
-
+app.use( logger('dev') );
 app.use( bodyParser.urlencoded({ extended: true }) );
 app.use( bodyParser.json() );
-
 app.use( express.static(__dirname + '/static') );
 
 app.use( (req, res, next) => {
 
-  if (!(req.session.state)) {
-    console.log('new session');
-    req.session.state = new State();
+  if (!(req.session.player)) {
+    console.log('new session: ' + req.sessionID.toString());
+    req.session.player = 'guest';
+    req.session.game = null;
   }
   next();
 
 });
 
-app.get('/', (req, res) => {
-  debugger;                                                                                                                                                                                      
-  const report = State.createReport(req.session.state);
+app.get('/', (req, res) => {   
+                                                                                                                              
+  const report = helpers.createReport(req.session);
   console.log(report);
   res.set({
     'Cache-Control': 'no-cache'

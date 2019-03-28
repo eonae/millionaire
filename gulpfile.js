@@ -17,15 +17,12 @@ const replace = require('gulp-replace');
 const prettier = require('gulp-prettier');
 const pug = require('gulp-pug');
 const extract = require('./gulp-eonae-extract');
-const debug = require('gulp-debug');
 const ext_replace = require('gulp-ext-replace');
 const filter = require('gulp-filter');
 
 const webpack_config = require('./webpack.config');
 
 const vueFilter = filter('**/*.vue', { restore: true });
-
-// Компиляция scss-кода в main.css
 
 gulp.task('precompile', () => {
   return gulp.src(['./src/frontend/views/components/**/*.vue',
@@ -102,11 +99,6 @@ gulp.task('server', () => {
               .pipe(gulp.dest('./build/server'));
 });
 
-gulp.task('game', () => {
-  return gulp.src('./src/game/**/*')
-             .pipe(gulp.dest('./build/game'));
-});
-
 gulp.task('app', () => {
   return gulp.src('./src/app.js')
              .pipe(gulp.dest('./build'));
@@ -120,9 +112,8 @@ gulp.task('clean', () => {
 
 gulp.task('all-sass', gulp.series('prepare-sass', 'sass'));
 gulp.task('all-js', gulp.series('precompile', 'bundle'));
-gulp.task('')
 
-gulp.task('all', gulp.series('clean', 'assets', 'server', 'game', 'app', 'all-sass', 'all-js', ));
+gulp.task('all', gulp.series('clean', 'assets', 'server', 'app', 'all-sass', 'all-js', ));
 
 gulp.task('default', () => {
 
@@ -132,12 +123,11 @@ gulp.task('default', () => {
         }
     });
     
-    gulp.watch('./src/frontend/views/sass/**/*.scss', gulp.series('sass'));
-    gulp.watch('./src/frontend/views/components/**/*.vue', gulp.series(['prepare-sass', 'precompile']));
-    gulp.watch('./src/frontend/**/*.js', gulp.series('bundle'));
-
+    gulp.watch(['./src/frontend/views/sass/**/*.scss'], gulp.series('sass'));
+    gulp.watch('./src/frontend/views/components/**/*.vue', gulp.series('prepare-sass'));
+    // Для перекомпиляции шаблонов придётся перезапускать gulp
+    gulp.watch('./src/frontend/**/*.js', gulp.series('bundle'))
     gulp.watch('./src/server', gulp.series('server'));
-    gulp.watch('./src/game', gulp.series('game'));
     gulp.watch('./src/app.js', gulp.series('app'));
 });
 

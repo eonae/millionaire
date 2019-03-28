@@ -2,29 +2,28 @@ import templates from 'views/templates';
 import EventEmitter from 'base/EventEmitter';
 
 export default class Component extends EventEmitter {
-  constructor(settings) {
+  constructor(settings, model) {
     super();
     this.isActive = false;
-    this.data = settings.data;
-    // if (settings.slot) {
-    //   this.slotSelector = settings.slot;
-    // }
+    this.model = model;
+    this.uses = settings.uses;
 
     this.render = (inCascade) => {
     // inCascade - флаг указывающий на то, рендерится объект сам по себе или его рендеринг
     // вызван родительским компонентом.
-      if (settings.template == 'ladder')
-        debugger;
+      if (!this.isActive)
+        this.emit('activate', this);
       this.isActive = true;
+
       if (settings.slot) {
         if (!this.slot || inCascade) {
           this.slot = document.querySelector(settings.slot);
           if (!this.slot) throw new Error(`Slot >> ${this.slotSelector} << not found!`);
         }
-        this.slot = render_slot(settings.template, this.data, this.slot);
+        this.slot = render_slot(settings.template, this.model, this.slot);
       }
       else
-        render_master(settings.template, this.data);
+        render_master(settings.template, this.model);
 
       if (settings.events) {
         this.setEvents();
@@ -49,25 +48,22 @@ export default class Component extends EventEmitter {
       }
     }
 
-    if (settings.data) {
-      this.setData = (entries) => {
-        Object.assign(this.data, entries);
-        if (this.isActive) {
-          this.render();
-        }
-      }
-    }
-
     if (settings.children) {
       this.children = {};
       for (let child of Object.entries(settings.children)) {
         var key = child[0], componentSettings = child[1];
-        this.children[key] = new Component(componentSettings);
+        this.children[key] = new Component(componentSettings, this.model);
         this.children[key].parent = this;
         this[key] = this.children[key]; // Исключительно, чтобы навигация по дереву была чуть приятнее
       }
     }
+    //console.log(this);
+
+    this.upd = this.upd.bind(this);
+
+    model.on('change', this.upd);
   }
+
 
   raiseEvent(name, args) {
     if (this.handlers[name]) {
@@ -80,13 +76,13 @@ export default class Component extends EventEmitter {
       } else {
         this.parent.emit(name, args);
       }
-    
     }
-
   }
 
   deactivate() {
     this.isActive = false;
+    this.emit('deactivate', this);
+    // Сюда же надо добавить отписку от событий DOM
     if (this.children) {
       for (let child of Object.values(this.children)) {
         child.isActive = false;
@@ -122,20 +118,3 @@ function render_slot(template,  data, slot) {
 
   return root;
 }
-
-
-
-/**
- * Виды компонентов:
-  *  - master     - контейнер, рендерится прямо в body
-  *  - switch     - контейнер, способный "переключать содержимое"
-  *  - container  - контейнер, рендерится "замещением"
-  *  - child      - "лист" дерева компонентов, вложенных компонентов не имеет.
-  * 
-  * Каждый компонет умеет:
-  *  - рендерится
-  *  - запускать рендер вложенных компонентов
-  *  - самостоятельно обновляться при изменении данных.
-  *  - эмиттить события.
-  *  
- */

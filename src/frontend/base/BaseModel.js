@@ -1,29 +1,29 @@
 import EventEmitter from 'base/EventEmitter';
+import ajax from 'vendor/ajax';
 
 export default class BaseModel extends EventEmitter {
-  constructor(schema) {
+  constructor(data) {
     super();
-    // schema представляет собой объект с необходимыми в модели свойствами и их начальными значениями.
-    for (let prop of Object.keys(schema)) {
-      const privateProp = '_' + prop
-      this[privateProp] = schema[prop];
-      Object.defineProperty(this, prop, {
-        set: value => {
-
-          const oldValue = this[privateProp];
-          this[privateProp] = value;
-          this.emit(prop + '_change', {
-            model: this,
-            changed: prop,
-            oldValue,
-            value
-          });
-        },
-        get: () => {
-          return this[privateProp];
-        }
-      });
-    }
+    if (data) this.set(data);
   }
-  // Это будет работать только при изменении "корневых" свойств.
+
+  set(entries) {
+    
+    const keys = Object.keys(entries);
+    keys.forEach(key => {
+      this[key] = entries[key];
+    });
+    this.emit('change', keys);
+  }
+
+  request(url, params) {
+    ajax.get(url, params, (err, res) => {
+      if (err) {
+        this.emit('error', { model: this, err });
+      } else {
+        debugger;
+        this.set(res);
+      }
+    });
+  }
 }
