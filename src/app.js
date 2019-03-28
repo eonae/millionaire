@@ -50,4 +50,4 @@ app.use((req, res) => {
   res.redirect('/');
 })
 
-app.listen(4445);
+app.listen(process.env.PORT || 4445);
