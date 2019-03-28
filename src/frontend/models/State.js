@@ -1,6 +1,7 @@
 'use strict';
 
 import BaseModel from 'base/BaseModel';
+import ajax from 'vendor/ajax';
 
 export default class State extends BaseModel {
 
@@ -9,12 +10,10 @@ export default class State extends BaseModel {
   }
 
   setPlayer(player) {
-    debugger;
     this.request('/api/player', { player });
   }
 
   startNewGame() {
-    debugger;
     this.request('/api/new');
   }
 
@@ -24,5 +23,15 @@ export default class State extends BaseModel {
 
   flee() {
     this.request('./api/flee');
+  }
+
+  request(url, params) {
+    ajax.get(url, params, (err, res) => {
+      if (err) {
+        this.emit('error', { model: this, err });
+      } else {
+        this.set(res);
+      }
+    });
   }
 };

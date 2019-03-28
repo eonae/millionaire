@@ -5,7 +5,7 @@ import BaseController from 'base/BaseController';
 export default class Controller extends BaseController {
 
   constructor(views) {
-    debugger;
+
     super(views);
     this.state = views.game.model;
 
@@ -15,9 +15,10 @@ export default class Controller extends BaseController {
       }
     });
 
-    state.on('change_inProgress', () => {
-      if (state.inProgress) this.show(views.game);
-      else this.show(views.main);
+    state.on('change', changed => {
+
+      if (changed.inProgress === true) this.show(views.game);
+      if (changed.inProgress === false) this.show(views.main);
     });
 
     views.main.on('newPlayer', args => {
@@ -29,7 +30,6 @@ export default class Controller extends BaseController {
     });
 
     views.main.on('play', args => {
-      debugger;
       state.startNewGame();
     });
 

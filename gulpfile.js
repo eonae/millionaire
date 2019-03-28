@@ -123,7 +123,7 @@ gulp.task('default', () => {
         }
     });
     
-    gulp.watch(['./src/frontend/views/sass/**/*.scss'], gulp.series('sass'));
+    gulp.watch(['./src/frontend/views/sass/**/*.scss', './src/vendor/**/*.scss'], gulp.series('sass'));
     gulp.watch('./src/frontend/views/components/**/*.vue', gulp.series('prepare-sass'));
     // Для перекомпиляции шаблонов придётся перезапускать gulp
     gulp.watch('./src/frontend/**/*.js', gulp.series('bundle'))

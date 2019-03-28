@@ -1,5 +1,4 @@
 import EventEmitter from 'base/EventEmitter';
-import ajax from 'vendor/ajax';
 
 export default class BaseModel extends EventEmitter {
   constructor(data) {
@@ -8,22 +7,14 @@ export default class BaseModel extends EventEmitter {
   }
 
   set(entries) {
-    
+    const changed = {};
     const keys = Object.keys(entries);
     keys.forEach(key => {
-      this[key] = entries[key];
-    });
-    this.emit('change', keys);
-  }
-
-  request(url, params) {
-    ajax.get(url, params, (err, res) => {
-      if (err) {
-        this.emit('error', { model: this, err });
-      } else {
-        debugger;
-        this.set(res);
+      if (this[key] !== entries[key]) {
+        this[key] = entries[key];
+        changed[key] = entries[key];
       }
     });
+    this.emit('change', changed);
   }
 }

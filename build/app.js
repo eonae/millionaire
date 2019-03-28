@@ -10,7 +10,7 @@ const app = express();
 
 app.use( session({
   cookie: {
-    maxAge: 60000,
+    maxAge: 30000,
   },
   store: new MongoStore({ url: 'mongodb://localhost/millionaire'}),
   secret: 'wow, what a GAME!',

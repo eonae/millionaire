@@ -2,25 +2,23 @@ const repo = require('./repo');
 const getLadder = require('./ladder');
 
 function getQuestion(ladder, stage, playedQuestionIds) {
-
-    debugger;
-    const question = repo.getRandomQuestion(ladder[stage].level, playedQuestionIds);
-    if (!question) throw new Error('Unable to find appropriate question');
+    const result = repo.getRandomQuestion(ladder[stage].level, playedQuestionIds);
+    if (result === null) throw new Error('Unable to find appropriate question');
 
     return {
         question: {
-            id: question.id,
-            text: question.text,
-            options: question.options
+            id: result.id,
+            text: result.text,
+            options: result.options
         },
-        correct: question.correct         // Правильный ответ выносим отдельно.
+        correct: result.correct         // Правильный ответ выносим отдельно.
     }
 }
 function isLastRound(game) {
     return (game.stage === game.ladder.length - 1);
 }
 function maxPrize(game) {
-    return this.ladder[game.ladder.length - 1].prize;
+    return game.ladder[game.ladder.length - 1].prize;
 }
 function lastFixedPrize(game) {
     var prize = 0;
@@ -33,7 +31,7 @@ function lastFixedPrize(game) {
 
 const actions = {
 
-    answer(game, params) {
+    try(game, params) {
 
         if (game.result) return null;               // Если игра уже закончена - ничего не происходит.
 
@@ -46,17 +44,23 @@ const actions = {
                 return {
                     result: 'WIN',
                     inProgress: true,
-                    playedQuestionIds: [ ...playedQuestionIds, game.question.id ],
+                    stage: game.stage + 1, 
                     prize: maxPrize(game)
                 };
 
             } else {                              // Следующий вопрос!
-            
-                const nextStage = game.stage++;
+
+                const nextStage = game.stage + 1;
+                const { correct, question } = getQuestion(game.ladder, nextStage, game.playedQuestionIds);
+                
+                
+
                 return {
                     stage: nextStage,
                     prize: game.ladder[nextStage].prize,
-                    question: getNextQuestion(game.ladder, nextStage, playedQuestionIds).question
+                    playedQuestionIds: [ ...game.playedQuestionIds, question.id ],
+                    question: question,
+                    correct: correct
                 };
             }
 
@@ -148,6 +152,11 @@ module.exports = class Game {
     }
 
     static play(game, command, params) {
-        return actions[command](game, params);
+        if (command in actions) {
+            return actions[command](game, params);
+        } else {
+            return null;
+        }
+        
     }
 }

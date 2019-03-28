@@ -19,7 +19,8 @@ export default class EventEmitter {
 
   emit(eventName, args) {
       if (eventName in this.handlers) {
-          for (var handler of this.handlers[eventName]) {
+          
+          for (let handler of this.handlers[eventName]) {
               setTimeout(() => { handler.call(this, args); }, 0);
           }
       }

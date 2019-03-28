@@ -1,26 +1,4 @@
-<template lang="pug">
 
-.wrapper
-  .question-text #{question.text}
-  .options
-    .options-row
-      button(type="button" id="option-0") #{question.options[0]}
-        .letterFrame
-          .letter A
-      button(type="button" id="option-1") #{question.options[1]}
-        .letterFrame
-          .letter B
-    .options-row
-      button(type="button" id="option-2") #{question.options[2]}
-        .letterFrame
-          .letter C
-      button(type="button" id="option-3") #{question.options[3]}
-        .letterFrame
-          .letter D
-          
-</template>
-
-<style lang="scss">
   .content-wrapper {
     margin-top: 2vh;
     justify-content: space-between;
@@ -134,5 +112,3 @@
       }
     }
   }
-</style>
-

@@ -30,7 +30,7 @@
     @include flex(flex-end, center);
     button {
       @extend .game-btn;
-      padding: 1% 4%;
+      padding: 2px 5px;
       margin-left: 5%;
       &:last-child {
         margin-right: 10%;

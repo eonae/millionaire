@@ -23,7 +23,6 @@ export default class MainView extends Component {
 
   askName() {
     modals.inputBox({ message: 'Please enter your name' }, player => {
-      debugger;
       this.emit('newPlayer', { player } );
     });
   }

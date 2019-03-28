@@ -16,8 +16,6 @@ window.onload = () => {
 
   window.initialState = JSON.parse(document.getElementById('state').innerHTML);
 
-  debugger;
-
   state.set(initialState);
 
   const activeView = (state.inProgress)

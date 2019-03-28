@@ -57,11 +57,20 @@ export default class Component extends EventEmitter {
         this[key] = this.children[key]; // Исключительно, чтобы навигация по дереву была чуть приятнее
       }
     }
-    //console.log(this);
 
-    this.upd = this.upd.bind(this);
+    if (settings.uses) {
+      model.on('change', changed => {
+        if (this.isActive) {
+          for (let key of settings.uses) {
+            if (key in changed) {
+              this.render();
+              return;
+            }
+          }
+        }
+      });
+    }
 
-    model.on('change', this.upd);
   }
 
 

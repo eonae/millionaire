@@ -12,18 +12,21 @@ router.get('/:api', (req, res) => {
 
     case 'state':
       res.send(helpers.createReport(req.session));
+      break;
 
     case 'new':
       req.session.game = Game.create();                         // Создаём "чистый" game-state. Проверять есть активная игра или нет проще на клиенте
       res.send(helpers.serialize(req.session.game));                    // Отправляем state
+      break;
 
     case 'player':
-      debugger;
+
       req.session.player = params.player;
       res.send(helpers.serialize( { player : req.session.player } ));
       break;
   
     default:
+
       if (!req.session.game) res.redirect('/');                 // Активной игры нет - редиректим на главную
 
       const changes = Game.play(req.session.game, command, params);
