@@ -1,7 +1,7 @@
 const express = require('express');
-const router = express.Router();
-const Game = require('./game/Game.js');
-const helpers = require('./helpers');
+//const router = express.Router();
+//const Game = require('./game/Game.js');
+//const helpers = require('./helpers');
 
 router.get('/:api', (req, res) => {
 
