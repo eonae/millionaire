@@ -1,7 +1,8 @@
 'use strict';
 
 import modals from 'vendor/modals/modals.js';
-import Component from 'base/Component';
+import Component from 'base/Component.js';
+import templates from 'views/templates.js';
 
 export default class GameView extends Component {
   constructor(model) {
@@ -53,23 +54,34 @@ export default class GameView extends Component {
   }
 
   loss(args) {
-    debugger;
-    modals.confirmBox( { message:
-      `We are really sorry, but you are wrong (((<br>
-      Correct answer was
-      ${String.fromCharCode(args.correct + 65)}: ${args.options[args.correct]}
-      Would you play once more?`}, (oneMore) => {
-        if (oneMore) alert('One more!');
+
+    modals.confirmBox(templates.render_lossMessage({
+
+      letter: String.fromCharCode(args.correctOption + 65),
+      option: this.model.question.options[args.correctOption],
+      prize: args.prize
+
+    }), (oneMore) => {
+        if (oneMore)
+          this.emit('play', {});
       });
   }
 
-  win(prize) {
-    modals.confirmBox( { message:
-      `Congratulations! You were really great!
-      Your prize: ${prize}
-      Would you play once more?`}, (oneMore) => {
-        if (oneMore) alert('One more!');
+  win(args) {
+
+    modals.confirmBox(templates.render_winMessage({
+      prize: args.prize
+    }), (oneMore) => {
+      if (oneMore)
+        this.emit('play', {});
       });
+  }
+
+  correct() {
+    modals.messageBox({
+      message: templates.render_correctMessage(),
+      buttons: { positive: 'Continue' }
+     });
   }
 
   error(args) {

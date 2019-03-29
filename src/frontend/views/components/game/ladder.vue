@@ -45,9 +45,11 @@
   }
   & .done-immune {
     background: darkgreen;
+    @include font(14px, 700, #fff);
   }
   & .done {
     background: green;
+    @include font(14px, 700, #fff);
   }
   & .immune {
     background: yellow;

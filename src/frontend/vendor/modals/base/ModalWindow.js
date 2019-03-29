@@ -25,6 +25,9 @@ export default class ModalWindow {
 
   close() {
     document.body.removeChild(this.wrapper);
-    this.callback(this.output);
+    if (this.callback) {
+      this.callback(this.output);
+    }
+    
   }
 }

@@ -1,7 +1,6 @@
 'use strict';
 
 import BaseModel from 'base/BaseModel';
-import ajax from 'vendor/ajax';
 
 export default class State extends BaseModel {
 
@@ -18,20 +17,16 @@ export default class State extends BaseModel {
   }
 
   tryAnswer(option) {
-    this.request('/api/try', { option });
+    this.request('/api/try', { option }, res => {
+      if (res.result) {
+        this.emit(res.result.toLowerCase(), res);
+      } else {
+        this.emit('correct', {});
+      }
+    });
   }
 
   flee() {
     this.request('./api/flee');
-  }
-
-  request(url, params) {
-    ajax.get(url, params, (err, res) => {
-      if (err) {
-        this.emit('error', { model: this, err });
-      } else {
-        this.set(res);
-      }
-    });
   }
 };
