@@ -1,4 +1,5 @@
 import EventEmitter from 'base/EventEmitter';
+import ajax from 'vendor/ajax';
 
 export default class BaseModel extends EventEmitter {
   constructor(data) {
@@ -16,5 +17,17 @@ export default class BaseModel extends EventEmitter {
       }
     });
     this.emit('change', changed);
+  }
+
+  request(url, params, callback, surpress) {
+    ajax.get(url, params, (err, res) => {
+      if (err) {
+        this.emit('error', { model: this, err });
+      } else {
+        if (!surpress) this.set(res);
+        if (callback) setTimeout(() => callback(res), 0); //Надо ли?
+
+      }
+    });
   }
 }

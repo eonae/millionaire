@@ -10,7 +10,7 @@ const app = express();
 
 app.use( session({
   cookie: {
-    maxAge: 30000,
+    maxAge: 600000,
   },
   store: new MongoStore({ url: 'mongodb://heroku_gbhd59v3:kvp3hjqthcj71832oj27ucdosj@ds221271.mlab.com:21271/heroku_gbhd59v3'}),
   // store: new MongoStore({ url: 'mongodb://localhost/millionaire'}),
@@ -49,6 +49,6 @@ app.use('/api', api);
 
 app.use((req, res) => {
   res.redirect('/');
-})
+});
 
 app.listen(process.env.PORT || 4445);

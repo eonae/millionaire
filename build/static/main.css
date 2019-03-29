@@ -132,10 +132,16 @@ footer a {
 
 .ladder .done-immune {
 	background: darkgreen;
+	font-size: 14px;
+	font-weight: 700;
+	color: #fff;
 }
 
 .ladder .done {
 	background: green;
+	font-size: 14px;
+	font-weight: 700;
+	color: #fff;
 }
 
 .ladder .immune {
@@ -302,6 +308,18 @@ footer a {
 	margin-right: 15px;
 }
 
+.msg {
+	font-size: 25px;
+	font-weight: 700;
+	color: #222;
+}
+
+.prize {
+	font-size: 22px;
+	font-weight: 700;
+	color: palevioletred;
+}
+
 .modal-overlay {
 	position: fixed;
 	top: 0;
@@ -345,8 +363,7 @@ footer a {
 }
 
 .message-box .buttons button {
-	padding: 10px 30px;
-	padding: 3% 7%;
+	padding: 5px 15px;
 	margin-left: 5%;
 }
 
@@ -379,7 +396,7 @@ footer a {
 }
 
 .confirm-box .buttons button {
-	padding: 3% 7%;
+	padding: 2px 5px;
 	margin-left: 5%;
 }
 

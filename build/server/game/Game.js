@@ -70,7 +70,8 @@ const actions = {
                 result: 'LOSS',
                 inProgress: false,
                 prize: lastFixedPrize(game),
-                mistake: option
+                mistake: option,
+                correctOption: game.correct      // Чтобы не вырезалось stripper'ом
             }
         }
     },

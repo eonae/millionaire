@@ -16,19 +16,6 @@
   background: white;
 }
 
-%modal-window-lg {
-  width: 80%;
-  height: 80%;
-}
-
-%modal-window-md {
-  width: 60%;
-  height: 60%;
-}
-%modal-window-sm {
-  min-width: 40%;
-}
-
 @import 'messageBox/messageBox.scss';
 @import 'confirmBox/confirmBox.scss';
 @import 'inputBox/InputBox.scss';
